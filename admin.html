@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理画面 — コンポーネントカタログ</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       ヘッダー
+       ============================================================ -->
+  <header class="admin-header">
+    <a class="admin-logo" href="index.html">
+      <span class="admin-logo-icon">⚡</span>
+      コンポーネントカタログ
+    </a>
+    <span class="admin-badge">管理画面</span>
+    <div class="header-spacer"></div>
+    <a class="header-link" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      カタログへ戻る
+    </a>
+  </header>
+
+  <!-- ============================================================
+       メインレイアウト（左カラム | 右カラム）
+       ============================================================ -->
+  <div class="admin-body">
+
+    <!-- ===== 左カラム ===== -->
+    <div class="admin-left">
+
+      <!-- ---- カテゴリ管理 ---- -->
+      <div class="section-header">
+        <h2 class="section-title">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 4h12M2 8h8M2 12h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          カテゴリ管理
+        </h2>
+      </div>
+      <div class="category-manager">
+        <div class="category-add-row">
+          <input class="form-input" type="text" id="new-category-input" placeholder="新しいカテゴリ名を入力" autocomplete="off">
+          <button class="btn-new" id="btn-add-category" type="button">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+              <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            追加
+          </button>
+        </div>
+        <div class="category-chips" id="category-chips">
+          <!-- admin.js で動的生成 -->
+        </div>
+      </div>
+
+      <!-- ---- JSON 操作 ---- -->
+      <div class="json-actions">
+        <button class="btn-json btn-json-export" id="btn-export">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path d="M8 1v10M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          JSONをエクスポート
+        </button>
+        <button class="btn-json" id="btn-import">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path d="M8 11V1M4 5l4-4 4 4M2 13h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          JSONをインポート
+        </button>
+        <button class="btn-json" id="btn-reset">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path d="M2 8a6 6 0 1 0 1.5-4M2 2v4h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          データをリセット
+        </button>
+      </div>
+
+      <!-- ---- コンポーネント一覧 ---- -->
+      <div class="section-header">
+        <h2 class="section-title">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M4 5h8M4 8h8M4 11h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          コンポーネント一覧
+        </h2>
+        <button class="btn-new" id="btn-new">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+            <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          新規登録
+        </button>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="component-table">
+          <thead>
+            <tr>
+              <th>コンポーネント名</th>
+              <th>カテゴリ</th>
+              <th>登録日</th>
+              <th>更新日</th>
+              <th style="text-align:right">操作</th>
+            </tr>
+          </thead>
+          <tbody id="component-tbody">
+            <!-- admin.js で動的生成 -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ---- 登録・編集フォーム ---- -->
+      <div class="form-panel" id="form-panel">
+        <div class="form-panel-header">
+          <span class="form-panel-title" id="form-panel-title">新規コンポーネントを登録</span>
+        </div>
+
+        <div class="form-panel-body">
+
+          <!-- ID -->
+          <div class="form-group">
+            <label class="form-label" for="f-id">
+              ID <span class="required-mark">*</span>
+            </label>
+            <div class="form-id-row">
+              <input class="form-input" type="text" id="f-id" placeholder="btn-001" autocomplete="off">
+              <button class="btn-gen-id" id="btn-gen-id" type="button">自動生成</button>
+            </div>
+            <label class="sync-label">
+              <input type="checkbox" id="sync-id-name">
+              コンポーネント名と同じ値をIDとして使用する
+            </label>
+            <span class="form-hint">カテゴリ-連番 の形式を推奨（例: btn-001）</span>
+          </div>
+
+          <!-- 名前 & カテゴリ -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="f-name">
+                コンポーネント名 <span class="required-mark">*</span>
+              </label>
+              <input class="form-input" type="text" id="f-name" placeholder="例：プライマリボタン" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f-category">
+                カテゴリ <span class="required-mark">*</span>
+              </label>
+              <select class="form-select" id="f-category">
+                <!-- admin.js で動的生成 -->
+              </select>
+            </div>
+          </div>
+
+          <!-- タグ -->
+          <div class="form-group">
+            <label class="form-label" for="f-tags">タグ</label>
+            <input class="form-input" type="text" id="f-tags" placeholder="button, primary, CTA（カンマ区切り）" autocomplete="off">
+            <span class="form-hint">カンマ区切りで複数入力できます</span>
+          </div>
+
+          <!-- 説明文 -->
+          <div class="form-group">
+            <label class="form-label" for="f-description">説明文</label>
+            <input class="form-input" type="text" id="f-description" placeholder="コンポーネントの用途や特徴を入力" autocomplete="off">
+          </div>
+
+          <!-- HTML -->
+          <div class="form-group">
+            <label class="form-label" for="f-html">HTML</label>
+            <textarea
+              class="form-textarea large"
+              id="f-html"
+              placeholder="<button class=&quot;btn-primary&quot;>ボタン</button>&#10;&#10;または .html ファイルをここにドロップ"
+              spellcheck="false"
+            ></textarea>
+            <span class="form-hint">ファイルをドラッグ&amp;ドロップしても挿入できます</span>
+          </div>
+
+          <!-- CSS -->
+          <div class="form-group">
+            <label class="form-label" for="f-css">CSS</label>
+            <textarea
+              class="form-textarea large"
+              id="f-css"
+              placeholder=".btn-primary { background: #3b82f6; color: #fff; }&#10;&#10;または .css ファイルをここにドロップ"
+              spellcheck="false"
+            ></textarea>
+            <span class="form-hint">ファイルをドラッグ&amp;ドロップしても挿入できます</span>
+          </div>
+
+          <!-- 作成者 -->
+          <div class="form-group">
+            <label class="form-label" for="f-author">作成者</label>
+            <input class="form-input" type="text" id="f-author" placeholder="デザインチーム" autocomplete="off">
+          </div>
+
+        </div><!-- /form-panel-body -->
+
+        <div class="form-footer">
+          <button class="btn-cancel" id="btn-cancel" type="button">キャンセル</button>
+          <button class="btn-save" id="btn-save" type="button">保存する</button>
+        </div>
+
+      </div><!-- /form-panel -->
+
+    </div><!-- /admin-left -->
+
+    <!-- ===== 右カラム（プレビュー） ===== -->
+    <div class="admin-right">
+      <div class="preview-panel">
+        <div class="preview-panel-header">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+            <path d="M1 8s3-6 7-6 7 6 7 6-3 6-7 6-7-6-7-6z" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          リアルタイムプレビュー
+        </div>
+
+        <!-- iframe プレビュー -->
+        <div class="preview-iframe-wrap">
+          <iframe
+            id="preview-iframe"
+            title="コンポーネントプレビュー"
+            sandbox="allow-scripts allow-same-origin"
+          ></iframe>
+        </div>
+
+        <!-- メタ情報 -->
+        <div class="preview-meta">
+          <div class="preview-name" id="preview-name">（未入力）</div>
+          <div class="preview-description" id="preview-description"></div>
+          <div class="preview-tags" id="preview-tags"></div>
+        </div>
+      </div><!-- /preview-panel -->
+    </div><!-- /admin-right -->
+
+  </div><!-- /admin-body -->
+
+  <!-- ============================================================
+       削除確認ダイアログ
+       ============================================================ -->
+  <div class="dialog-overlay" id="dialog-overlay" role="dialog" aria-modal="true">
+    <div class="dialog">
+      <div class="dialog-icon">🗑️</div>
+      <div class="dialog-title">削除の確認</div>
+      <div class="dialog-message" id="dialog-message">このコンポーネントを削除しますか？</div>
+      <div class="dialog-actions">
+        <button class="btn-cancel" id="btn-delete-cancel">キャンセル</button>
+        <button class="btn-save" style="background:var(--color-danger)" id="btn-delete-confirm">削除する</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- トースト通知コンテナ -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- JavaScript -->
+  <!-- インラインデータ（file:// での直接開きに対応） -->
+  <script src="data/components-data.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

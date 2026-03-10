@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コンポーネントカタログ</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- シンタックスハイライト（highlight.js） -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+  <!-- ============================================================
+       ヘッダー
+       ============================================================ -->
+  <header class="site-header">
+    <!-- ハンバーガーメニュー（モバイル） -->
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- ロゴ -->
+    <a class="site-logo" href="index.html">
+      <span class="site-logo-icon">⚡</span>
+      コンポーネントカタログ
+    </a>
+
+    <!-- 検索バー -->
+    <div class="header-search">
+      <span class="header-search-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <input
+        class="header-search-input"
+        id="search-input"
+        type="search"
+        placeholder="コンポーネント名・説明・タグで検索..."
+        autocomplete="off"
+      >
+    </div>
+
+    <!-- ヘッダーアクション -->
+    <div class="header-actions">
+      <a class="header-btn" href="admin.html">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        管理画面
+      </a>
+    </div>
+  </header>
+
+  <!-- サイドバーオーバーレイ（モバイル） -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- ============================================================
+       ページ本体
+       ============================================================ -->
+  <div class="page-body">
+
+    <!-- サイドバー -->
+    <aside class="sidebar" id="sidebar">
+
+      <!-- カテゴリ -->
+      <div class="sidebar-section">
+        <p class="sidebar-title">カテゴリ</p>
+        <ul class="category-list" id="category-list">
+          <!-- catalog.js で動的生成 -->
+        </ul>
+      </div>
+
+      <!-- タグ -->
+      <div class="sidebar-section">
+        <p class="sidebar-title">タグ</p>
+        <div class="tag-cloud" id="tag-cloud">
+          <!-- catalog.js で動的生成 -->
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- メインエリア -->
+    <main class="main-content">
+
+      <!-- 結果ヘッダー -->
+      <div class="result-header">
+        <span class="result-count" id="result-count">読み込み中...</span>
+        <button class="reset-btn" id="reset-btn">すべて表示</button>
+      </div>
+
+      <!-- コンポーネントグリッド -->
+      <div class="components-grid" id="components-grid">
+        <!-- catalog.js で動的生成 -->
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ============================================================
+       コードモーダル
+       ============================================================ -->
+  <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+
+      <!-- モーダルヘッダー -->
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="modal-title"></div>
+          <div class="modal-subtitle" id="modal-subtitle"></div>
+        </div>
+        <button class="modal-close" id="modal-close" aria-label="閉じる">✕</button>
+      </div>
+
+      <!-- タブ -->
+      <div class="modal-tabs">
+        <button class="tab-btn active" data-tab="html">HTML</button>
+        <button class="tab-btn" data-tab="css">CSS</button>
+      </div>
+
+      <!-- コード表示エリア -->
+      <div class="modal-body">
+        <!-- HTML タブ -->
+        <div class="tab-pane active" data-tab="html">
+          <div class="code-wrapper">
+            <pre><code id="code-html" class="language-html"></code></pre>
+          </div>
+        </div>
+
+        <!-- CSS タブ -->
+        <div class="tab-pane" data-tab="css">
+          <div class="code-wrapper">
+            <pre><code id="code-css" class="language-css"></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- モーダルフッター -->
+      <div class="modal-footer">
+        <button class="btn-modal-copy" id="btn-copy-html">HTMLをコピー</button>
+        <button class="btn-modal-copy" id="btn-copy-css">CSSをコピー</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       拡大プレビューモーダル
+       ============================================================ -->
+  <div class="preview-overlay" id="preview-overlay" role="dialog" aria-modal="true" aria-labelledby="preview-dialog-title">
+    <div class="preview-dialog">
+
+      <div class="preview-dialog-header">
+        <div>
+          <div class="preview-dialog-title" id="preview-dialog-title"></div>
+          <div class="preview-dialog-subtitle" id="preview-dialog-subtitle"></div>
+        </div>
+        <button class="preview-dialog-close" id="preview-dialog-close" aria-label="閉じる">✕</button>
+      </div>
+
+      <div class="preview-dialog-body" id="preview-dialog-body">
+        <iframe
+          id="preview-dialog-iframe"
+          title="拡大プレビュー"
+          sandbox="allow-scripts allow-same-origin"
+        ></iframe>
+      </div>
+
+      <!-- ビューポート切替ツールバー -->
+      <div class="preview-dialog-toolbar">
+        <span class="preview-toolbar-label">幅:</span>
+        <button class="btn-viewport active" data-width="100%">全幅</button>
+        <button class="btn-viewport" data-width="1440px">PC (1440)</button>
+        <button class="btn-viewport" data-width="768px">タブレット (768)</button>
+        <button class="btn-viewport" data-width="375px">モバイル (375)</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- トースト通知コンテナ -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- JavaScript -->
+  <!-- インラインデータ（file:// での直接開きに対応） -->
+  <script src="data/components-data.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/catalog.js"></script>
+</body>
+</html>
