@@ -50,3 +50,44 @@ catalog/
 - 詳細仕様・デザイン定義・スキーマは **SPEC.md を必ず参照**すること
 - コメントは日本語で記載
 - 実装順: variables.css → style.css → index.html → admin.html → README.md
+
+## 現在の運用方針
+
+- **閲覧**: GitHub Pages で全員に公開（`https://t-arizuka.github.io/component-catalog/`）
+- **編集**: 管理者のみ（ローカルで admin.html を操作 → JSON エクスポート → git push）
+- `data/components.json` を更新して push すれば GitHub Pages に即反映される
+
+## 将来の移行計画：複数人での編集対応
+
+現在の Vanilla JS 構成を維持したまま、**GitHub REST API 経由での直接書き込み**に移行する予定。
+
+### 移行方針（GitHub API 方式）
+
+- ブラウザから GitHub API を叩いて `data/components.json` を直接更新する
+- バックエンドサーバー不要・Vanilla JS のまま対応可能
+- 変更履歴が git コミットとして残る
+
+### 移行時に変更が必要なファイル
+
+| ファイル | 変更内容 |
+|---|---|
+| `assets/js/admin.js` | `saveToStorage()` を GitHub API 書き込みに置き換え |
+| `admin.html` | GitHub Personal Access Token の入力欄を追加（またはセッション保存） |
+| `data/components.json` | データソースはそのまま流用 |
+
+### GitHub API での JSON 更新フロー（参考）
+```js
+// PUT /repos/{owner}/{repo}/contents/{path}
+await fetch('https://api.github.com/repos/t-arizuka/component-catalog/contents/data/components.json', {
+  method: 'PUT',
+  headers: {
+    'Authorization': `token ${githubToken}`,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    message: 'コンポーネントを更新',
+    content: btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2)))),
+    sha: currentFileSha,  // 既存ファイルの SHA が必要
+  }),
+});
+```
