@@ -18,6 +18,8 @@ const adminState = {
   editingId: null,
   /** 削除確認中の ID */
   deletingId: null,
+  /** File System Access API のファイルハンドル（null = 未接続） */
+  fileHandle: null,
 };
 
 /* ============================================================
@@ -246,7 +248,7 @@ function getFormValues() {
 /**
  * フォームの値を保存する（新規 or 更新）
  */
-function saveComponent() {
+async function saveComponent() {
   const comp = getFormValues();
   if (!comp) return;
 
@@ -267,6 +269,7 @@ function saveComponent() {
 
   adminState.data.components = components;
   saveToStorage();
+  await saveToFile();
   renderTable();
   resetForm();
   adminState.editingId = null;
@@ -317,25 +320,113 @@ function closeDeleteDialog() {
   document.getElementById('dialog-overlay')?.classList.remove('visible');
 }
 
-function confirmDelete() {
+async function confirmDelete() {
   const id = adminState.deletingId;
   if (!id) return;
 
   const idx = (adminState.data.components ?? []).findIndex(c => c.id === id);
   if (idx !== -1) {
-    const name = adminState.data.components[idx].name;
+    const comp = adminState.data.components[idx];
+    // 完全削除せず削除済み配列に移動
+    if (!Array.isArray(adminState.data.deletedComponents)) {
+      adminState.data.deletedComponents = [];
+    }
+    adminState.data.deletedComponents.push({ ...comp, deletedAt: formatDate() });
     adminState.data.components.splice(idx, 1);
     saveToStorage();
+    await saveToFile();
     renderTable();
-    showToast(`「${name}」を削除しました`);
+    renderDeletedTable();
+    showToast(`「${comp.name}」を削除済みエリアに移動しました`);
 
-    // 編集中だった場合はフォームもリセット
     if (adminState.editingId === id) {
       cancelForm();
     }
   }
 
   closeDeleteDialog();
+}
+
+/**
+ * 削除済みコンポーネントをアクティブ一覧に戻す
+ */
+async function restoreComponent(id) {
+  const deleted = adminState.data.deletedComponents ?? [];
+  const idx = deleted.findIndex(c => c.id === id);
+  if (idx === -1) return;
+
+  const comp = { ...deleted[idx] };
+  delete comp.deletedAt;
+
+  deleted.splice(idx, 1);
+  adminState.data.deletedComponents = deleted;
+  adminState.data.components.push(comp);
+
+  saveToStorage();
+  await saveToFile();
+  renderTable();
+  renderDeletedTable();
+  showToast(`「${comp.name}」を復元しました`);
+}
+
+/**
+ * 削除済みコンポーネントを完全削除する
+ */
+async function permanentlyDelete(id, name) {
+  const deleted = adminState.data.deletedComponents ?? [];
+  const idx = deleted.findIndex(c => c.id === id);
+  if (idx === -1) return;
+
+  deleted.splice(idx, 1);
+  adminState.data.deletedComponents = deleted;
+
+  saveToStorage();
+  await saveToFile();
+  renderDeletedTable();
+  showToast(`「${name}」を完全に削除しました`);
+}
+
+/**
+ * 削除済みコンポーネント一覧を描画する
+ */
+function renderDeletedTable() {
+  const tbody = document.getElementById('deleted-tbody');
+  const section = document.getElementById('deleted-section');
+  if (!tbody || !section) return;
+
+  const deleted = adminState.data.deletedComponents ?? [];
+  section.style.display = deleted.length === 0 ? 'none' : '';
+
+  if (deleted.length === 0) return;
+
+  tbody.innerHTML = '';
+  for (const comp of deleted) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="table-name deleted-name">${escapeHtml(comp.name)}</td>
+      <td><span class="table-category">${escapeHtml(comp.category)}</span></td>
+      <td class="table-date">${escapeHtml(comp.deletedAt ?? '—')}</td>
+      <td>
+        <div class="table-actions">
+          <button class="btn-restore" data-id="${escapeHtml(comp.id)}">元に戻す</button>
+          <button class="btn-perm-delete" data-id="${escapeHtml(comp.id)}" data-name="${escapeHtml(comp.name)}">完全削除</button>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  }
+
+  tbody.querySelectorAll('.btn-restore').forEach(btn => {
+    btn.addEventListener('click', () => restoreComponent(btn.dataset.id));
+  });
+
+  tbody.querySelectorAll('.btn-perm-delete').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (confirm(`「${btn.dataset.name}」を完全に削除しますか？この操作は元に戻せません。`)) {
+        permanentlyDelete(btn.dataset.id, btn.dataset.name);
+      }
+    });
+  });
 }
 
 /* ============================================================
@@ -368,6 +459,76 @@ function updatePreview() {
     tagsEl.innerHTML = tags
       .map(t => `<span class="preview-tag">${escapeHtml(t)}</span>`)
       .join('');
+  }
+}
+
+/* ============================================================
+   File System Access API（ローカルファイルへの直接書き込み）
+   ============================================================ */
+
+/**
+ * components.json をファイルピッカーで開き、ファイルハンドルを取得する
+ * 以降の保存・削除・カテゴリ操作で自動的にファイルに書き込まれる
+ */
+async function openJsonFile() {
+  if (!window.showOpenFilePicker) {
+    showToast('このブラウザはFile System Access APIに対応していません（Chrome推奨）', 'error');
+    return;
+  }
+  try {
+    const [handle] = await window.showOpenFilePicker({
+      types: [{ description: 'JSON', accept: { 'application/json': ['.json'] } }],
+    });
+    // ファイルを開いた直後（ユーザー操作中）に書き込み権限を取得
+    const permission = await handle.requestPermission({ mode: 'readwrite' });
+    if (permission !== 'granted') {
+      showToast('書き込み権限が拒否されました', 'error');
+      return;
+    }
+    adminState.fileHandle = handle;
+    updateFileStatus();
+    showToast(`「${handle.name}」を開きました。以降の変更は自動で上書き保存されます`);
+  } catch (e) {
+    // キャンセル時は何もしない
+    if (e.name !== 'AbortError') {
+      showToast('ファイルを開けませんでした', 'error');
+    }
+  }
+}
+
+/**
+ * ファイルハンドルが取得済みの場合、現在のデータを components.json に書き込む
+ */
+async function saveToFile() {
+  if (!adminState.fileHandle) return;
+  try {
+    const writable = await adminState.fileHandle.createWritable();
+    await writable.write(JSON.stringify(adminState.data, null, 2));
+    await writable.close();
+  } catch (e) {
+    console.error('ファイルへの書き込みに失敗:', e);
+    if (e.name === 'NotFoundError') {
+      adminState.fileHandle = null;
+      updateFileStatus();
+      showToast('ファイルが見つかりません。再度「JSONファイルを開く」を実行してください', 'error');
+    } else {
+      showToast(`書き込みエラー（${e.name}）`, 'error');
+    }
+  }
+}
+
+/**
+ * ファイル接続状態のラベルを更新する
+ */
+function updateFileStatus() {
+  const statusEl = document.getElementById('file-status');
+  if (!statusEl) return;
+  if (adminState.fileHandle) {
+    statusEl.textContent = `✓ ${adminState.fileHandle.name} に接続中`;
+    statusEl.className = 'file-status connected';
+  } else {
+    statusEl.textContent = '未接続';
+    statusEl.className = 'file-status';
   }
 }
 
@@ -449,7 +610,7 @@ function renderCategoryManager() {
   });
 }
 
-function addCategory() {
+async function addCategory() {
   const input = document.getElementById('new-category-input');
   const name = input?.value.trim();
   if (!name) { showToast('カテゴリ名を入力してください', 'error'); return; }
@@ -460,13 +621,14 @@ function addCategory() {
   cats.push(name);
   adminState.data.categories = cats;
   saveToStorage();
+  await saveToFile();
   renderCategoryManager();
   renderCategoryOptions();
   if (input) input.value = '';
   showToast(`「${name}」を追加しました`);
 }
 
-function deleteCategory(name) {
+async function deleteCategory(name) {
   // 使用中のカテゴリは削除不可
   const inUse = (adminState.data.components ?? []).some(c => c.category === name);
   if (inUse) {
@@ -481,6 +643,7 @@ function deleteCategory(name) {
   cats.splice(idx, 1);
   adminState.data.categories = cats;
   saveToStorage();
+  await saveToFile();
   renderCategoryManager();
   renderCategoryOptions();
   showToast(`「${name}」を削除しました`);
@@ -558,6 +721,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 一覧テーブル描画
   renderTable();
+  renderDeletedTable();
 
   // 初期 ID 生成
   const ids = (adminState.data.components ?? []).map(c => c.id);
@@ -627,6 +791,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // キャンセルボタン
   document.getElementById('btn-cancel')?.addEventListener('click', cancelForm);
+
+  // JSONファイルを開く（File System Access API）
+  document.getElementById('btn-open-file')?.addEventListener('click', openJsonFile);
+
+  // ファイル接続状態の初期表示
+  updateFileStatus();
 
   // JSON エクスポート
   document.getElementById('btn-export')?.addEventListener('click', exportJson);
