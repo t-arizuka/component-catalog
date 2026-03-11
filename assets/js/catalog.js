@@ -279,6 +279,15 @@ function createCard(comp) {
       <button class="btn-code" data-action="view-code">コードを見る</button>
       <button class="btn-copy" data-action="copy-html">HTML</button>
       <button class="btn-copy" data-action="copy-css">CSS</button>
+      <button class="btn-figma" data-action="copy-figma" title="コンポーネントJSONをコピー → Figmaプラグインに貼り付け">
+        <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
+          <rect x="2" y="2" width="5" height="5" rx="1.2" fill="currentColor" opacity=".7"/>
+          <rect x="9" y="2" width="5" height="5" rx="1.2" fill="currentColor" opacity=".85"/>
+          <rect x="2" y="9" width="5" height="5" rx="1.2" fill="currentColor" opacity=".7"/>
+          <circle cx="11.5" cy="11.5" r="2.5" fill="currentColor"/>
+        </svg>
+        Figma
+      </button>
     </div>
   `;
 
@@ -305,6 +314,18 @@ function createCard(comp) {
   card.querySelector('[data-action="copy-css"]').addEventListener('click', async () => {
     const ok = await copyToClipboard(comp.css ?? '');
     showToast(ok ? 'CSSをコピーしました' : 'コピーに失敗しました', ok ? 'success' : 'error');
+  });
+  card.querySelector('[data-action="copy-figma"]').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    const ok = await copyComponentForFigma(comp);
+    btn.disabled = false;
+    btn.style.opacity = '';
+    showToast(
+      ok ? 'Figmaプラグインにペーストしてください' : 'コピーに失敗しました',
+      ok ? 'success' : 'error'
+    );
   });
 
   return card;
@@ -449,6 +470,32 @@ function switchTab(tab) {
 }
 
 /* ============================================================
+   Figma用JSONコピー
+   ============================================================ */
+
+/**
+ * Figmaプラグインに渡すコンポーネントJSONを生成する
+ * @param {object} comp
+ * @returns {string}
+ */
+function buildFigmaPayload(comp) {
+  return JSON.stringify({
+    name: typeof comp?.name === 'string' ? comp.name : '',
+    html: typeof comp?.html === 'string' ? comp.html : '',
+    css: typeof comp?.css === 'string' ? comp.css : '',
+  }, null, 2);
+}
+
+/**
+ * コンポーネントJSONをクリップボードにコピーする
+ * @param {object} comp
+ * @returns {Promise<boolean>} コピー成功なら true
+ */
+async function copyComponentForFigma(comp) {
+  return copyToClipboard(buildFigmaPayload(comp));
+}
+
+/* ============================================================
    初期化
    ============================================================ */
 
@@ -534,6 +581,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('btn-copy-css')?.addEventListener('click', async () => {
     const ok = await copyToClipboard(state.modalComponent?.css ?? '');
     showToast(ok ? 'CSSをコピーしました' : 'コピーに失敗しました', ok ? 'success' : 'error');
+  });
+  document.getElementById('btn-copy-figma')?.addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    const ok = await copyComponentForFigma(state.modalComponent ?? {});
+    btn.disabled = false;
+    btn.style.opacity = '';
+    showToast(
+      ok ? 'Figmaプラグインにペーストしてください' : 'コピーに失敗しました',
+      ok ? 'success' : 'error'
+    );
   });
 
   // ハンバーガーメニュー（モバイル）

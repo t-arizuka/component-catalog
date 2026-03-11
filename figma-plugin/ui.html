@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component Catalog Importer</title>
+  <style>
+    :root {
+      --bg: var(--figma-color-bg, #fff);
+      --bg-secondary: var(--figma-color-bg-secondary, #f5f5f5);
+      --text: var(--figma-color-text, #111827);
+      --text-muted: var(--figma-color-text-secondary, #6b7280);
+      --border: var(--figma-color-border, #d1d5db);
+      --brand: var(--figma-color-bg-brand, #2563eb);
+      --brand-hover: var(--figma-color-bg-brand-hover, #1d4ed8);
+      --danger: var(--figma-color-bg-danger, #dc2626);
+      --danger-hover: var(--figma-color-bg-danger-hover, #b91c1c);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .app {
+      padding: 16px;
+    }
+
+    .panel {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    p,
+    li,
+    label {
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    p,
+    ul {
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    label {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 320px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      resize: vertical;
+      background: var(--bg);
+      color: var(--text);
+      font: 12px/1.6 Consolas, "Courier New", monospace;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .primary {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .primary:hover:not(:disabled) {
+      background: var(--brand-hover);
+    }
+
+    .secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .danger {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .danger:hover:not(:disabled) {
+      background: var(--danger-hover);
+    }
+
+    .status.error {
+      color: #dc2626;
+    }
+
+    .render-host {
+      position: fixed;
+      left: -200vw;
+      top: 0;
+      width: 1920px;
+      height: 2400px;
+      opacity: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .render-host iframe {
+      width: 1920px;
+      height: 2400px;
+      border: 0;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section class="panel">
+      <div>
+        <h1>Component Catalog Importer</h1>
+        <p>カタログの「Figma」ボタンでコピーしたJSONを貼り付けて、HTML/CSSレイアウトをFigmaレイヤーへ変換します。</p>
+      </div>
+
+      <div>
+        <label for="json-input">コンポーネントJSON</label>
+        <textarea id="json-input" spellcheck="false" placeholder='{
+  "name": "コンポーネント名",
+  "html": "<section>...</section>",
+  "css": ".component { ... }"
+}'></textarea>
+      </div>
+
+      <div class="actions">
+        <button class="primary" id="btn-import" type="button">Figmaに展開</button>
+        <button class="danger" id="btn-close" type="button">閉じる</button>
+      </div>
+
+      <p class="status" id="status">JSONを手動で貼り付けて「Figmaに展開」を押してください。</p>
+
+      <ul>
+        <li>JSONは入力欄をクリックして `Ctrl + V` で貼り付けてください。</li>
+        <li>テキストは編集可能な `TextNode` として作成します。</li>
+        <li>画像はURLから `Image` 塗りに変換します。取得できない場合はプレースホルダーになります。</li>
+        <li>疑似要素と複雑な gradient は対象外です。</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="render-host" aria-hidden="true">
+    <iframe id="render-frame" sandbox="allow-same-origin allow-scripts"></iframe>
+  </div>
+
+  <script>
+    'use strict';
+
+    const VIEWPORT_WIDTH = 1920;
+    const INLINE_TAGS = new Set(['a', 'abbr', 'b', 'code', 'em', 'i', 'mark', 'small', 'span', 'strong', 'sub', 'sup']);
+    const TEXT_CONTAINER_TAGS = new Set(['a', 'button', 'em', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label', 'li', 'p', 'small', 'span', 'strong']);
+    const input = document.getElementById('json-input');
+    const statusEl = document.getElementById('status');
+    const importBtn = document.getElementById('btn-import');
+    const frame = document.getElementById('render-frame');
+
+    importBtn.addEventListener('click', handleImport);
+    document.getElementById('btn-close').addEventListener('click', () => {
+      parent.postMessage({ pluginMessage: { type: 'CLOSE' } }, '*');
+    });
+
+    window.addEventListener('message', (event) => {
+      const message = event.data && event.data.pluginMessage;
+      if (!message) return;
+
+      if (message.type === 'IMPORT_SUCCESS') {
+        setBusy(false);
+        setStatus(`「${message.name}」をFigmaに展開しました。`);
+      }
+
+      if (message.type === 'IMPORT_ERROR') {
+        setBusy(false);
+        setStatus(message.message || 'インポートに失敗しました。', true);
+      }
+    });
+
+    async function handleImport() {
+      setBusy(true);
+      setStatus('JSONを解析しています...');
+
+      try {
+        const component = parsePayload(input.value);
+        const root = await renderAndExtract(component);
+        setStatus(`${countNodes(root)} ノードをFigmaへ送信しています...`);
+
+        parent.postMessage({
+          pluginMessage: {
+            type: 'CREATE_NODES',
+            payload: { name: component.name, root },
+          },
+        }, '*');
+      } catch (error) {
+        setBusy(false);
+        setStatus(error instanceof Error ? error.message : 'インポートに失敗しました。', true);
+      }
+    }
+
+    function parsePayload(raw) {
+      if (typeof raw !== 'string' || raw.trim() === '') {
+        throw new Error('コンポーネントJSONを貼り付けてください。');
+      }
+
+      let parsed;
+      try {
+        parsed = JSON.parse(raw);
+      } catch (error) {
+        throw new Error('JSONの形式が不正です。カタログサイトの「Figma」ボタンでコピーした内容を貼り付けてください。');
+      }
+
+      const payload = {
+        name: parsed && typeof parsed.name === 'string' ? parsed.name : 'Imported Component',
+        html: parsed && typeof parsed.html === 'string' ? parsed.html : '',
+        css: parsed && typeof parsed.css === 'string' ? parsed.css : '',
+      };
+
+      if (payload.html.trim() === '') {
+        throw new Error('html が空です。');
+      }
+
+      return payload;
+    }
+
+    async function renderAndExtract(component) {
+      frame.style.width = `${VIEWPORT_WIDTH}px`;
+      frame.style.height = '2400px';
+      await loadSrcdoc(buildSrcdoc(component));
+
+      const doc = frame.contentDocument;
+      const rootEl = doc.getElementById('figma-component-root');
+      if (!rootEl) {
+        throw new Error('レンダリング用の root 要素を作成できませんでした。');
+      }
+
+      await waitForAssets(doc);
+      await nextFrame(frame.contentWindow);
+      await nextFrame(frame.contentWindow);
+
+      const origin = collectBounds(rootEl);
+      return extractElementNode(rootEl, origin, true, component.name);
+    }
+
+    function loadSrcdoc(srcdoc) {
+      return new Promise((resolve, reject) => {
+        frame.onload = () => resolve();
+        frame.onerror = () => reject(new Error('iframe の描画に失敗しました。'));
+        frame.srcdoc = srcdoc;
+      });
+    }
+
+    function buildSrcdoc(component) {
+      const isLayoutTag = /^<(section|header|main|footer|nav)[\s>]/i.test(component.html.trimStart());
+      const rootStyle = isLayoutTag
+        ? `position:relative;display:block;width:${VIEWPORT_WIDTH}px;min-width:${VIEWPORT_WIDTH}px;`
+        : 'position:relative;display:inline-block;';
+
+      return [
+        '<!DOCTYPE html>',
+        '<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><style>',
+        '*,*::before,*::after{box-sizing:border-box;}',
+        'html,body{margin:0;padding:0;background:#fff;}',
+        'body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Hiragino Sans","Noto Sans JP",sans-serif;font-size:14px;}',
+        '#figma-component-root{', rootStyle, '}',
+        component.css,
+        '</style></head><body><div id="figma-component-root">',
+        component.html,
+        '</div></body></html>',
+      ].join('');
+    }
+
+    async function waitForAssets(doc) {
+      const fontsReady = doc.fonts && doc.fonts.ready
+        ? doc.fonts.ready.catch(function () { return undefined; })
+        : Promise.resolve();
+      const imageTasks = Array.from(doc.images || []).map((image) => {
+        if (image.complete) return Promise.resolve();
+        return new Promise((resolve) => {
+          image.addEventListener('load', resolve, { once: true });
+          image.addEventListener('error', resolve, { once: true });
+        });
+      });
+
+      await Promise.all([fontsReady, ...imageTasks]);
+    }
+
+    function collectBounds(rootEl) {
+      const rects = [];
+      const rootRect = rootEl.getBoundingClientRect();
+      if (rootRect.width > 0 && rootRect.height > 0) rects.push(rootRect);
+
+      for (const element of rootEl.querySelectorAll('*')) {
+        const style = getComputedStyle(element);
+        if (style.display === 'none' || style.visibility === 'hidden') continue;
+        const rect = element.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) rects.push(rect);
+        rects.push(...collectPseudoRects(element));
+      }
+
+      if (rects.length === 0) {
+        return { left: 0, top: 0, width: 1, height: 1 };
+      }
+
+      const left = Math.min(...rects.map((rect) => rect.left));
+      const top = Math.min(...rects.map((rect) => rect.top));
+      const right = Math.max(...rects.map((rect) => rect.right));
+      const bottom = Math.max(...rects.map((rect) => rect.bottom));
+      return { left, top, width: round(right - left), height: round(bottom - top) };
+    }
+
+    function extractElementNode(element, origin, isRoot = false, overrideName = '') {
+      const style = getComputedStyle(element);
+      if (style.display === 'none' || style.visibility === 'hidden') return null;
+
+      const rect = element.getBoundingClientRect();
+      if (!isRoot && (rect.width <= 0 || rect.height <= 0)) return null;
+
+      const tagName = element.tagName.toLowerCase();
+      if (tagName === 'img') {
+        return {
+          kind: 'image',
+          name: overrideName || buildElementName(element),
+          tagName,
+          x: round(rect.left - origin.left),
+          y: round(rect.top - origin.top),
+          width: round(rect.width),
+          height: round(rect.height),
+          src: element.currentSrc || element.getAttribute('src') || '',
+          textContent: '',
+          styles: extractStyleSnapshot(style),
+          layoutItem: extractLayoutItemSnapshot(style),
+          children: [],
+        };
+      }
+
+      if (shouldExtractAsSingleText(element, style, isRoot)) {
+        return buildTextNodeFromElement(element, origin, overrideName);
+      }
+
+      const children = [];
+      children.push(...extractPseudoNodes(element, origin));
+      for (const childNode of Array.from(element.childNodes)) {
+        if (childNode.nodeType === Node.ELEMENT_NODE) {
+          const child = extractElementNode(childNode, origin);
+          if (child) children.push(child);
+        }
+        if (childNode.nodeType === Node.TEXT_NODE) {
+          const child = extractTextNode(childNode, origin, element);
+          if (child) children.push(child);
+        }
+      }
+
+      const styles = extractStyleSnapshot(style);
+      const layout = buildAutoLayoutData(element, style, children, rect);
+      const hasBox = hasVisibleBackground(styles.backgroundColor) || hasVisibleBorder(styles.borderColor, styles.borderWidths);
+      const keepFrame = isRoot
+        || hasBox
+        || Boolean(layout)
+        || styles.overflowHidden
+        || styles.opacity < 1
+        || style.transform !== 'none'
+        || children.some((child) => child.kind !== 'text')
+        || !INLINE_TAGS.has(tagName);
+
+      if (!keepFrame && children.length === 1 && children[0].kind === 'text') {
+        return children[0];
+      }
+
+      if (!keepFrame && children.length === 0) {
+        return null;
+      }
+
+      return {
+        kind: children.length === 0 ? 'rectangle' : 'frame',
+        name: overrideName || buildElementName(element),
+        tagName,
+        x: isRoot ? 0 : round(rect.left - origin.left),
+        y: isRoot ? 0 : round(rect.top - origin.top),
+        width: isRoot ? origin.width : round(rect.width),
+        height: isRoot ? origin.height : round(rect.height),
+        src: '',
+        textContent: '',
+        styles,
+        layout,
+        layoutItem: extractLayoutItemSnapshot(style),
+        children,
+      };
+    }
+
+    function extractTextNode(textNode, origin, parentElement) {
+      const style = getComputedStyle(parentElement);
+      const textContent = normalizeText(textNode.textContent || '', style.whiteSpace, false);
+      if (textContent.trim() === '') return null;
+
+      const range = textNode.ownerDocument.createRange();
+      range.selectNodeContents(textNode);
+      const rects = Array.from(range.getClientRects()).filter((rect) => rect.width > 0 && rect.height > 0);
+      if (rects.length === 0) return null;
+
+      const bounds = unionRects(rects);
+      return {
+        kind: 'text',
+        name: buildTextName(textContent),
+        tagName: '#text',
+        x: round(bounds.left - origin.left),
+        y: round(bounds.top - origin.top),
+        width: round(bounds.width),
+        height: round(bounds.height),
+        src: '',
+        textContent,
+        styles: extractTextStyles(style),
+        layoutItem: extractLayoutItemSnapshot(null),
+        children: [],
+      };
+    }
+
+    function extractStyleSnapshot(style) {
+      return {
+        backgroundColor: style.backgroundColor,
+        borderColor: style.borderColor,
+        borderTopLeftRadius: parsePx(style.borderTopLeftRadius),
+        borderTopRightRadius: parsePx(style.borderTopRightRadius),
+        borderBottomRightRadius: parsePx(style.borderBottomRightRadius),
+        borderBottomLeftRadius: parsePx(style.borderBottomLeftRadius),
+        borderWidths: {
+          top: parsePx(style.borderTopWidth),
+          right: parsePx(style.borderRightWidth),
+          bottom: parsePx(style.borderBottomWidth),
+          left: parsePx(style.borderLeftWidth),
+        },
+        color: style.color,
+        fontFamily: style.fontFamily,
+        fontSize: parsePx(style.fontSize),
+        fontStyle: style.fontStyle,
+        fontWeight: normalizeFontWeight(style.fontWeight),
+        letterSpacing: parsePx(style.letterSpacing),
+        lineHeight: parsePx(style.lineHeight),
+        objectFit: style.objectFit,
+        opacity: parseFloat(style.opacity) || 1,
+        overflowHidden: ['hidden', 'clip'].includes(style.overflow) || ['hidden', 'clip'].includes(style.overflowX) || ['hidden', 'clip'].includes(style.overflowY),
+        textAlign: style.textAlign,
+      };
+    }
+
+    function extractTextStyles(style) {
+      return {
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
+        borderBottomRightRadius: 0,
+        borderBottomLeftRadius: 0,
+        borderWidths: { top: 0, right: 0, bottom: 0, left: 0 },
+        color: style.color,
+        fontFamily: style.fontFamily,
+        fontSize: parsePx(style.fontSize),
+        fontStyle: style.fontStyle,
+        fontWeight: normalizeFontWeight(style.fontWeight),
+        letterSpacing: parsePx(style.letterSpacing),
+        lineHeight: parsePx(style.lineHeight),
+        objectFit: '',
+        opacity: parseFloat(style.opacity) || 1,
+        overflowHidden: false,
+        textAlign: style.textAlign,
+      };
+    }
+
+    function shouldExtractAsSingleText(element, style, isRoot) {
+      if (isRoot) return false;
+
+      const tagName = element.tagName.toLowerCase();
+      if (!TEXT_CONTAINER_TAGS.has(tagName)) return false;
+      if (hasVisiblePseudoElement(element)) return false;
+
+      const text = normalizeText(element.innerText || element.textContent || '', style.whiteSpace, true).trim();
+      if (!text) return false;
+
+      if (hasVisibleBackground(style.backgroundColor)) return false;
+      if (hasVisibleBorder(style.borderColor, {
+        top: parsePx(style.borderTopWidth),
+        right: parsePx(style.borderRightWidth),
+        bottom: parsePx(style.borderBottomWidth),
+        left: parsePx(style.borderLeftWidth),
+      })) return false;
+
+      for (const child of Array.from(element.children)) {
+        const childTag = child.tagName.toLowerCase();
+        if (childTag === 'br') continue;
+        if (!INLINE_TAGS.has(childTag)) return false;
+      }
+
+      return true;
+    }
+
+    function buildTextNodeFromElement(element, origin, overrideName) {
+      const style = getComputedStyle(element);
+      const rect = element.getBoundingClientRect();
+      const textContent = normalizeText(element.innerText || element.textContent || '', style.whiteSpace, true).trim();
+      if (!textContent) return null;
+
+      return {
+        kind: 'text',
+        name: overrideName || buildTextName(textContent),
+        tagName: element.tagName.toLowerCase(),
+        x: round(rect.left - origin.left),
+        y: round(rect.top - origin.top),
+        width: round(rect.width),
+        height: round(rect.height),
+        src: '',
+        textContent,
+        styles: extractTextStyles(style),
+        layoutItem: extractLayoutItemSnapshot(style),
+        children: [],
+      };
+    }
+
+    function extractPseudoNodes(element, origin) {
+      const nodes = [];
+      const beforeNode = buildPseudoNode(element, origin, 'before');
+      const afterNode = buildPseudoNode(element, origin, 'after');
+
+      if (beforeNode) nodes.push(beforeNode);
+      if (afterNode) nodes.push(afterNode);
+
+      return nodes;
+    }
+
+    function collectPseudoRects(element) {
+      const rects = [];
+      const beforeRect = getPseudoRect(element, 'before');
+      const afterRect = getPseudoRect(element, 'after');
+
+      if (beforeRect) rects.push(beforeRect);
+      if (afterRect) rects.push(afterRect);
+
+      return rects;
+    }
+
+    function buildPseudoNode(element, origin, pseudoType) {
+      const pseudoStyle = getComputedStyle(element, `::${pseudoType}`);
+      if (!isVisiblePseudo(pseudoStyle)) return null;
+
+      const rect = getPseudoRect(element, pseudoType, pseudoStyle);
+      if (!rect) return null;
+
+      const content = normalizePseudoContent(pseudoStyle.content);
+      const name = `${buildElementName(element)}::${pseudoType}`;
+
+      if (content) {
+        return {
+          kind: 'text',
+          name,
+          tagName: `::${pseudoType}`,
+          x: round(rect.left - origin.left),
+          y: round(rect.top - origin.top),
+          width: round(rect.width),
+          height: round(rect.height),
+          src: '',
+          textContent: normalizeText(content, pseudoStyle.whiteSpace, true),
+          styles: extractTextStyles(pseudoStyle),
+          layoutItem: extractLayoutItemSnapshot(pseudoStyle),
+          children: [],
+        };
+      }
+
+      return {
+        kind: 'rectangle',
+        name,
+        tagName: `::${pseudoType}`,
+        x: round(rect.left - origin.left),
+        y: round(rect.top - origin.top),
+        width: round(rect.width),
+        height: round(rect.height),
+        src: '',
+        textContent: '',
+        styles: extractStyleSnapshot(pseudoStyle),
+        layoutItem: extractLayoutItemSnapshot(pseudoStyle),
+        children: [],
+      };
+    }
+
+    function buildAutoLayoutData(element, style, children, rect) {
+      if (!isAutoLayoutCandidate(element, style, children)) return null;
+
+      const direction = style.flexDirection || 'row';
+      const isHorizontal = direction.indexOf('row') === 0;
+      const reverse = direction.indexOf('reverse') !== -1;
+      const wrap = style.flexWrap && style.flexWrap !== 'nowrap';
+      const flowChildren = children.filter((child) => !child.layoutItem || child.layoutItem.positioning !== 'ABSOLUTE');
+
+      if (flowChildren.length === 0) return null;
+
+      const mainGap = inferAutoLayoutGap(flowChildren, isHorizontal, reverse);
+      const parsedColumnGap = parsePx(style.columnGap);
+      const parsedRowGap = parsePx(style.rowGap);
+      const itemSpacing = isHorizontal
+        ? (parsedColumnGap !== null ? parsedColumnGap : mainGap)
+        : (parsedRowGap !== null ? parsedRowGap : mainGap);
+      const counterAxisSpacing = isHorizontal
+        ? (parsedRowGap !== null ? parsedRowGap : 0)
+        : (parsedColumnGap !== null ? parsedColumnGap : 0);
+
+      return {
+        mode: isHorizontal ? 'HORIZONTAL' : 'VERTICAL',
+        reverse,
+        wrap,
+        primaryAxisAlignItems: mapPrimaryAxisAlign(style.justifyContent),
+        counterAxisAlignItems: mapCounterAxisAlign(style.alignItems, isHorizontal),
+        alignItemsRaw: style.alignItems || 'stretch',
+        itemSpacing: itemSpacing || 0,
+        counterAxisSpacing: counterAxisSpacing || 0,
+        paddingTop: parsePx(style.paddingTop) || 0,
+        paddingRight: parsePx(style.paddingRight) || 0,
+        paddingBottom: parsePx(style.paddingBottom) || 0,
+        paddingLeft: parsePx(style.paddingLeft) || 0,
+        width: round(rect.width),
+        height: round(rect.height),
+      };
+    }
+
+    function isAutoLayoutCandidate(element, style, children) {
+      if (!style) return false;
+      const modeHint = getAutoLayoutHint(element);
+      if (modeHint === 'fixed') return false;
+      if (!['flex', 'inline-flex'].includes(style.display)) return false;
+      if ((style.flexWrap && style.flexWrap !== 'nowrap') && modeHint !== 'force') return false;
+      if (style.position === 'absolute' || style.position === 'fixed') return false;
+      if (style.transform && style.transform !== 'none') return false;
+      if (style.justifyContent === 'space-around' || style.justifyContent === 'space-evenly') return false;
+      if (children.length < 2 && modeHint !== 'force') return false;
+
+      const direction = style.flexDirection || 'row';
+      const isHorizontal = direction.indexOf('row') === 0;
+      const flowChildren = children.filter((child) => !child.layoutItem || child.layoutItem.positioning !== 'ABSOLUTE');
+      if (flowChildren.length < 2 && modeHint !== 'force') return false;
+      if (!isOrderedFlow(flowChildren, isHorizontal) && modeHint !== 'force') return false;
+      if (hasOverlappingFlow(flowChildren, isHorizontal) && modeHint !== 'force') return false;
+
+      return true;
+    }
+
+    function getAutoLayoutHint(element) {
+      if (!element || !element.getAttribute) return 'auto';
+
+      const raw = (element.getAttribute('data-figma-layout')
+        || element.getAttribute('data-figma-autolayout')
+        || '').toLowerCase().trim();
+
+      if (raw === 'fixed' || raw === 'false' || raw === 'off') return 'fixed';
+      if (raw === 'force' || raw === 'true' || raw === 'on') return 'force';
+      return 'auto';
+    }
+
+    function extractLayoutItemSnapshot(style) {
+      const source = style || {};
+      return {
+        positioning: source.position === 'absolute' || source.position === 'fixed' ? 'ABSOLUTE' : 'AUTO',
+        alignSelf: source.alignSelf || 'auto',
+        flexGrow: normalizeFlexGrow(source.flexGrow),
+      };
+    }
+
+    function inferAutoLayoutGap(children, isHorizontal, reverse) {
+      if (!Array.isArray(children) || children.length < 2) return 0;
+
+      const ordered = [...children].sort((a, b) => {
+        const first = isHorizontal ? a.x : a.y;
+        const second = isHorizontal ? b.x : b.y;
+        return reverse ? second - first : first - second;
+      });
+
+      const gaps = [];
+      for (let i = 0; i < ordered.length - 1; i += 1) {
+        const current = ordered[i];
+        const next = ordered[i + 1];
+        const currentEnd = isHorizontal ? current.x + current.width : current.y + current.height;
+        const nextStart = isHorizontal ? next.x : next.y;
+        const gap = round(nextStart - currentEnd);
+        if (gap >= 0) gaps.push(gap);
+      }
+
+      if (gaps.length === 0) return 0;
+      return round(gaps.reduce((sum, value) => sum + value, 0) / gaps.length);
+    }
+
+    function isOrderedFlow(children, isHorizontal) {
+      if (!Array.isArray(children) || children.length < 2) return true;
+
+      const positions = children.map((child) => isHorizontal ? child.x : child.y);
+      let ascending = true;
+      let descending = true;
+
+      for (let i = 1; i < positions.length; i += 1) {
+        if (positions[i] < positions[i - 1]) ascending = false;
+        if (positions[i] > positions[i - 1]) descending = false;
+      }
+
+      return ascending || descending;
+    }
+
+    function hasOverlappingFlow(children, isHorizontal) {
+      if (!Array.isArray(children) || children.length < 2) return false;
+
+      const ordered = [...children].sort((a, b) => {
+        const first = isHorizontal ? a.x : a.y;
+        const second = isHorizontal ? b.x : b.y;
+        return first - second;
+      });
+
+      for (let i = 0; i < ordered.length - 1; i += 1) {
+        const current = ordered[i];
+        const next = ordered[i + 1];
+        const currentEnd = isHorizontal ? current.x + current.width : current.y + current.height;
+        const nextStart = isHorizontal ? next.x : next.y;
+        if (nextStart < currentEnd - 1) return true;
+      }
+
+      return false;
+    }
+
+    function mapPrimaryAxisAlign(value) {
+      switch (value) {
+        case 'center':
+          return 'CENTER';
+        case 'flex-end':
+        case 'end':
+          return 'MAX';
+        case 'space-between':
+          return 'SPACE_BETWEEN';
+        default:
+          return 'MIN';
+      }
+    }
+
+    function mapCounterAxisAlign(value, isHorizontal) {
+      switch (value) {
+        case 'center':
+          return 'CENTER';
+        case 'flex-end':
+        case 'end':
+          return 'MAX';
+        case 'baseline':
+          return isHorizontal ? 'BASELINE' : 'MIN';
+        default:
+          return 'MIN';
+      }
+    }
+
+    function normalizeFlexGrow(value) {
+      const numeric = Number(value);
+      return Number.isFinite(numeric) && numeric > 0 ? 1 : 0;
+    }
+
+    function getPseudoRect(element, pseudoType, pseudoStyle) {
+      const style = pseudoStyle || getComputedStyle(element, `::${pseudoType}`);
+      if (!isVisiblePseudo(style)) return null;
+
+      const baseRect = element.getBoundingClientRect();
+      const width = resolvePseudoSize(style.width, baseRect.width, style, true);
+      const height = resolvePseudoSize(style.height, baseRect.height, style, false);
+
+      if (width <= 0 || height <= 0) return null;
+
+      const left = resolvePseudoPosition(style.left, style.right, baseRect.left, baseRect.right, width);
+      const top = resolvePseudoTop(element, pseudoType, style, baseRect, height);
+
+      return {
+        left,
+        top,
+        width,
+        height,
+      };
+    }
+
+    function resolvePseudoTop(element, pseudoType, style, baseRect, height) {
+      const explicitTop = resolvePseudoPosition(style.top, style.bottom, baseRect.top, baseRect.bottom, height);
+      if (parsePx(style.top) !== null || parsePx(style.bottom) !== null || style.position === 'absolute' || style.position === 'fixed') {
+        return explicitTop;
+      }
+
+      const marginTop = parsePx(style.marginTop) || 0;
+      const marginBottom = parsePx(style.marginBottom) || 0;
+
+      if (pseudoType === 'before') {
+        return baseRect.top + marginTop;
+      }
+
+      return baseRect.bottom - height - marginBottom;
+    }
+
+    function resolvePseudoPosition(startValue, endValue, baseStart, baseEnd, size) {
+      const start = parsePx(startValue);
+      if (start !== null) return baseStart + start;
+
+      const end = parsePx(endValue);
+      if (end !== null) return baseEnd - end - size;
+
+      return baseStart;
+    }
+
+    function resolvePseudoSize(value, fallbackSize, style, isHorizontal) {
+      const parsed = parsePx(value);
+      if (parsed !== null) return parsed;
+
+      const content = normalizePseudoContent(style.content);
+      if (!content) return round(fallbackSize);
+
+      const fontSize = parsePx(style.fontSize) || 16;
+      if (isHorizontal) {
+        return round(Math.max(content.length * fontSize * 0.6, fontSize));
+      }
+
+      return round(parsePx(style.lineHeight) || fontSize * 1.2);
+    }
+
+    function isVisiblePseudo(style) {
+      if (!style) return false;
+      if (style.display === 'none' || style.visibility === 'hidden') return false;
+
+      const content = normalizePseudoContent(style.content);
+      const hasBox = hasVisibleBackground(style.backgroundColor) || hasVisibleBorder(style.borderColor, {
+        top: parsePx(style.borderTopWidth),
+        right: parsePx(style.borderRightWidth),
+        bottom: parsePx(style.borderBottomWidth),
+        left: parsePx(style.borderLeftWidth),
+      });
+      const width = resolvePseudoSize(style.width, 0, style, true);
+      const height = resolvePseudoSize(style.height, 0, style, false);
+
+      return Boolean(content || hasBox) && width > 0 && height > 0;
+    }
+
+    function hasVisiblePseudoElement(element) {
+      return isVisiblePseudo(getComputedStyle(element, '::before'))
+        || isVisiblePseudo(getComputedStyle(element, '::after'));
+    }
+
+    function normalizePseudoContent(content) {
+      if (typeof content !== 'string') return '';
+      if (content === 'none' || content === 'normal') return '';
+
+      const unquoted = content.replace(/^['"]|['"]$/g, '');
+      return unquoted
+        .replace(/\\A/g, '\n')
+        .replace(/\\n/g, '\n')
+        .replace(/\\"/g, '"')
+        .replace(/\\\\/g, '\\');
+    }
+
+    function normalizeText(text, whiteSpace, preserveLineBreaks) {
+      const normalized = String(text)
+        .replace(/\r\n/g, '\n')
+        .replace(/\r/g, '\n')
+        .replace(/\u00a0/g, ' ');
+
+      if (/pre-wrap|break-spaces/.test(whiteSpace)) {
+        return normalized;
+      }
+
+      if (/pre-line/.test(whiteSpace) || preserveLineBreaks) {
+        return normalized
+          .split('\n')
+          .map((line) => line.replace(/[^\S\n]+/g, ' ').trimEnd())
+          .join('\n')
+          .replace(/\n{3,}/g, '\n\n');
+      }
+
+      if (/pre/.test(whiteSpace)) {
+        return normalized;
+      }
+
+      return normalized.replace(/\s+/g, ' ');
+    }
+
+    function hasVisibleBackground(value) {
+      return !/^(transparent|rgba\(0,\s*0,\s*0,\s*0\))$/i.test(String(value).replace(/\s+/g, ''));
+    }
+
+    function hasVisibleBorder(color, widths) {
+      const weight = Math.max(widths.top || 0, widths.right || 0, widths.bottom || 0, widths.left || 0);
+      if (weight <= 0) return false;
+      return !/^(transparent|rgba\(0,\s*0,\s*0,\s*0\))$/i.test(String(color).replace(/\s+/g, ''));
+    }
+
+    function parsePx(value) {
+      if (typeof value !== 'string' || value === '' || value === 'normal' || value === 'auto') return null;
+      const match = value.match(/-?[\d.]+/);
+      return match ? round(Number(match[0])) : null;
+    }
+
+    function normalizeFontWeight(value) {
+      if (value === 'normal') return 400;
+      if (value === 'bold') return 700;
+      const numeric = Number(value);
+      return Number.isFinite(numeric) ? numeric : 400;
+    }
+
+    function buildElementName(element) {
+      const tagName = element.tagName.toLowerCase();
+      if (element.id) return `${tagName}#${element.id}`;
+      const firstClass = element.classList[0];
+      return firstClass ? `${tagName}.${firstClass}` : tagName;
+    }
+
+    function buildTextName(text) {
+      const short = text.trim().replace(/\s+/g, ' ').slice(0, 24);
+      return short ? `text:${short}` : 'text';
+    }
+
+    function unionRects(rects) {
+      const left = Math.min(...rects.map((rect) => rect.left));
+      const top = Math.min(...rects.map((rect) => rect.top));
+      const right = Math.max(...rects.map((rect) => rect.right));
+      const bottom = Math.max(...rects.map((rect) => rect.bottom));
+      return { left, top, width: round(right - left), height: round(bottom - top) };
+    }
+
+    function countNodes(node) {
+      return node ? 1 + (node.children || []).reduce((sum, child) => sum + countNodes(child), 0) : 0;
+    }
+
+    function nextFrame(win) {
+      return new Promise((resolve) => win.requestAnimationFrame(() => resolve()));
+    }
+
+    function setStatus(message, isError = false) {
+      statusEl.textContent = message;
+      statusEl.classList.toggle('error', isError);
+    }
+
+    function setBusy(busy) {
+      importBtn.disabled = busy;
+    }
+
+    function round(value) {
+      return Math.round(value * 100) / 100;
+    }
+  </script>
+</body>
+</html>

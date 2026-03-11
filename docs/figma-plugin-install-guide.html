@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component Catalog Importer 導入手順</title>
+  <style>
+    :root {
+      --text: #1f2937;
+      --muted: #4b5563;
+      --line: #d1d5db;
+      --bg: #ffffff;
+      --panel: #f8fafc;
+      --accent: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+      line-height: 1.7;
+    }
+
+    body {
+      padding: 32px;
+    }
+
+    .page {
+      width: min(920px, 100%);
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 28px 32px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0 0 12px;
+      line-height: 1.4;
+    }
+
+    h1 {
+      font-size: 28px;
+    }
+
+    h2 {
+      margin-top: 32px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--line);
+      font-size: 22px;
+    }
+
+    h3 {
+      margin-top: 20px;
+      font-size: 17px;
+    }
+
+    p,
+    li {
+      font-size: 14px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul,
+    ol {
+      margin: 0 0 16px;
+      padding-left: 22px;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: #e5eefc;
+      color: #1d4ed8;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.95em;
+    }
+
+    .box {
+      margin-top: 16px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+    }
+
+    .note {
+      color: var(--muted);
+    }
+
+    .contact {
+      min-height: 72px;
+    }
+
+    @page {
+      size: A4;
+      margin: 14mm;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .page {
+        width: 100%;
+      }
+
+      .hero {
+        break-inside: avoid;
+      }
+
+      h2,
+      h3,
+      .box {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>Component Catalog Importer 導入手順</h1>
+      <p>社内コンポーネントカタログの HTML / CSS を Figma に取り込むための開発用プラグインです。</p>
+      <p class="note">このプラグインは <code>Figma Desktop アプリ</code> でのみ使用できます。ブラウザ版 Figma では利用できません。</p>
+    </section>
+
+    <h2>事前に必要なもの</h2>
+    <ul>
+      <li><code>Figma Desktop アプリ</code></li>
+      <li>配布された ZIP ファイル</li>
+      <li>Windows PC</li>
+    </ul>
+
+    <h2>1. ZIP ファイルを展開する</h2>
+    <p>配布された ZIP ファイルを、次の固定フォルダに展開してください。</p>
+    <div class="box">
+      <p><code>C:\company-tools\component-catalog\</code></p>
+      <p>展開後、以下のファイルがあることを確認してください。</p>
+      <p><code>C:\company-tools\component-catalog\figma-plugin\manifest.json</code></p>
+    </div>
+    <ul>
+      <li>フォルダ名は変更しないでください</li>
+      <li><code>figma-plugin</code> フォルダの場所を移動しないでください</li>
+      <li>ZIP のままでは使えません。必ず展開してください</li>
+    </ul>
+
+    <h2>2. Figma Desktop アプリを開く</h2>
+    <p><code>Figma Desktop アプリ</code> を起動してください。</p>
+    <p class="note">ブラウザ版では動作しません。</p>
+
+    <h2>3. プラグインを初回登録する</h2>
+    <p>Figma Desktop アプリで、上部メニューから次を開きます。</p>
+    <div class="box">
+      <p><code>Plugins → Development → Import plugin from manifest...</code></p>
+    </div>
+    <p>ファイル選択画面が開いたら、次のファイルを選択してください。</p>
+    <p><code>C:\company-tools\component-catalog\figma-plugin\manifest.json</code></p>
+    <p>正常に登録されると、Figma の Development Plugins 一覧に <code>Component Catalog Importer</code> が表示されます。</p>
+    <p class="note">この操作は最初の 1 回だけです。</p>
+
+    <h2>4. プラグインを使う</h2>
+    <h3>カタログ側</h3>
+    <ol>
+      <li>社内コンポーネントカタログを開きます</li>
+      <li>使いたいコンポーネントの <code>Figma</code> ボタンを押します</li>
+      <li>コンポーネント情報がコピーされます</li>
+    </ol>
+
+    <h3>Figma 側</h3>
+    <ol>
+      <li>Figma Desktop で任意のファイルを開きます</li>
+      <li>上部メニューから <code>Plugins → Development → Component Catalog Importer</code> を開きます</li>
+      <li>開いたプラグイン画面の入力欄をクリックします</li>
+      <li><code>Ctrl + V</code> で貼り付けます</li>
+      <li><code>Figmaに展開</code> を押します</li>
+    </ol>
+    <p>正常に動作すると、Figma のキャンバス上にコンポーネントが展開されます。</p>
+
+    <h2>5. 更新があった場合</h2>
+    <ol>
+      <li>既存の <code>C:\company-tools\component-catalog\</code> を新しいファイルで上書きします</li>
+      <li>Figma Desktop を再起動します</li>
+      <li>再度プラグインを開いて利用します</li>
+    </ol>
+    <p>通常は <code>manifest.json</code> の再登録は不要です。</p>
+    <p>ただし、更新後にプラグインが正常に開かない場合は、もう一度 <code>Plugins → Development → Import plugin from manifest...</code> を実行してください。</p>
+
+    <h2>よくある質問</h2>
+    <h3>Q. プラグインが見つかりません</h3>
+    <p>A. 初回登録が完了していない可能性があります。<code>Plugins → Development → Import plugin from manifest...</code> を実行し、<code>C:\company-tools\component-catalog\figma-plugin\manifest.json</code> を選択してください。</p>
+
+    <h3>Q. プラグインを開いたが、何をすればいいですか？</h3>
+    <p>A. 入力欄をクリックして <code>Ctrl + V</code> で貼り付け、その後 <code>Figmaに展開</code> を押してください。</p>
+
+    <h3>Q. ブラウザ版 Figma では使えますか？</h3>
+    <p>A. 使えません。<code>Figma Desktop アプリ</code> を使用してください。</p>
+
+    <h3>Q. 展開結果が少し崩れることがあります</h3>
+    <p>A. HTML / CSS の表現を Figma 用に変換しているため、完全一致しない場合があります。特に、装飾や複雑なレイアウトは差が出ることがあります。</p>
+
+    <h2>問い合わせ先</h2>
+    <div class="box contact">
+      <p>担当:</p>
+      <p>連絡先:</p>
+    </div>
+  </main>
+</body>
+</html>
