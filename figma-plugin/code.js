@@ -8,6 +8,8 @@ figma.showUI(__html__, {
 
 const loadedFonts = new Set();
 let availableFontsPromise = null;
+const DEFAULT_FONT_FAMILY = 'Noto Sans JP';
+const DEFAULT_FRAME_BACKGROUND = 'rgba(255,255,255,1)';
 
 figma.ui.onmessage = async (message) => {
   if (!message || typeof message !== 'object') return;
@@ -28,7 +30,7 @@ async function handleCreateNodes(payload) {
     }
 
     const root = payload.root;
-    const frame = createFrameNode(root);
+    const frame = createFrameNode(root, { isRoot: true });
     frame.name = payload.name || root.name || 'Imported Component';
 
     await appendChildren(root.children || [], frame, root.x || 0, root.y || 0, root.layout || null);
@@ -111,14 +113,16 @@ async function createNode(data) {
   }
 }
 
-function createFrameNode(data) {
+function createFrameNode(data, options = {}) {
   const frame = figma.createFrame();
   frame.name = data.name || data.tagName || 'frame';
   frame.layoutMode = 'NONE';
   frame.clipsContent = Boolean(data.styles && data.styles.overflowHidden);
   applyAutoLayoutToFrame(frame, data.layout || null, data.width, data.height);
   frame.resize(safeSize(data.width), safeSize(data.height));
-  applyShapeStyles(frame, data.styles);
+  applyShapeStyles(frame, data.styles, {
+    fallbackBackgroundColor: options.isRoot ? DEFAULT_FRAME_BACKGROUND : null,
+  });
   return frame;
 }
 
@@ -184,11 +188,12 @@ async function createImageNode(data) {
   return rect;
 }
 
-function applyShapeStyles(node, styles = {}) {
-  node.fills = buildSolidPaints(styles.backgroundColor);
+function applyShapeStyles(node, styles = {}, options = {}) {
+  node.fills = buildSolidPaints(styles.backgroundColor, false, options.fallbackBackgroundColor);
 
-  const strokeColor = parseColor(styles.borderColor);
-  const strokeWeight = getStrokeWeight(styles.borderWidths);
+  const borderWeights = getVisibleBorderWeights(styles.borderWidths, styles.borderStyles, styles.borderColors);
+  const strokeWeight = getStrokeWeight(borderWeights);
+  const strokeColor = getStrokeColor(styles.borderColors, styles.borderColor, borderWeights);
   if (strokeColor && strokeWeight > 0) {
     node.strokes = [{
       type: 'SOLID',
@@ -197,6 +202,7 @@ function applyShapeStyles(node, styles = {}) {
     }];
     node.strokeWeight = strokeWeight;
     node.strokeAlign = 'INSIDE';
+    applyIndividualStrokeWeights(node, borderWeights);
   } else {
     node.strokes = [];
   }
@@ -274,7 +280,14 @@ function applyCornerRadius(node, styles = {}) {
 
 async function resolveFontName(styles = {}) {
   const families = parseFontFamilies(styles.fontFamily);
-  families.push('Inter');
+  if (families.length === 0) {
+    families.push(DEFAULT_FONT_FAMILY);
+  } else if (!families.includes(DEFAULT_FONT_FAMILY)) {
+    families.push(DEFAULT_FONT_FAMILY);
+  }
+  if (!families.includes('Inter')) {
+    families.push('Inter');
+  }
 
   const fonts = await getAvailableFonts();
   const stylesToTry = buildFontStyles(styles.fontWeight, styles.fontStyle);
@@ -293,7 +306,7 @@ async function resolveFontName(styles = {}) {
     return familyFonts[0].fontName;
   }
 
-  return { family: 'Inter', style: 'Regular' };
+  return { family: DEFAULT_FONT_FAMILY, style: 'Regular' };
 }
 
 function parseFontFamilies(fontFamily) {
@@ -301,7 +314,25 @@ function parseFontFamilies(fontFamily) {
   return fontFamily
     .split(',')
     .map((item) => item.replace(/["']/g, '').trim())
-    .filter(Boolean);
+    .filter((item) => Boolean(item) && !isGenericFontFamily(item));
+}
+
+function isGenericFontFamily(value) {
+  const normalized = String(value).trim().toLowerCase();
+  return [
+    'serif',
+    'sans-serif',
+    'monospace',
+    'cursive',
+    'fantasy',
+    'system-ui',
+    'ui-sans-serif',
+    'ui-serif',
+    'ui-monospace',
+    'emoji',
+    'math',
+    'fangsong',
+  ].includes(normalized);
 }
 
 function buildFontStyles(fontWeight, fontStyle) {
@@ -337,9 +368,33 @@ async function ensureFontLoaded(fontName) {
   loadedFonts.add(key);
 }
 
-function buildSolidPaints(colorText, fallbackBlack = false) {
+function buildSolidPaints(colorText, fallbackBlack = false, fallbackColorText = null) {
   const color = parseColor(colorText);
+  if (color && color.a <= 0) {
+    const fallbackColor = parseColor(fallbackColorText);
+    if (fallbackColor) {
+      return [{
+        type: 'SOLID',
+        color: toPaintColor(fallbackColor),
+        opacity: fallbackColor.a,
+      }];
+    }
+    if (!fallbackBlack) return [];
+    return [{
+      type: 'SOLID',
+      color: { r: 0, g: 0, b: 0 },
+    }];
+  }
+
   if (!color) {
+    const fallbackColor = parseColor(fallbackColorText);
+    if (fallbackColor) {
+      return [{
+        type: 'SOLID',
+        color: toPaintColor(fallbackColor),
+        opacity: fallbackColor.a,
+      }];
+    }
     if (!fallbackBlack) return [];
     return [{
       type: 'SOLID',
@@ -409,6 +464,43 @@ function getStrokeWeight(borderWidths = {}) {
   ].filter((value) => typeof value === 'number' && value > 0);
 
   return values.length > 0 ? Math.max(...values) : 0;
+}
+
+function getVisibleBorderWeights(borderWidths = {}, borderStyles = {}, borderColors = {}) {
+  return {
+    top: isVisibleBorderSide(borderWidths.top, borderStyles.top, borderColors.top) ? numericOrZero(borderWidths.top) : 0,
+    right: isVisibleBorderSide(borderWidths.right, borderStyles.right, borderColors.right) ? numericOrZero(borderWidths.right) : 0,
+    bottom: isVisibleBorderSide(borderWidths.bottom, borderStyles.bottom, borderColors.bottom) ? numericOrZero(borderWidths.bottom) : 0,
+    left: isVisibleBorderSide(borderWidths.left, borderStyles.left, borderColors.left) ? numericOrZero(borderWidths.left) : 0,
+  };
+}
+
+function isVisibleBorderSide(width, borderStyle, borderColor) {
+  if (!(Number(width) > 0)) return false;
+  if (borderStyle === 'none' || borderStyle === 'hidden') return false;
+  return Boolean(parseColor(borderColor));
+}
+
+function getStrokeColor(borderColors = {}, fallbackColor, borderWeights = {}) {
+  const visibleColors = ['top', 'right', 'bottom', 'left']
+    .filter((side) => Number(borderWeights[side]) > 0)
+    .map((side) => borderColors[side])
+    .filter((color) => typeof color === 'string' && color.trim() !== '');
+
+  for (const colorText of visibleColors) {
+    const parsed = parseColor(colorText);
+    if (parsed) return parsed;
+  }
+
+  return parseColor(fallbackColor);
+}
+
+function applyIndividualStrokeWeights(node, borderWeights = {}) {
+  if (!('strokeTopWeight' in node)) return;
+  node.strokeTopWeight = numericOrZero(borderWeights.top);
+  node.strokeRightWeight = numericOrZero(borderWeights.right);
+  node.strokeBottomWeight = numericOrZero(borderWeights.bottom);
+  node.strokeLeftWeight = numericOrZero(borderWeights.left);
 }
 
 function mapTextAlign(value) {

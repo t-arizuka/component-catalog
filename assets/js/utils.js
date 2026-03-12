@@ -6,6 +6,60 @@
 'use strict';
 
 /* ============================================================
+   コンポーネント用CSS変数
+   ============================================================ */
+
+const COMPONENT_CSS_VARIABLES = `
+:root {
+  /*------▼基本設定▼------*/
+  --color-background: #fff;
+  --color-font: #111;
+  --color-primary: #333;
+  --color-primary-shade: #111;
+  --color-primary-tint: #666;
+  --color-secondary: #aaa;
+  --color-secondary-tint: #eee;
+  --color-table-border: #ccc;
+  --body-font-size: min(calc(1.6rem + (1vw - 1.92rem) * 0.1294), 1.6rem);
+  --body-font-family: 'Noto Sans JP', sans-serif;
+  --content-max-width: 1240px;
+
+  /*------▼フォント設定▼------*/
+  --font-family01: 'Noto Sans JP', sans-serif;
+  --font-family02: 'Oswald', 'Noto Sans JP', sans-serif;
+
+  /*------▼pxバリエーション▼------*/
+  --px240: min(calc(240px + (1vw - 19.2px) * 10.3560), 240px);
+  --px200: min(calc(200px + (1vw - 19.2px) * 6.4725), 200px);
+  --px180: min(calc(180px + (1vw - 19.2px) * 3.8835), 180px);
+  --px160w: min(calc(160px + (1vw - 19.2px) * 5.1780), 160px);
+  --px160: min(calc(160px + (1vw - 19.2px) * 6.4725), 160px);
+  --px150: min(calc(150px + (1vw - 19.2px) * 3.2362), 150px);
+  --px140: min(calc(140px + (1vw - 19.2px) * 6.4725), 140px);
+  --px120: min(calc(120px + (1vw - 19.2px) * 2.5890), 120px);
+  --px100w: min(calc(100px + (1vw - 19.2px) * 3.2362), 100px);
+  --px100: min(calc(100px + (1vw - 19.2px) * 3.8835), 100px);
+  --px96: min(calc(96px + (1vw - 19.2px) * 3.1068), 96px);
+  --px80w: min(calc(80px + (1vw - 19.2px) * 1.2945), 80px);
+  --px80: min(calc(80px + (1vw - 19.2px) * 2.5890), 80px);
+  --px80s: min(calc(80px + (1vw - 19.2px) * 3.8835), 80px);
+  --px60w: min(calc(60px + (1vw - 19.2px) * 1.2945), 60px);
+  --px60: min(calc(60px + (1vw - 19.2px) * 1.9417), 60px);
+  --px50: min(calc(50px + (1vw - 19.2px) * 1.2945), 50px);
+  --px40w: min(calc(40px + (1vw - 19.2px) * 0.6472), 40px);
+  --px40: min(calc(40px + (1vw - 19.2px) * 1.2945), 40px);
+  --px30w: min(calc(30px + (1vw - 19.2px) * 0.6472), 30px);
+  --px30: min(calc(30px + (1vw - 19.2px) * 0.9709), 30px);
+  --px24: min(calc(24px + (1vw - 19.2px) * 0.6472), 24px);
+  --px20: min(calc(20px + (1vw - 19.2px) * 0.6472), 20px);
+  --px18: min(calc(18px + (1vw - 19.2px) * 0.2589), 18px);
+  --px16: min(calc(16px + (1vw - 19.2px) * 0.1294), 16px);
+  --px14: min(calc(14px + (1vw - 19.2px) * 0.1294), 14px);
+  --px12: min(calc(12px + (1vw - 19.2px) * 0.0647), 12px);
+}
+`;
+
+/* ============================================================
    クリップボードコピー
    ============================================================ */
 
@@ -186,12 +240,14 @@ function buildSrcdoc(html, css, scrollable = false) {
   const isLayoutTag = /^<(section|header|main|footer|nav)[\s>]/i.test(trimmed);
 
   const bodyStyle = isLayoutTag
-    ? `font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
-    font-size: 14px;
+    ? `font-family: var(--body-font-family, "Noto Sans JP", sans-serif);
+    font-size: var(--body-font-size, 14px);
+    color: var(--color-font, #111);
     background: #f8fafc;
     ${scrollable ? 'overflow-y: auto;' : 'overflow: hidden;'}`
-    : `font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
-    font-size: 14px;
+    : `font-family: var(--body-font-family, "Noto Sans JP", sans-serif);
+    font-size: var(--body-font-size, 14px);
+    color: var(--color-font, #111);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -205,6 +261,7 @@ function buildSrcdoc(html, css, scrollable = false) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
+  ${COMPONENT_CSS_VARIABLES}
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { ${bodyStyle} }
   ${css}
