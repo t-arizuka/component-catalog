@@ -260,6 +260,7 @@ function buildSrcdoc(html, css, scrollable = false) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="assets/css/designcode.css">
 <style>
   ${COMPONENT_CSS_VARIABLES}
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
