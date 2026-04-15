@@ -379,9 +379,11 @@ function downloadJson(data, filename = 'components.json') {
 function buildSrcdoc(html, css, scrollable = false) {
   // ルート要素がセクション系タグかどうかで body スタイルを切り替える
   // section / header / main / footer / nav → full-width レイアウト向け
+  // <div class="post"> ラッパー形式 → full-width レイアウト向け
   // それ以外 → 中央配置（ボタン・バッジ・カード等の小コンポーネント向け）
   const trimmed = html.trimStart();
-  const isLayoutTag = /^<(section|header|main|footer|nav|article)[\s>]/i.test(trimmed);
+  const isLayoutTag = /^<(section|header|main|footer|nav|article)[\s>]/i.test(trimmed)
+    || /^<div\b[^>]*\bclass="[^"]*\bpost\b/.test(trimmed);
 
   const bodyStyle = isLayoutTag
     ? `font-family: var(--body-font-family, "Noto Sans JP", sans-serif);
