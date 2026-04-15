@@ -59,6 +59,150 @@ const COMPONENT_CSS_VARIABLES = `
 }
 `;
 
+const COMPONENT_PREVIEW_RESET_CSS = `
+/* ==========================================================================
+   Component Styles reset
+   Scope: .post .package_parts
+   ========================================================================== */
+
+/* ボックスモデルの統一 */
+.post .package_parts,
+.post .package_parts * {
+  box-sizing: border-box;
+}
+
+/* --- 見出し(h1-h6)のリセット --- */
+
+.post .package_parts h1,
+.post .package_parts h2,
+.post .package_parts h3,
+.post .package_parts h4,
+.post .package_parts h5,
+.post .package_parts h6 {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 100%;
+  font-weight: normal;
+  color: inherit;
+  line-height: 1.5;
+  box-shadow: none;
+  text-shadow: none;
+  width: auto;
+  position: static;
+}
+
+/* 見出しの擬似要素(アイコン等)を消去 */
+.post .package_parts h1::before, .post .package_parts h1::after,
+.post .package_parts h2::before, .post .package_parts h2::after,
+.post .package_parts h3::before, .post .package_parts h3::after,
+.post .package_parts h4::before, .post .package_parts h4::after,
+.post .package_parts h5::before, .post .package_parts h5::after,
+.post .package_parts h6::before, .post .package_parts h6::after {
+  content: none;
+  display: none;
+  background: transparent;
+}
+
+/* --- リスト(ul, ol, li)のリセット --- */
+.post .package_parts ul,
+.post .package_parts ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+
+.post .package_parts li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  display: block;
+  width: auto;
+}
+
+.post .package_parts li::before,
+.post .package_parts li::after {
+  content: none;
+  display: none;
+}
+
+/* --- 定義リスト(dl, dt, dd)のリセット --- */
+.post .package_parts dl,
+.post .package_parts dt,
+.post .package_parts dd {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+/* --- その他タグのリセット --- */
+.post .package_parts p,
+.post .package_parts figure,
+.post .package_parts blockquote,
+.post .package_parts dl,
+.post .package_parts dt,
+.post .package_parts dd {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.post .package_parts table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border: none;
+  background: none;
+}
+
+.post .package_parts th,
+.post .package_parts td {
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+/* --- 画像のリセット --- */
+.post .package_parts img {
+  padding: 0 !important;
+  border: none !important;
+  margin: 0;
+  max-width: 100%;
+  height: auto;
+  box-shadow: none !important;
+  vertical-align: bottom;
+  float: none;
+  background: none !important;
+}
+
+/* --- リンクのリセット --- */
+.post .package_parts a {
+  text-decoration: none;
+  color: inherit;
+  transition: none;
+  border: none;
+}
+
+/* --- WordPress固有クラスの無効化 --- */
+.post .package_parts .aligncenter,
+.post .package_parts .alignleft,
+.post .package_parts .alignright {
+  float: none;
+  margin: 0;
+  display: inline;
+}
+`;
+
 /* ============================================================
    クリップボードコピー
    ============================================================ */
@@ -237,7 +381,7 @@ function buildSrcdoc(html, css, scrollable = false) {
   // section / header / main / footer / nav → full-width レイアウト向け
   // それ以外 → 中央配置（ボタン・バッジ・カード等の小コンポーネント向け）
   const trimmed = html.trimStart();
-  const isLayoutTag = /^<(section|header|main|footer|nav)[\s>]/i.test(trimmed);
+  const isLayoutTag = /^<(section|header|main|footer|nav|article)[\s>]/i.test(trimmed);
 
   const bodyStyle = isLayoutTag
     ? `font-family: var(--body-font-family, "Noto Sans JP", sans-serif);
@@ -254,7 +398,6 @@ function buildSrcdoc(html, css, scrollable = false) {
     min-height: 100vh;
     padding: 16px;
     background: #f8fafc;`;
-
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -265,6 +408,7 @@ function buildSrcdoc(html, css, scrollable = false) {
   ${COMPONENT_CSS_VARIABLES}
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { ${bodyStyle} }
+  ${COMPONENT_PREVIEW_RESET_CSS}
   ${css}
 </style>
 </head>
