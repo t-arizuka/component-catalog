@@ -237,6 +237,31 @@
 
         </div><!-- /form-panel-body -->
 
+        <div class="save-mode-panel" id="save-mode-panel">
+          <div class="save-mode-header">
+            <div>
+              <p class="save-mode-label">保存モード</p>
+              <p class="save-mode-status" id="save-mode-status">ローカル編集モード</p>
+            </div>
+          </div>
+          <p class="save-mode-hint" id="save-mode-hint">
+            公開反映したい場合は、Vercel 上の <code>admin.html</code> から保存してください。
+          </p>
+          <div class="save-mode-fields" id="remote-save-fields" hidden>
+            <div class="form-group compact">
+              <label class="form-label" for="remote-admin-password">管理用パスワード</label>
+              <input
+                class="form-input"
+                type="password"
+                id="remote-admin-password"
+                placeholder="Vercel に設定した ADMIN_PASSWORD"
+                autocomplete="current-password"
+              >
+              <span class="form-hint">公開保存を行うときだけ使います。ブラウザを閉じるまで保持されます。</span>
+            </div>
+          </div>
+        </div>
+
         <div class="form-footer">
           <button class="btn-cancel" id="btn-cancel" type="button">キャンセル</button>
           <button class="btn-save" id="btn-save" type="button">保存する</button>

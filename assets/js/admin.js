@@ -7,6 +7,8 @@
 'use strict';
 
 const STORAGE_KEY = 'componentCatalogData';
+const ADMIN_PASSWORD_STORAGE_KEY = 'componentCatalogAdminPassword';
+const REMOTE_SAVE_PATH = '/api/save-components';
 
 /* ============================================================
    状態管理
@@ -20,6 +22,7 @@ const adminState = {
   deletingId: null,
   /** File System Access API のファイルハンドル（null = 未接続） */
   fileHandle: null,
+  remoteMode: false,
 };
 
 /* ============================================================
@@ -84,6 +87,113 @@ async function fetchData() {
  */
 function saveToStorage() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(adminState.data));
+}
+
+function isRemoteSaveMode() {
+  return location.protocol.startsWith('http') && /\.vercel\.app$/i.test(location.hostname);
+}
+
+function updateSaveModeUi(tone = 'default', text = '') {
+  const statusEl = document.getElementById('save-mode-status');
+  const hintEl = document.getElementById('save-mode-hint');
+  const fieldsEl = document.getElementById('remote-save-fields');
+
+  if (!statusEl || !hintEl || !fieldsEl) return;
+
+  fieldsEl.hidden = !adminState.remoteMode;
+
+  if (adminState.remoteMode) {
+    statusEl.textContent = text || '公開保存モード（GitHub を更新）';
+    hintEl.textContent = '保存すると Vercel Function が GitHub の data/components.json を更新します。GitHub Pages への反映には少し時間がかかる場合があります。';
+  } else {
+    statusEl.textContent = text || 'ローカル編集モード';
+    hintEl.textContent = 'この画面ではブラウザ内の一時保存と JSON エクスポートを行います。公開反映したい場合は Vercel 上の admin.html を利用してください。';
+  }
+
+  statusEl.className = tone === 'default'
+    ? 'save-mode-status'
+    : `save-mode-status ${tone}`;
+}
+
+function getRemoteAdminPassword() {
+  return getValue('remote-admin-password').trim();
+}
+
+function persistRemoteAdminPassword() {
+  const password = getRemoteAdminPassword();
+  if (password) {
+    sessionStorage.setItem(ADMIN_PASSWORD_STORAGE_KEY, password);
+  } else {
+    sessionStorage.removeItem(ADMIN_PASSWORD_STORAGE_KEY);
+  }
+}
+
+function ensureSaveReady() {
+  if (!adminState.remoteMode) return true;
+
+  const passwordInput = document.getElementById('remote-admin-password');
+  if (!getRemoteAdminPassword()) {
+    updateSaveModeUi('error', '管理用パスワードを入力してください');
+    passwordInput?.focus();
+    showToast('公開保存には管理用パスワードが必要です', 'error');
+    return false;
+  }
+
+  return true;
+}
+
+async function syncCurrentData() {
+  if (adminState.remoteMode) {
+    await saveToRemote();
+    return;
+  }
+  await saveToFile();
+}
+
+async function commitDataMutation(mutator) {
+  if (!ensureSaveReady()) return false;
+
+  const prevData = JSON.parse(JSON.stringify(adminState.data));
+  mutator(adminState.data);
+  saveToStorage();
+
+  try {
+    await syncCurrentData();
+    return true;
+  } catch (error) {
+    adminState.data = prevData;
+    saveToStorage();
+    throw error;
+  }
+}
+
+async function saveToRemote() {
+  persistRemoteAdminPassword();
+
+  const res = await fetch(REMOTE_SAVE_PATH, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    cache: 'no-store',
+    body: JSON.stringify({
+      password: getRemoteAdminPassword(),
+      data: adminState.data,
+    }),
+  });
+
+  const result = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const message = result.error || '公開保存に失敗しました';
+    updateSaveModeUi('error', '公開保存に失敗しました');
+    throw new Error(message);
+  }
+
+  const time = new Date().toLocaleTimeString('ja-JP', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+  updateSaveModeUi('success', `GitHub に保存済み（${time}）`);
 }
 
 /* ============================================================
@@ -252,24 +362,29 @@ async function saveComponent() {
   const comp = getFormValues();
   if (!comp) return;
 
-  const components = adminState.data.components ?? [];
+  const isEditing = Boolean(adminState.editingId);
 
-  if (adminState.editingId) {
-    // 更新
-    const idx = components.findIndex(c => c.id === adminState.editingId);
-    if (idx !== -1) {
-      components[idx] = comp;
-    }
-    showToast(`「${comp.name}」を更新しました`);
-  } else {
-    // 新規追加
-    components.push(comp);
-    showToast(`「${comp.name}」を登録しました`);
+  try {
+    await commitDataMutation((draft) => {
+      const components = draft.components ?? [];
+
+      if (adminState.editingId) {
+        const idx = components.findIndex(c => c.id === adminState.editingId);
+        if (idx !== -1) {
+          components[idx] = comp;
+        }
+      } else {
+        components.push(comp);
+      }
+
+      draft.components = components;
+    });
+  } catch (error) {
+    console.error('保存エラー:', error);
+    showToast(error.message || '保存に失敗しました', 'error');
+    return;
   }
 
-  adminState.data.components = components;
-  saveToStorage();
-  await saveToFile();
   renderTable();
   resetForm();
   adminState.editingId = null;
@@ -278,6 +393,14 @@ async function saveComponent() {
   if (titleEl) titleEl.textContent = '新規コンポーネントを登録';
 
   updatePreview();
+
+  if (adminState.remoteMode) {
+    showToast(`「${comp.name}」を公開保存しました`);
+  } else if (isEditing) {
+    showToast(`「${comp.name}」を更新しました`);
+  } else {
+    showToast(`「${comp.name}」を登録しました`);
+  }
 }
 
 /**
@@ -324,24 +447,33 @@ async function confirmDelete() {
   const id = adminState.deletingId;
   if (!id) return;
 
-  const idx = (adminState.data.components ?? []).findIndex(c => c.id === id);
-  if (idx !== -1) {
-    const comp = adminState.data.components[idx];
-    // 完全削除せず削除済み配列に移動
-    if (!Array.isArray(adminState.data.deletedComponents)) {
-      adminState.data.deletedComponents = [];
-    }
-    adminState.data.deletedComponents.push({ ...comp, deletedAt: formatDate() });
-    adminState.data.components.splice(idx, 1);
-    saveToStorage();
-    await saveToFile();
-    renderTable();
-    renderDeletedTable();
-    showToast(`「${comp.name}」を削除済みエリアに移動しました`);
+  const comp = (adminState.data.components ?? []).find(c => c.id === id);
+  if (!comp) return;
 
-    if (adminState.editingId === id) {
-      cancelForm();
-    }
+  try {
+    await commitDataMutation((draft) => {
+      const idx = (draft.components ?? []).findIndex(c => c.id === id);
+      if (idx === -1) return;
+
+      if (!Array.isArray(draft.deletedComponents)) {
+        draft.deletedComponents = [];
+      }
+      draft.deletedComponents.push({ ...draft.components[idx], deletedAt: formatDate() });
+      draft.components.splice(idx, 1);
+    });
+  } catch (error) {
+    console.error('削除エラー:', error);
+    showToast(error.message || '削除に失敗しました', 'error');
+    closeDeleteDialog();
+    return;
+  }
+
+  renderTable();
+  renderDeletedTable();
+  showToast(`「${comp.name}」を削除済みエリアに移動しました`);
+
+  if (adminState.editingId === id) {
+    cancelForm();
   }
 
   closeDeleteDialog();
@@ -358,12 +490,25 @@ async function restoreComponent(id) {
   const comp = { ...deleted[idx] };
   delete comp.deletedAt;
 
-  deleted.splice(idx, 1);
-  adminState.data.deletedComponents = deleted;
-  adminState.data.components.push(comp);
+  try {
+    await commitDataMutation((draft) => {
+      const items = draft.deletedComponents ?? [];
+      const deletedIndex = items.findIndex(c => c.id === id);
+      if (deletedIndex === -1) return;
 
-  saveToStorage();
-  await saveToFile();
+      const restored = { ...items[deletedIndex] };
+      delete restored.deletedAt;
+
+      items.splice(deletedIndex, 1);
+      draft.deletedComponents = items;
+      draft.components.push(restored);
+    });
+  } catch (error) {
+    console.error('復元エラー:', error);
+    showToast(error.message || '復元に失敗しました', 'error');
+    return;
+  }
+
   renderTable();
   renderDeletedTable();
   showToast(`「${comp.name}」を復元しました`);
@@ -377,11 +522,21 @@ async function permanentlyDelete(id, name) {
   const idx = deleted.findIndex(c => c.id === id);
   if (idx === -1) return;
 
-  deleted.splice(idx, 1);
-  adminState.data.deletedComponents = deleted;
+  try {
+    await commitDataMutation((draft) => {
+      const items = draft.deletedComponents ?? [];
+      const deletedIndex = items.findIndex(c => c.id === id);
+      if (deletedIndex === -1) return;
 
-  saveToStorage();
-  await saveToFile();
+      items.splice(deletedIndex, 1);
+      draft.deletedComponents = items;
+    });
+  } catch (error) {
+    console.error('完全削除エラー:', error);
+    showToast(error.message || '完全削除に失敗しました', 'error');
+    return;
+  }
+
   renderDeletedTable();
   showToast(`「${name}」を完全に削除しました`);
 }
@@ -548,6 +703,7 @@ function importJson() {
   input.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+    const prevData = JSON.parse(JSON.stringify(adminState.data));
     try {
       const text = await file.text();
       const parsed = JSON.parse(text);
@@ -559,13 +715,26 @@ function importJson() {
 
       adminState.data = parsed;
       saveToStorage();
+
+      if (adminState.remoteMode) {
+        if (!ensureSaveReady()) {
+          adminState.data = prevData;
+          saveToStorage();
+          return;
+        }
+        await syncCurrentData();
+      }
+
       renderTable();
+      renderDeletedTable();
       renderCategoryOptions();
       renderCategoryManager();
-      showToast('JSONをインポートしました');
+      showToast(adminState.remoteMode ? 'JSON をインポートして公開保存しました' : 'JSONをインポートしました');
     } catch (err) {
       console.error('インポートエラー:', err);
-      showToast('JSONの読み込みに失敗しました', 'error');
+      adminState.data = prevData;
+      saveToStorage();
+      showToast(err.message || 'JSONの読み込みに失敗しました', 'error');
     }
   });
   input.click();
@@ -618,10 +787,18 @@ async function addCategory() {
   const cats = adminState.data.categories ?? [];
   if (cats.includes(name)) { showToast(`「${name}」はすでに存在します`, 'error'); return; }
 
-  cats.push(name);
-  adminState.data.categories = cats;
-  saveToStorage();
-  await saveToFile();
+  try {
+    await commitDataMutation((draft) => {
+      const nextCats = draft.categories ?? [];
+      nextCats.push(name);
+      draft.categories = nextCats;
+    });
+  } catch (error) {
+    console.error('カテゴリ追加エラー:', error);
+    showToast(error.message || 'カテゴリ追加に失敗しました', 'error');
+    return;
+  }
+
   renderCategoryManager();
   renderCategoryOptions();
   if (input) input.value = '';
@@ -636,14 +813,21 @@ async function deleteCategory(name) {
     return;
   }
 
-  const cats = adminState.data.categories ?? [];
-  const idx = cats.indexOf(name);
-  if (idx === -1) return;
+  try {
+    await commitDataMutation((draft) => {
+      const cats = draft.categories ?? [];
+      const idx = cats.indexOf(name);
+      if (idx === -1) return;
 
-  cats.splice(idx, 1);
-  adminState.data.categories = cats;
-  saveToStorage();
-  await saveToFile();
+      cats.splice(idx, 1);
+      draft.categories = cats;
+    });
+  } catch (error) {
+    console.error('カテゴリ削除エラー:', error);
+    showToast(error.message || 'カテゴリ削除に失敗しました', 'error');
+    return;
+  }
+
   renderCategoryManager();
   renderCategoryOptions();
   showToast(`「${name}」を削除しました`);
@@ -712,6 +896,8 @@ function scrollToForm() {
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', async () => {
+  adminState.remoteMode = isRemoteSaveMode();
+
   // データ読み込み
   await loadData();
 
@@ -731,6 +917,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 初期プレビュー
   updatePreview();
+
+  const passwordInput = document.getElementById('remote-admin-password');
+  const storedPassword = sessionStorage.getItem(ADMIN_PASSWORD_STORAGE_KEY);
+  if (storedPassword && passwordInput) {
+    passwordInput.value = storedPassword;
+  }
+  passwordInput?.addEventListener('input', () => {
+    persistRemoteAdminPassword();
+    if (adminState.remoteMode && getRemoteAdminPassword()) {
+      updateSaveModeUi('info', '公開保存モード（GitHub を更新）');
+    }
+  });
+  updateSaveModeUi();
 
   // ---- イベント登録 ----
 

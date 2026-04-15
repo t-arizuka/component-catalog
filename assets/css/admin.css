@@ -346,6 +346,65 @@ body {
   padding: 20px;
 }
 
+.save-mode-panel {
+  margin: 0 20px 16px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+}
+
+.save-mode-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.save-mode-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.save-mode-status {
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.save-mode-status.info {
+  color: var(--color-primary);
+}
+
+.save-mode-status.success {
+  color: var(--color-success);
+}
+
+.save-mode-status.error {
+  color: var(--color-danger);
+}
+
+.save-mode-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.save-mode-fields {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--color-border);
+}
+
+.form-group.compact {
+  margin-bottom: 0;
+}
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -873,5 +932,9 @@ body {
 
   .json-actions {
     flex-direction: column;
+  }
+
+  .save-mode-panel {
+    margin: 0 16px 16px;
   }
 }
