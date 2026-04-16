@@ -379,11 +379,11 @@ function downloadJson(data, filename = 'components.json') {
 function buildSrcdoc(html, css, scrollable = false) {
   // ルート要素がセクション系タグかどうかで body スタイルを切り替える
   // section / header / main / footer / nav → full-width レイアウト向け
-  // <div class="post"> ラッパー形式 → full-width レイアウト向け
-  // それ以外 → 中央配置（ボタン・バッジ・カード等の小コンポーネント向け）
+  // <div class="post"> + package_parts ラッパー形式 → full-width レイアウト向け
+  // それ以外（post + package_partsなし、ボタン等）→ 中央配置（ボタン・バッジ等の小コンポーネント向け）
   const trimmed = html.trimStart();
   const isLayoutTag = /^<(section|header|main|footer|nav|article)[\s>]/i.test(trimmed)
-    || /^<div\b[^>]*\bclass="[^"]*\bpost\b/.test(trimmed);
+    || (/^<div\b[^>]*\bclass="[^"]*\bpost\b/.test(trimmed) && /class="[^"]*\bpackage_parts\b/.test(trimmed));
 
   const bodyStyle = isLayoutTag
     ? `font-family: var(--body-font-family, "Noto Sans JP", sans-serif);
@@ -397,7 +397,7 @@ function buildSrcdoc(html, css, scrollable = false) {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: 100%;
     padding: 16px;
     background: #f8fafc;`;
   return `<!DOCTYPE html>
@@ -409,6 +409,7 @@ function buildSrcdoc(html, css, scrollable = false) {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
   ${COMPONENT_CSS_VARIABLES}
+  html { height: 100%; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { ${bodyStyle} }
   ${COMPONENT_PREVIEW_RESET_CSS}
