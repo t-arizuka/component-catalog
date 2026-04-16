@@ -5,7 +5,8 @@
     "CTA",
     "FAQ",
     "COMPANY",
-    "SERVICE"
+    "SERVICE",
+    "BUTTON"
   ],
   "components": [
     {
