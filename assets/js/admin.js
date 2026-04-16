@@ -23,6 +23,12 @@ const adminState = {
   /** File System Access API のファイルハンドル（null = 未接続） */
   fileHandle: null,
   remoteMode: false,
+  /** バリアント管理: -1 = デフォルトタブ、0+ = variants 配列のインデックス */
+  variantIndex: -1,
+  /** デフォルトタブの HTML（f-html から同期） */
+  defaultHtml: '',
+  /** バリアント一覧 { label: string, html: string }[] */
+  variantData: [],
 };
 
 /* ============================================================
@@ -283,9 +289,20 @@ function openEditForm(id) {
   setValue('f-category', comp.category ?? '');
   setValue('f-tags', (comp.tags ?? []).join(', '));
   setValue('f-description', comp.description ?? '');
-  setValue('f-html', comp.html ?? '');
   setValue('f-css', comp.css ?? '');
   setValue('f-author', comp.author ?? '');
+
+  // AI メタデータ
+  setValue('f-use-cases', (comp.useCases ?? []).join(', '));
+  setValue('f-layout', comp.layout ?? '');
+  setValue('f-columns', (comp.columns ?? []).join(', '));
+
+  // バリアントデータをロード（デフォルトタブの HTML を f-html にセット）
+  adminState.defaultHtml = comp.html ?? '';
+  adminState.variantData = JSON.parse(JSON.stringify(comp.variants ?? []));
+  adminState.variantIndex = -1;
+  setValue('f-html', adminState.defaultHtml);
+  renderVariantTabs();
 
   const titleEl = document.getElementById('form-panel-title');
   if (titleEl) titleEl.textContent = `「${comp.name}」を編集`;
@@ -294,11 +311,123 @@ function openEditForm(id) {
   scrollToForm();
 }
 
+/* ============================================================
+   バリアント管理
+   ============================================================ */
+
+/**
+ * バリアントタブバーを描画する
+ */
+function renderVariantTabs() {
+  const bar = document.getElementById('variant-tab-bar');
+  if (!bar) return;
+
+  bar.innerHTML = '';
+
+  // デフォルトタブ
+  const defaultTab = document.createElement('button');
+  defaultTab.type = 'button';
+  defaultTab.className = `variant-tab${adminState.variantIndex === -1 ? ' active' : ''}`;
+  defaultTab.textContent = 'デフォルト';
+  defaultTab.dataset.index = '-1';
+  defaultTab.addEventListener('click', () => switchVariantTab(-1));
+  bar.appendChild(defaultTab);
+
+  // バリアントタブ
+  adminState.variantData.forEach((v, i) => {
+    const tab = document.createElement('button');
+    tab.type = 'button';
+    tab.className = `variant-tab${adminState.variantIndex === i ? ' active' : ''}`;
+    tab.textContent = v.label || `バリアント${i + 1}`;
+    tab.dataset.index = String(i);
+    tab.addEventListener('click', () => switchVariantTab(i));
+    bar.appendChild(tab);
+  });
+
+  // 追加ボタン
+  const addBtn = document.createElement('button');
+  addBtn.type = 'button';
+  addBtn.className = 'btn-add-variant';
+  addBtn.textContent = '+ バリアントを追加';
+  addBtn.addEventListener('click', addVariant);
+  bar.appendChild(addBtn);
+
+  // バリアントラベル行の表示切替
+  const labelRow = document.getElementById('variant-label-row');
+  if (labelRow) {
+    labelRow.hidden = adminState.variantIndex === -1;
+    if (adminState.variantIndex >= 0) {
+      setValue('f-variant-label', adminState.variantData[adminState.variantIndex]?.label ?? '');
+    }
+  }
+}
+
+/**
+ * 現在のタブの編集内容を adminState に同期する
+ */
+function syncCurrentVariantHtml() {
+  const html = getValue('f-html');
+  if (adminState.variantIndex === -1) {
+    adminState.defaultHtml = html;
+  } else if (adminState.variantData[adminState.variantIndex]) {
+    adminState.variantData[adminState.variantIndex].html = html;
+  }
+}
+
+/**
+ * バリアントタブを切り替える
+ * @param {number} index - -1: デフォルト, 0+: バリアント
+ */
+function switchVariantTab(index) {
+  // 現在の内容を保存
+  syncCurrentVariantHtml();
+  if (adminState.variantIndex >= 0 && adminState.variantData[adminState.variantIndex]) {
+    adminState.variantData[adminState.variantIndex].label =
+      getValue('f-variant-label').trim() || adminState.variantData[adminState.variantIndex].label;
+  }
+
+  adminState.variantIndex = index;
+
+  // 新しいタブの HTML を f-html にロード
+  if (index === -1) {
+    setValue('f-html', adminState.defaultHtml);
+  } else {
+    setValue('f-html', adminState.variantData[index]?.html ?? '');
+  }
+
+  renderVariantTabs();
+  updatePreview();
+}
+
+/**
+ * 新しいバリアントを追加する
+ */
+function addVariant() {
+  syncCurrentVariantHtml();
+  if (adminState.variantIndex >= 0 && adminState.variantData[adminState.variantIndex]) {
+    adminState.variantData[adminState.variantIndex].label =
+      getValue('f-variant-label').trim() || adminState.variantData[adminState.variantIndex].label;
+  }
+  const newIndex = adminState.variantData.length;
+  adminState.variantData.push({ label: `バリアント${newIndex + 1}`, html: '' });
+  switchVariantTab(newIndex);
+}
+
+/**
+ * 現在のバリアントを削除する
+ */
+function deleteCurrentVariant() {
+  if (adminState.variantIndex < 0) return;
+  adminState.variantData.splice(adminState.variantIndex, 1);
+  switchVariantTab(-1);
+}
+
 /**
  * フォームをリセットする
  */
 function resetForm() {
-  ['f-id', 'f-name', 'f-tags', 'f-description', 'f-html', 'f-css', 'f-author'].forEach(id => {
+  ['f-id', 'f-name', 'f-tags', 'f-description', 'f-html', 'f-css', 'f-author',
+   'f-use-cases', 'f-layout', 'f-columns'].forEach(id => {
     setValue(id, '');
   });
   // カテゴリは先頭に戻す
@@ -306,6 +435,11 @@ function resetForm() {
   if (catSelect && catSelect.options.length > 0) {
     catSelect.selectedIndex = 0;
   }
+  // バリアント状態をリセット
+  adminState.defaultHtml = '';
+  adminState.variantData = [];
+  adminState.variantIndex = -1;
+  renderVariantTabs();
 }
 
 /**
@@ -313,14 +447,28 @@ function resetForm() {
  * @returns {object|null} バリデーション失敗時は null
  */
 function getFormValues() {
+  // 現在のタブの内容を state に同期してから収集する
+  syncCurrentVariantHtml();
+  if (adminState.variantIndex >= 0 && adminState.variantData[adminState.variantIndex]) {
+    adminState.variantData[adminState.variantIndex].label =
+      getValue('f-variant-label').trim() || adminState.variantData[adminState.variantIndex].label;
+  }
+
   const id = getValue('f-id').trim();
   const name = getValue('f-name').trim();
   const category = getValue('f-category');
   const tagsRaw = getValue('f-tags');
   const description = getValue('f-description').trim();
-  const html = getValue('f-html');
+  // html はデフォルトタブの内容（syncCurrentVariantHtml で同期済み）
+  const html = adminState.defaultHtml;
   const css = getValue('f-css');
   const author = getValue('f-author').trim();
+
+  // AI メタデータ（任意）
+  const useCases = getValue('f-use-cases').split(',').map(t => t.trim()).filter(Boolean);
+  const layout = getValue('f-layout').trim();
+  const columnsRaw = getValue('f-columns');
+  const columns = columnsRaw.split(',').map(t => parseInt(t.trim(), 10)).filter(n => !isNaN(n));
 
   if (!id) { showToast('IDを入力してください', 'error'); return null; }
   if (!name) { showToast('コンポーネント名を入力してください', 'error'); return null; }
@@ -339,7 +487,12 @@ function getFormValues() {
 
   const now = formatDate();
 
-  return {
+  // バリアントデータ（空なら variants フィールドを省略）
+  const variantsField = adminState.variantData.length > 0
+    ? adminState.variantData.map(v => ({ label: v.label, html: v.html }))
+    : undefined;
+
+  const result = {
     id,
     name,
     category,
@@ -353,6 +506,14 @@ function getFormValues() {
       : now,
     updatedAt: now,
   };
+
+  // AI メタデータ：値があるときのみフィールドを追加
+  if (useCases.length > 0) result.useCases = useCases;
+  if (layout) result.layout = layout;
+  if (columns.length > 0) result.columns = columns;
+  if (variantsField) result.variants = variantsField;
+
+  return result;
 }
 
 /**
@@ -958,6 +1119,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   ['f-html', 'f-css', 'f-name', 'f-description', 'f-tags'].forEach(id => {
     document.getElementById(id)?.addEventListener('input', updatePreview);
   });
+
+  // バリアントラベル入力: リアルタイムでタブ名を更新
+  document.getElementById('f-variant-label')?.addEventListener('input', () => {
+    const label = getValue('f-variant-label').trim();
+    if (adminState.variantIndex >= 0 && adminState.variantData[adminState.variantIndex]) {
+      adminState.variantData[adminState.variantIndex].label = label;
+      // タブボタンのテキストを即時更新
+      const bar = document.getElementById('variant-tab-bar');
+      const activeTab = bar?.querySelector(`.variant-tab[data-index="${adminState.variantIndex}"]`);
+      if (activeTab) activeTab.textContent = label || `バリアント${adminState.variantIndex + 1}`;
+    }
+  });
+
+  // バリアント削除ボタン
+  document.getElementById('btn-delete-variant')?.addEventListener('click', deleteCurrentVariant);
+
+  // 初期バリアントタブ描画
+  renderVariantTabs();
 
   // IDとコンポーネント名の同期チェックボックス
   const syncCheckbox = document.getElementById('sync-id-name');

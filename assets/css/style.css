@@ -390,6 +390,42 @@ body {
   pointer-events: none;
 }
 
+/* バリアント切替ボタン群（プレビュー左下にオーバーレイ） */
+.variant-switcher {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  display: flex;
+  gap: 4px;
+  z-index: 2;
+  max-width: calc(100% - 60px);
+  flex-wrap: wrap;
+}
+
+.btn-variant {
+  padding: 3px 8px;
+  background: rgba(15, 23, 42, 0.62);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+  pointer-events: auto;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.btn-variant:hover {
+  background: rgba(15, 23, 42, 0.85);
+}
+
+.btn-variant.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
 /* 拡大ボタン（カードホバー時に表示） */
 .btn-expand-preview {
   position: absolute;
@@ -769,6 +805,70 @@ body {
 .modal-close:hover {
   background: var(--color-border);
   color: var(--color-text);
+}
+
+/* バリアント切替バー（モーダル内、バリアントがある場合のみ表示） */
+.modal-variant-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.modal-variant-bar::before {
+  content: 'バリアント:';
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.modal-variant-btn {
+  padding: 4px 12px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.modal-variant-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: #eff6ff;
+}
+
+.modal-variant-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+/* バリアント切替バー（拡大プレビューモーダル内、バリアントがある場合のみ表示） */
+.preview-variant-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.preview-variant-bar::before {
+  content: 'バリアント:';
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* タブ */

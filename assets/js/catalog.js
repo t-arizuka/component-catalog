@@ -21,6 +21,12 @@ const state = {
   modalComponent: null,
   /** モーダルのアクティブタブ */
   modalTab: 'html',
+  /** モーダルで選択中のバリアントインデックス（-1 = デフォルト） */
+  modalVariantIndex: -1,
+  /** 拡大プレビューで表示中のコンポーネント */
+  previewComponent: null,
+  /** 拡大プレビューで選択中のバリアントインデックス（-1 = デフォルト） */
+  previewVariantIndex: -1,
 };
 
 /* ============================================================
@@ -248,6 +254,9 @@ function createCard(comp) {
   card.className = 'component-card';
   card.dataset.id = comp.id;
 
+  const variants = comp.variants ?? [];
+  const hasVariants = variants.length > 0;
+
   // タグ表示（最大5個）
   const tagsHtml = (comp.tags ?? []).slice(0, 5)
     .map(t => `<span class="card-tag">${escapeHtml(t)}</span>`)
@@ -260,6 +269,7 @@ function createCard(comp) {
         sandbox="allow-scripts allow-same-origin"
         loading="lazy"
       ></iframe>
+      ${hasVariants ? '<div class="variant-switcher"></div>' : ''}
       <button class="btn-expand-preview" data-action="expand-preview" title="拡大プレビュー">
         <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
           <path d="M10 2h4v4M6 14H2v-4M14 2l-5 5M2 14l5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -295,6 +305,49 @@ function createCard(comp) {
   const iframe = card.querySelector('iframe');
   iframe.srcdoc = buildSrcdoc(comp.html ?? '', comp.css ?? '', true);
 
+  // アクティブなバリアントインデックス（-1 = デフォルト）
+  let activeVariantIndex = -1;
+
+  // 現在表示中の HTML を返す
+  const getActiveHtml = () => activeVariantIndex === -1
+    ? (comp.html ?? '')
+    : (variants[activeVariantIndex]?.html ?? comp.html ?? '');
+
+  // バリアントボタンを構築
+  if (hasVariants) {
+    const switcher = card.querySelector('.variant-switcher');
+
+    // デフォルトボタン
+    const defaultBtn = document.createElement('button');
+    defaultBtn.className = 'btn-variant active';
+    defaultBtn.textContent = '標準';
+    defaultBtn.dataset.variantIndex = '-1';
+    switcher.appendChild(defaultBtn);
+
+    // バリアントボタン
+    variants.forEach((v, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'btn-variant';
+      btn.textContent = v.label || `バリアント${i + 1}`;
+      btn.dataset.variantIndex = String(i);
+      switcher.appendChild(btn);
+    });
+
+    // クリックイベント（イベント委譲）
+    switcher.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-variant');
+      if (!btn) return;
+      e.stopPropagation();
+
+      activeVariantIndex = parseInt(btn.dataset.variantIndex);
+      iframe.srcdoc = buildSrcdoc(getActiveHtml(), comp.css ?? '', true);
+
+      switcher.querySelectorAll('.btn-variant').forEach(b => {
+        b.classList.toggle('active', b === btn);
+      });
+    });
+  }
+
   // ホイール操作を iframe の contentWindow に転送（pointer-events: none のままスクロール可能にする）
   card.querySelector('.card-preview').addEventListener('wheel', (e) => {
     e.preventDefault();
@@ -302,13 +355,15 @@ function createCard(comp) {
   }, { passive: false });
 
   // ボタンイベント
-  card.querySelector('[data-action="view-code"]').addEventListener('click', () => openModal(comp));
+  card.querySelector('[data-action="view-code"]').addEventListener('click', () => {
+    openModal(comp, activeVariantIndex);
+  });
   card.querySelector('[data-action="expand-preview"]').addEventListener('click', (e) => {
     e.stopPropagation();
-    openPreviewModal(comp);
+    openPreviewModal(comp, activeVariantIndex);
   });
   card.querySelector('[data-action="copy-html"]').addEventListener('click', async () => {
-    const ok = await copyToClipboard(comp.html ?? '');
+    const ok = await copyToClipboard(getActiveHtml());
     showToast(ok ? 'HTMLをコピーしました' : 'コピーに失敗しました', ok ? 'success' : 'error');
   });
   card.querySelector('[data-action="copy-css"]').addEventListener('click', async () => {
@@ -338,16 +393,28 @@ function createCard(comp) {
 /**
  * 拡大プレビューモーダルを開く
  * @param {object} comp
+ * @param {number} [initVariantIndex=-1] - 初期バリアントインデックス（-1 = デフォルト）
  */
-function openPreviewModal(comp) {
+function openPreviewModal(comp, initVariantIndex = -1) {
   const overlay = document.getElementById('preview-overlay');
   const titleEl = document.getElementById('preview-dialog-title');
   const subtitleEl = document.getElementById('preview-dialog-subtitle');
   const iframe = document.getElementById('preview-dialog-iframe');
 
+  state.previewComponent = comp;
+  state.previewVariantIndex = initVariantIndex;
+
+  const variants = comp.variants ?? [];
+  const activeHtml = initVariantIndex === -1
+    ? (comp.html ?? '')
+    : (variants[initVariantIndex]?.html ?? comp.html ?? '');
+
   if (titleEl) titleEl.textContent = comp.name;
   if (subtitleEl) subtitleEl.textContent = `${comp.category} • ${comp.id}`;
-  if (iframe) iframe.srcdoc = buildSrcdoc(comp.html ?? '', comp.css ?? '', true);
+  if (iframe) iframe.srcdoc = buildSrcdoc(activeHtml, comp.css ?? '', true);
+
+  // バリアントバーを構築
+  renderPreviewVariantBar(comp, initVariantIndex);
 
   // ビューポートボタンをリセット（全幅を選択状態に）
   document.querySelectorAll('.btn-viewport').forEach(btn => {
@@ -360,6 +427,65 @@ function openPreviewModal(comp) {
 }
 
 /**
+ * 拡大プレビューモーダルのバリアントバーを構築・更新する
+ * @param {object} comp
+ * @param {number} activeIndex
+ */
+function renderPreviewVariantBar(comp, activeIndex) {
+  const bar = document.getElementById('preview-variant-bar');
+  if (!bar) return;
+
+  const variants = comp.variants ?? [];
+  if (variants.length === 0) {
+    bar.hidden = true;
+    bar.innerHTML = '';
+    return;
+  }
+
+  bar.hidden = false;
+  bar.innerHTML = '';
+
+  // デフォルトボタン
+  const defaultBtn = document.createElement('button');
+  defaultBtn.className = `modal-variant-btn${activeIndex === -1 ? ' active' : ''}`;
+  defaultBtn.textContent = '標準';
+  defaultBtn.dataset.index = '-1';
+  defaultBtn.addEventListener('click', () => switchPreviewVariant(comp, -1));
+  bar.appendChild(defaultBtn);
+
+  // バリアントボタン
+  variants.forEach((v, i) => {
+    const btn = document.createElement('button');
+    btn.className = `modal-variant-btn${i === activeIndex ? ' active' : ''}`;
+    btn.textContent = v.label || `バリアント${i + 1}`;
+    btn.dataset.index = String(i);
+    btn.addEventListener('click', () => switchPreviewVariant(comp, i));
+    bar.appendChild(btn);
+  });
+}
+
+/**
+ * 拡大プレビューモーダル内のバリアントを切り替える
+ * @param {object} comp
+ * @param {number} index
+ */
+function switchPreviewVariant(comp, index) {
+  state.previewVariantIndex = index;
+  const variants = comp.variants ?? [];
+  const html = index === -1
+    ? (comp.html ?? '')
+    : (variants[index]?.html ?? comp.html ?? '');
+
+  const iframe = document.getElementById('preview-dialog-iframe');
+  if (iframe) iframe.srcdoc = buildSrcdoc(html, comp.css ?? '', true);
+
+  // バリアントボタンのアクティブ状態を更新
+  document.querySelectorAll('#preview-variant-bar .modal-variant-btn').forEach(btn => {
+    btn.classList.toggle('active', parseInt(btn.dataset.index) === index);
+  });
+}
+
+/**
  * 拡大プレビューモーダルを閉じる
  */
 function closePreviewModal() {
@@ -369,6 +495,9 @@ function closePreviewModal() {
   // 閉じるときに iframe の src をクリアしてメモリ解放
   const iframe = document.getElementById('preview-dialog-iframe');
   if (iframe) iframe.srcdoc = '';
+
+  state.previewComponent = null;
+  state.previewVariantIndex = -1;
 }
 
 /**
@@ -408,10 +537,12 @@ function updateResultHeader() {
 /**
  * モーダルを開く
  * @param {object} comp
+ * @param {number} [initVariantIndex=-1] - 初期バリアントインデックス（-1 = デフォルト）
  */
-function openModal(comp) {
+function openModal(comp, initVariantIndex = -1) {
   state.modalComponent = comp;
   state.modalTab = 'html';
+  state.modalVariantIndex = initVariantIndex;
 
   const overlay = document.getElementById('modal-overlay');
   const title = document.getElementById('modal-title');
@@ -420,13 +551,81 @@ function openModal(comp) {
   if (title) title.textContent = comp.name;
   if (subtitle) subtitle.textContent = `${comp.category} • ${comp.id}`;
 
+  // バリアントバーを構築
+  renderModalVariantBar(comp, initVariantIndex);
+
   // コードをシンタックスハイライト付きで表示
-  setModalCode('html', comp.html ?? '');
+  const variants = comp.variants ?? [];
+  const displayHtml = initVariantIndex === -1
+    ? (comp.html ?? '')
+    : (variants[initVariantIndex]?.html ?? comp.html ?? '');
+  setModalCode('html', displayHtml);
   setModalCode('css', comp.css ?? '');
   switchTab('html');
 
   overlay?.classList.add('visible');
   document.body.style.overflow = 'hidden';
+}
+
+/**
+ * モーダルのバリアントバーを構築・更新する
+ * @param {object} comp
+ * @param {number} activeIndex
+ */
+function renderModalVariantBar(comp, activeIndex) {
+  const bar = document.getElementById('modal-variant-bar');
+  if (!bar) return;
+
+  const variants = comp.variants ?? [];
+  if (variants.length === 0) {
+    bar.hidden = true;
+    bar.innerHTML = '';
+    return;
+  }
+
+  bar.hidden = false;
+  bar.innerHTML = '';
+
+  // デフォルトボタン
+  const defaultBtn = document.createElement('button');
+  defaultBtn.className = `modal-variant-btn${activeIndex === -1 ? ' active' : ''}`;
+  defaultBtn.textContent = '標準';
+  defaultBtn.dataset.index = '-1';
+  defaultBtn.addEventListener('click', () => switchModalVariant(comp, -1));
+  bar.appendChild(defaultBtn);
+
+  // バリアントボタン
+  variants.forEach((v, i) => {
+    const btn = document.createElement('button');
+    btn.className = `modal-variant-btn${i === activeIndex ? ' active' : ''}`;
+    btn.textContent = v.label || `バリアント${i + 1}`;
+    btn.dataset.index = String(i);
+    btn.addEventListener('click', () => switchModalVariant(comp, i));
+    bar.appendChild(btn);
+  });
+}
+
+/**
+ * モーダル内のバリアントを切り替える
+ * @param {object} comp
+ * @param {number} index
+ */
+function switchModalVariant(comp, index) {
+  state.modalVariantIndex = index;
+  const variants = comp.variants ?? [];
+  const html = index === -1
+    ? (comp.html ?? '')
+    : (variants[index]?.html ?? comp.html ?? '');
+
+  setModalCode('html', html);
+
+  // バリアントボタンのアクティブ状態を更新
+  document.querySelectorAll('#modal-variant-bar .modal-variant-btn').forEach(btn => {
+    btn.classList.toggle('active', parseInt(btn.dataset.index) === index);
+  });
+
+  // HTML タブに切り替え
+  if (state.modalTab !== 'html') switchTab('html');
 }
 
 /**
@@ -573,9 +772,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     btn.addEventListener('click', () => switchTab(btn.dataset.tab));
   });
 
-  // モーダルコピーボタン
+  // モーダルコピーボタン（アクティブなバリアントの HTML をコピー）
   document.getElementById('btn-copy-html')?.addEventListener('click', async () => {
-    const ok = await copyToClipboard(state.modalComponent?.html ?? '');
+    const comp = state.modalComponent;
+    const variants = comp?.variants ?? [];
+    const html = state.modalVariantIndex === -1
+      ? (comp?.html ?? '')
+      : (variants[state.modalVariantIndex]?.html ?? comp?.html ?? '');
+    const ok = await copyToClipboard(html);
     showToast(ok ? 'HTMLをコピーしました' : 'コピーに失敗しました', ok ? 'success' : 'error');
   });
   document.getElementById('btn-copy-css')?.addEventListener('click', async () => {

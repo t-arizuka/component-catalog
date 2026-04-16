@@ -205,9 +205,24 @@
             <input class="form-input" type="text" id="f-description" placeholder="コンポーネントの用途や特徴を入力" autocomplete="off">
           </div>
 
-          <!-- HTML -->
+          <!-- HTML / バリアント -->
           <div class="form-group">
-            <label class="form-label" for="f-html">HTML</label>
+            <label class="form-label">HTML / バリアント</label>
+            <!-- バリアントタブバー -->
+            <div class="variant-tab-bar" id="variant-tab-bar">
+              <!-- admin.js で動的生成 -->
+            </div>
+            <!-- バリアントラベル編集行（バリアントタブ選択時のみ表示） -->
+            <div class="variant-label-row" id="variant-label-row" hidden>
+              <input
+                class="form-input"
+                type="text"
+                id="f-variant-label"
+                placeholder="ラベル（例：col-3）"
+                autocomplete="off"
+              >
+              <button class="btn-delete-variant" id="btn-delete-variant" type="button">このバリアントを削除</button>
+            </div>
             <textarea
               class="form-textarea large"
               id="f-html"
@@ -233,6 +248,30 @@
           <div class="form-group">
             <label class="form-label" for="f-author">作成者</label>
             <input class="form-input" type="text" id="f-author" placeholder="デザインチーム" autocomplete="off">
+          </div>
+
+          <!-- AI メタデータ -->
+          <div class="form-section-divider">
+            <span class="form-section-divider-label">AI メタデータ（任意）</span>
+          </div>
+
+          <!-- 使用シーン -->
+          <div class="form-group">
+            <label class="form-label" for="f-use-cases">使用シーン</label>
+            <input class="form-input" type="text" id="f-use-cases" placeholder="サービス一覧, 実績紹介, チーム紹介（カンマ区切り）" autocomplete="off">
+            <span class="form-hint">AI がコンポーネントを選定する際の判断材料になります</span>
+          </div>
+
+          <!-- レイアウト種別 & カラム数 -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="f-layout">レイアウト種別</label>
+              <input class="form-input" type="text" id="f-layout" placeholder="grid / accordion / table / collage" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f-columns">カラム数</label>
+              <input class="form-input" type="text" id="f-columns" placeholder="2, 3, 4（カンマ区切り）" autocomplete="off">
+            </div>
           </div>
 
         </div><!-- /form-panel-body -->
