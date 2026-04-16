@@ -208,19 +208,19 @@
       "variants": [
         {
           "label": "style02",
-          "html": "<div class=\"c-basic-btn c-basic-btn--style02\">\n    <a href=\"#\">ボタンをクリック</a>\n</div>"
+          "html": "<div class=\"post\">\n<div class=\"c-basic-btn c-basic-btn--style02\">\n    <a href=\"#\">ボタンをクリック</a>\n</div>\n</div>"
         },
         {
           "label": "style03",
-          "html": "<div class=\"c-basic-btn c-basic-btn--style03\">\n    <a href=\"#\">ボタンをクリック</a>\n</div>"
+          "html": "<div class=\"post\">\n<div class=\"c-basic-btn c-basic-btn--style03\">\n    <a href=\"#\">ボタンをクリック</a>\n</div>\n</div>"
         },
         {
           "label": "style04",
-          "html": "<div class=\"c-basic-btn c-basic-btn--style04\">\n    <a href=\"#\">ボタンをクリック</a>\n</div>"
+          "html": "<div class=\"post\">\n<div class=\"c-basic-btn c-basic-btn--style04\">\n    <a href=\"#\">ボタンをクリック</a>\n</div>\n</div>"
         },
         {
           "label": "style05",
-          "html": "<div class=\"c-basic-btn c-basic-btn--style02\">\n    <a href=\"#\">ボタンをクリック</a>\n</div>"
+          "html": "<div class=\"post\">\n<div class=\"c-basic-btn c-basic-btn--style02\">\n    <a href=\"#\">ボタンをクリック</a>\n</div>\n</div>"
         }
       ]
     }
