@@ -220,7 +220,7 @@
         },
         {
           "label": "style05",
-          "html": "<div class=\"post\">\n<div class=\"c-basic-btn c-basic-btn--style02\">\n    <a href=\"#\">ボタンをクリック</a>\n</div>\n</div>"
+          "html": "<div class=\"post\">\n<div class=\"c-basic-btn c-basic-btn--style05\">\n    <a href=\"#\">ボタンをクリック</a>\n</div>\n</div>"
         }
       ]
     }
