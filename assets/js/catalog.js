@@ -93,7 +93,7 @@ function getFiltered() {
     }
 
     return true;
-  });
+  }).sort((a, b) => a.category.localeCompare(b.category, 'ja'));
 }
 
 /* ============================================================
