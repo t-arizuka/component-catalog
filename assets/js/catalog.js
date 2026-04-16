@@ -21,13 +21,29 @@ const state = {
   modalComponent: null,
   /** モーダルのアクティブタブ */
   modalTab: 'html',
-  /** モーダルで選択中のバリアントインデックス（-1 = デフォルト） */
-  modalVariantIndex: -1,
+  /** モーダルで選択中のバリアントHTML（null = デフォルト） */
+  modalVariantHtml: null,
   /** 拡大プレビューで表示中のコンポーネント */
   previewComponent: null,
-  /** 拡大プレビューで選択中のバリアントインデックス（-1 = デフォルト） */
-  previewVariantIndex: -1,
+  /** 拡大プレビューで選択中のバリアントHTML（null = デフォルト） */
+  previewVariantHtml: null,
 };
+
+/* ============================================================
+   バリアントグループユーティリティ
+   ============================================================ */
+
+/**
+ * コンポーネントのバリアントグループを正規化して返す
+ * variantGroups があればそれを使用、なければ variants を単一グループとしてラップ
+ * @param {object} comp
+ * @returns {Array<{label: string|null, variants: Array<{label: string, html: string}>}>}
+ */
+function getVariantGroups(comp) {
+  if (comp.variantGroups?.length > 0) return comp.variantGroups;
+  if (comp.variants?.length > 0) return [{ label: null, variants: comp.variants }];
+  return [];
+}
 
 /* ============================================================
    データ取得
@@ -254,8 +270,8 @@ function createCard(comp) {
   card.className = 'component-card';
   card.dataset.id = comp.id;
 
-  const variants = comp.variants ?? [];
-  const hasVariants = variants.length > 0;
+  const variantGroups = getVariantGroups(comp);
+  const hasVariants = variantGroups.length > 0;
 
   // タグ表示（最大5個）
   const tagsHtml = (comp.tags ?? []).slice(0, 5)
@@ -269,7 +285,6 @@ function createCard(comp) {
         sandbox="allow-scripts allow-same-origin"
         loading="lazy"
       ></iframe>
-      ${hasVariants ? '<div class="variant-switcher"></div>' : ''}
       <button class="btn-expand-preview" data-action="expand-preview" title="拡大プレビュー">
         <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
           <path d="M10 2h4v4M6 14H2v-4M14 2l-5 5M2 14l5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -277,6 +292,7 @@ function createCard(comp) {
         拡大
       </button>
     </div>
+    ${hasVariants ? '<div class="variant-switcher"></div>' : ''}
     <div class="card-info">
       <div class="card-meta">
         <span class="card-category">${escapeHtml(comp.category)}</span>
@@ -305,47 +321,75 @@ function createCard(comp) {
   const iframe = card.querySelector('iframe');
   iframe.srcdoc = buildSrcdoc(comp.html ?? '', comp.css ?? '', true);
 
-  // アクティブなバリアントインデックス（-1 = デフォルト）
-  let activeVariantIndex = -1;
+  // 選択中のバリアントHTML（null = デフォルト）
+  let activeVariantHtml = null;
 
   // 現在表示中の HTML を返す
-  const getActiveHtml = () => activeVariantIndex === -1
-    ? (comp.html ?? '')
-    : (variants[activeVariantIndex]?.html ?? comp.html ?? '');
+  const getActiveHtml = () => activeVariantHtml ?? comp.html ?? '';
 
   // バリアントボタンを構築
   if (hasVariants) {
     const switcher = card.querySelector('.variant-switcher');
+    const allBtns = [];
+    const isGrouped = comp.variantGroups?.length > 0;
 
-    // デフォルトボタン
+    if (isGrouped) switcher.classList.add('is-grouped');
+
+    // ボタンをアクティブ化する共通処理
+    const activateVariant = (btn, html) => {
+      activeVariantHtml = html;
+      iframe.srcdoc = buildSrcdoc(getActiveHtml(), comp.css ?? '', true);
+      allBtns.forEach(b => b.classList.toggle('active', b === btn));
+    };
+
+    // 「標準」ボタン
     const defaultBtn = document.createElement('button');
     defaultBtn.className = 'btn-variant active';
     defaultBtn.textContent = '標準';
-    defaultBtn.dataset.variantIndex = '-1';
+    defaultBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      activateVariant(defaultBtn, null);
+    });
+    allBtns.push(defaultBtn);
     switcher.appendChild(defaultBtn);
 
-    // バリアントボタン
-    variants.forEach((v, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'btn-variant';
-      btn.textContent = v.label || `バリアント${i + 1}`;
-      btn.dataset.variantIndex = String(i);
-      switcher.appendChild(btn);
-    });
+    // グループ化モードでは全グループを縦積みするコンテナを用意
+    const groupsStack = isGrouped ? document.createElement('div') : null;
+    if (groupsStack) {
+      groupsStack.className = 'variant-groups-stack';
+      switcher.appendChild(groupsStack);
+    }
 
-    // クリックイベント（イベント委譲）
-    switcher.addEventListener('click', (e) => {
-      const btn = e.target.closest('.btn-variant');
-      if (!btn) return;
-      e.stopPropagation();
+    // グループ別にボタンを構築
+    for (const group of variantGroups) {
+      let container;
+      if (isGrouped) {
+        const row = document.createElement('div');
+        row.className = 'variant-group-row';
+        if (group.label) {
+          const labelEl = document.createElement('span');
+          labelEl.className = 'variant-group-label';
+          labelEl.textContent = group.label + ':';
+          row.appendChild(labelEl);
+        }
+        groupsStack.appendChild(row);
+        container = row;
+      } else {
+        container = switcher;
+      }
 
-      activeVariantIndex = parseInt(btn.dataset.variantIndex);
-      iframe.srcdoc = buildSrcdoc(getActiveHtml(), comp.css ?? '', true);
-
-      switcher.querySelectorAll('.btn-variant').forEach(b => {
-        b.classList.toggle('active', b === btn);
-      });
-    });
+      for (const v of group.variants) {
+        const btn = document.createElement('button');
+        btn.className = 'btn-variant';
+        btn.textContent = v.label || 'バリアント';
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          activateVariant(btn, v.html);
+        });
+        allBtns.push(btn);
+        container.appendChild(btn);
+      }
+    }
   }
 
   // ホイール操作を iframe の contentWindow に転送（pointer-events: none のままスクロール可能にする）
@@ -356,11 +400,11 @@ function createCard(comp) {
 
   // ボタンイベント
   card.querySelector('[data-action="view-code"]').addEventListener('click', () => {
-    openModal(comp, activeVariantIndex);
+    openModal(comp, activeVariantHtml);
   });
   card.querySelector('[data-action="expand-preview"]').addEventListener('click', (e) => {
     e.stopPropagation();
-    openPreviewModal(comp, activeVariantIndex);
+    openPreviewModal(comp, activeVariantHtml);
   });
   card.querySelector('[data-action="copy-html"]').addEventListener('click', async () => {
     const ok = await copyToClipboard(getActiveHtml());
@@ -393,28 +437,25 @@ function createCard(comp) {
 /**
  * 拡大プレビューモーダルを開く
  * @param {object} comp
- * @param {number} [initVariantIndex=-1] - 初期バリアントインデックス（-1 = デフォルト）
+ * @param {string|null} [initVariantHtml=null] - 初期バリアントHTML（null = デフォルト）
  */
-function openPreviewModal(comp, initVariantIndex = -1) {
+function openPreviewModal(comp, initVariantHtml = null) {
   const overlay = document.getElementById('preview-overlay');
   const titleEl = document.getElementById('preview-dialog-title');
   const subtitleEl = document.getElementById('preview-dialog-subtitle');
   const iframe = document.getElementById('preview-dialog-iframe');
 
   state.previewComponent = comp;
-  state.previewVariantIndex = initVariantIndex;
+  state.previewVariantHtml = initVariantHtml;
 
-  const variants = comp.variants ?? [];
-  const activeHtml = initVariantIndex === -1
-    ? (comp.html ?? '')
-    : (variants[initVariantIndex]?.html ?? comp.html ?? '');
+  const activeHtml = initVariantHtml ?? comp.html ?? '';
 
   if (titleEl) titleEl.textContent = comp.name;
   if (subtitleEl) subtitleEl.textContent = `${comp.category} • ${comp.id}`;
   if (iframe) iframe.srcdoc = buildSrcdoc(activeHtml, comp.css ?? '', true);
 
   // バリアントバーを構築
-  renderPreviewVariantBar(comp, initVariantIndex);
+  renderPreviewVariantBar(comp, initVariantHtml);
 
   // ビューポートボタンをリセット（全幅を選択状態に）
   document.querySelectorAll('.btn-viewport').forEach(btn => {
@@ -429,14 +470,14 @@ function openPreviewModal(comp, initVariantIndex = -1) {
 /**
  * 拡大プレビューモーダルのバリアントバーを構築・更新する
  * @param {object} comp
- * @param {number} activeIndex
+ * @param {string|null} activeHtml
  */
-function renderPreviewVariantBar(comp, activeIndex) {
+function renderPreviewVariantBar(comp, activeHtml) {
   const bar = document.getElementById('preview-variant-bar');
   if (!bar) return;
 
-  const variants = comp.variants ?? [];
-  if (variants.length === 0) {
+  const variantGroups = getVariantGroups(comp);
+  if (variantGroups.length === 0) {
     bar.hidden = true;
     bar.innerHTML = '';
     return;
@@ -445,43 +486,74 @@ function renderPreviewVariantBar(comp, activeIndex) {
   bar.hidden = false;
   bar.innerHTML = '';
 
-  // デフォルトボタン
+  const isGrouped = comp.variantGroups?.length > 0;
+  bar.classList.toggle('is-grouped', isGrouped);
+
+  // 「標準」ボタン
   const defaultBtn = document.createElement('button');
-  defaultBtn.className = `modal-variant-btn${activeIndex === -1 ? ' active' : ''}`;
+  defaultBtn.className = `modal-variant-btn${!activeHtml ? ' active' : ''}`;
   defaultBtn.textContent = '標準';
-  defaultBtn.dataset.index = '-1';
-  defaultBtn.addEventListener('click', () => switchPreviewVariant(comp, -1));
+  defaultBtn._variantHtml = null;
+  defaultBtn.addEventListener('click', () => switchPreviewVariant(comp, null));
+
   bar.appendChild(defaultBtn);
 
-  // バリアントボタン
-  variants.forEach((v, i) => {
-    const btn = document.createElement('button');
-    btn.className = `modal-variant-btn${i === activeIndex ? ' active' : ''}`;
-    btn.textContent = v.label || `バリアント${i + 1}`;
-    btn.dataset.index = String(i);
-    btn.addEventListener('click', () => switchPreviewVariant(comp, i));
-    bar.appendChild(btn);
-  });
+  if (isGrouped) {
+    const stack = document.createElement('div');
+    stack.className = 'preview-variant-groups-stack';
+    bar.appendChild(stack);
+
+    for (const group of variantGroups) {
+      const groupRow = document.createElement('div');
+      groupRow.className = 'preview-variant-group-row';
+
+      if (group.label) {
+        const labelEl = document.createElement('span');
+        labelEl.className = 'preview-variant-group-label';
+        labelEl.textContent = group.label + ':';
+        groupRow.appendChild(labelEl);
+      }
+
+      for (const v of group.variants) {
+        const btn = document.createElement('button');
+        btn.className = `modal-variant-btn${v.html === activeHtml ? ' active' : ''}`;
+        btn.textContent = v.label;
+        btn._variantHtml = v.html;
+        btn.addEventListener('click', () => switchPreviewVariant(comp, v.html));
+        groupRow.appendChild(btn);
+      }
+
+      stack.appendChild(groupRow);
+    }
+  } else {
+    for (const group of variantGroups) {
+      for (const v of group.variants) {
+        const btn = document.createElement('button');
+        btn.className = `modal-variant-btn${v.html === activeHtml ? ' active' : ''}`;
+        btn.textContent = v.label;
+        btn._variantHtml = v.html;
+        btn.addEventListener('click', () => switchPreviewVariant(comp, v.html));
+        bar.appendChild(btn);
+      }
+    }
+  }
 }
 
 /**
  * 拡大プレビューモーダル内のバリアントを切り替える
  * @param {object} comp
- * @param {number} index
+ * @param {string|null} html
  */
-function switchPreviewVariant(comp, index) {
-  state.previewVariantIndex = index;
-  const variants = comp.variants ?? [];
-  const html = index === -1
-    ? (comp.html ?? '')
-    : (variants[index]?.html ?? comp.html ?? '');
+function switchPreviewVariant(comp, html) {
+  state.previewVariantHtml = html;
+  const displayHtml = html ?? comp.html ?? '';
 
   const iframe = document.getElementById('preview-dialog-iframe');
-  if (iframe) iframe.srcdoc = buildSrcdoc(html, comp.css ?? '', true);
+  if (iframe) iframe.srcdoc = buildSrcdoc(displayHtml, comp.css ?? '', true);
 
   // バリアントボタンのアクティブ状態を更新
   document.querySelectorAll('#preview-variant-bar .modal-variant-btn').forEach(btn => {
-    btn.classList.toggle('active', parseInt(btn.dataset.index) === index);
+    btn.classList.toggle('active', btn._variantHtml === html);
   });
 }
 
@@ -497,7 +569,7 @@ function closePreviewModal() {
   if (iframe) iframe.srcdoc = '';
 
   state.previewComponent = null;
-  state.previewVariantIndex = -1;
+  state.previewVariantHtml = null;
 }
 
 /**
@@ -537,12 +609,12 @@ function updateResultHeader() {
 /**
  * モーダルを開く
  * @param {object} comp
- * @param {number} [initVariantIndex=-1] - 初期バリアントインデックス（-1 = デフォルト）
+ * @param {string|null} [initVariantHtml=null] - 初期バリアントHTML（null = デフォルト）
  */
-function openModal(comp, initVariantIndex = -1) {
+function openModal(comp, initVariantHtml = null) {
   state.modalComponent = comp;
   state.modalTab = 'html';
-  state.modalVariantIndex = initVariantIndex;
+  state.modalVariantHtml = initVariantHtml;
 
   const overlay = document.getElementById('modal-overlay');
   const title = document.getElementById('modal-title');
@@ -552,13 +624,10 @@ function openModal(comp, initVariantIndex = -1) {
   if (subtitle) subtitle.textContent = `${comp.category} • ${comp.id}`;
 
   // バリアントバーを構築
-  renderModalVariantBar(comp, initVariantIndex);
+  renderModalVariantBar(comp, initVariantHtml);
 
   // コードをシンタックスハイライト付きで表示
-  const variants = comp.variants ?? [];
-  const displayHtml = initVariantIndex === -1
-    ? (comp.html ?? '')
-    : (variants[initVariantIndex]?.html ?? comp.html ?? '');
+  const displayHtml = initVariantHtml ?? comp.html ?? '';
   setModalCode('html', displayHtml);
   setModalCode('css', comp.css ?? '');
   switchTab('html');
@@ -570,14 +639,14 @@ function openModal(comp, initVariantIndex = -1) {
 /**
  * モーダルのバリアントバーを構築・更新する
  * @param {object} comp
- * @param {number} activeIndex
+ * @param {string|null} activeHtml
  */
-function renderModalVariantBar(comp, activeIndex) {
+function renderModalVariantBar(comp, activeHtml) {
   const bar = document.getElementById('modal-variant-bar');
   if (!bar) return;
 
-  const variants = comp.variants ?? [];
-  if (variants.length === 0) {
+  const variantGroups = getVariantGroups(comp);
+  if (variantGroups.length === 0) {
     bar.hidden = true;
     bar.innerHTML = '';
     return;
@@ -586,42 +655,75 @@ function renderModalVariantBar(comp, activeIndex) {
   bar.hidden = false;
   bar.innerHTML = '';
 
-  // デフォルトボタン
+  const isGrouped = comp.variantGroups?.length > 0;
+  bar.classList.toggle('is-grouped', isGrouped);
+
+  // 「標準」ボタン
   const defaultBtn = document.createElement('button');
-  defaultBtn.className = `modal-variant-btn${activeIndex === -1 ? ' active' : ''}`;
+  defaultBtn.className = `modal-variant-btn${!activeHtml ? ' active' : ''}`;
   defaultBtn.textContent = '標準';
-  defaultBtn.dataset.index = '-1';
-  defaultBtn.addEventListener('click', () => switchModalVariant(comp, -1));
+  defaultBtn._variantHtml = null;
+  defaultBtn.addEventListener('click', () => switchModalVariant(comp, null));
+
   bar.appendChild(defaultBtn);
 
-  // バリアントボタン
-  variants.forEach((v, i) => {
-    const btn = document.createElement('button');
-    btn.className = `modal-variant-btn${i === activeIndex ? ' active' : ''}`;
-    btn.textContent = v.label || `バリアント${i + 1}`;
-    btn.dataset.index = String(i);
-    btn.addEventListener('click', () => switchModalVariant(comp, i));
-    bar.appendChild(btn);
-  });
+  if (isGrouped) {
+    const stack = document.createElement('div');
+    stack.className = 'modal-variant-groups-stack';
+    bar.appendChild(stack);
+
+    for (const group of variantGroups) {
+      const groupRow = document.createElement('div');
+      groupRow.className = 'modal-variant-group-row';
+
+      if (group.label) {
+        const labelEl = document.createElement('span');
+        labelEl.className = 'modal-variant-group-label';
+        labelEl.textContent = group.label + ':';
+        groupRow.appendChild(labelEl);
+      }
+
+      for (const v of group.variants) {
+        const btn = document.createElement('button');
+        btn.className = `modal-variant-btn${v.html === activeHtml ? ' active' : ''}`;
+        btn.textContent = v.label;
+        btn._variantHtml = v.html;
+        btn.addEventListener('click', () => switchModalVariant(comp, v.html));
+        groupRow.appendChild(btn);
+      }
+
+      stack.appendChild(groupRow);
+    }
+  } else {
+    bar.appendChild(defaultBtn);
+
+    for (const group of variantGroups) {
+      for (const v of group.variants) {
+        const btn = document.createElement('button');
+        btn.className = `modal-variant-btn${v.html === activeHtml ? ' active' : ''}`;
+        btn.textContent = v.label;
+        btn._variantHtml = v.html;
+        btn.addEventListener('click', () => switchModalVariant(comp, v.html));
+        bar.appendChild(btn);
+      }
+    }
+  }
 }
 
 /**
  * モーダル内のバリアントを切り替える
  * @param {object} comp
- * @param {number} index
+ * @param {string|null} html
  */
-function switchModalVariant(comp, index) {
-  state.modalVariantIndex = index;
-  const variants = comp.variants ?? [];
-  const html = index === -1
-    ? (comp.html ?? '')
-    : (variants[index]?.html ?? comp.html ?? '');
+function switchModalVariant(comp, html) {
+  state.modalVariantHtml = html;
+  const displayHtml = html ?? comp.html ?? '';
 
-  setModalCode('html', html);
+  setModalCode('html', displayHtml);
 
   // バリアントボタンのアクティブ状態を更新
   document.querySelectorAll('#modal-variant-bar .modal-variant-btn').forEach(btn => {
-    btn.classList.toggle('active', parseInt(btn.dataset.index) === index);
+    btn.classList.toggle('active', btn._variantHtml === html);
   });
 
   // HTML タブに切り替え
@@ -775,10 +877,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // モーダルコピーボタン（アクティブなバリアントの HTML をコピー）
   document.getElementById('btn-copy-html')?.addEventListener('click', async () => {
     const comp = state.modalComponent;
-    const variants = comp?.variants ?? [];
-    const html = state.modalVariantIndex === -1
-      ? (comp?.html ?? '')
-      : (variants[state.modalVariantIndex]?.html ?? comp?.html ?? '');
+    const html = state.modalVariantHtml ?? comp?.html ?? '';
     const ok = await copyToClipboard(html);
     showToast(ok ? 'HTMLをコピーしました' : 'コピーに失敗しました', ok ? 'success' : 'error');
   });

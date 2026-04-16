@@ -390,40 +390,72 @@ body {
   pointer-events: none;
 }
 
-/* バリアント切替ボタン群（プレビュー左下にオーバーレイ） */
+/* バリアント切替バー（プレビュー下・カード情報上の帯） */
 .variant-switcher {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 4px;
-  z-index: 2;
-  max-width: calc(100% - 60px);
+  padding: 6px 10px;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* グループ化モード：[標準] ボタンと グループスタックを横並び */
+.variant-switcher.is-grouped {
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+/* グループ行をまとめる縦積みコンテナ */
+.variant-groups-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+/* 各グループ行（ラベル + ボタン群） */
+.variant-group-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   flex-wrap: wrap;
 }
 
-.btn-variant {
-  padding: 3px 8px;
-  background: rgba(15, 23, 42, 0.62);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--radius-sm);
-  font-size: 11px;
+.variant-group-label {
+  font-size: 10px;
   font-weight: 600;
-  cursor: pointer;
-  transition: background var(--transition), border-color var(--transition);
-  pointer-events: auto;
+  color: var(--color-text-muted);
   white-space: nowrap;
-  line-height: 1.4;
+  flex-shrink: 0;
+  line-height: 1.5;
+}
+
+.btn-variant {
+  padding: 2px 9px;
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+  white-space: nowrap;
+  line-height: 1.5;
 }
 
 .btn-variant:hover {
-  background: rgba(15, 23, 42, 0.85);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .btn-variant.active {
   background: var(--color-primary);
   border-color: var(--color-primary);
+  color: #fff;
 }
 
 /* 拡大ボタン（カードホバー時に表示） */
@@ -826,6 +858,40 @@ body {
   flex-shrink: 0;
 }
 
+/* variantGroups 使用時（グループ化モード）: [標準] + グループスタック横並び */
+.modal-variant-bar.is-grouped {
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.modal-variant-bar.is-grouped::before {
+  content: none;
+}
+
+/* グループ行を縦積みするコンテナ */
+.modal-variant-groups-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.modal-variant-group-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.modal-variant-group-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 .modal-variant-btn {
   padding: 4px 12px;
   border: 1.5px solid var(--color-border);
@@ -864,6 +930,40 @@ body {
 
 .preview-variant-bar::before {
   content: 'バリアント:';
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* variantGroups 使用時（グループ化モード）: [標準] + グループスタック横並び */
+.preview-variant-bar.is-grouped {
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.preview-variant-bar.is-grouped::before {
+  content: none;
+}
+
+/* グループ行を縦積みするコンテナ */
+.preview-variant-groups-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.preview-variant-group-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.preview-variant-group-label {
   font-size: 11px;
   font-weight: 700;
   color: var(--color-text-muted);
