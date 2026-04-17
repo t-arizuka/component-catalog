@@ -250,6 +250,19 @@
             <input class="form-input" type="text" id="f-author" placeholder="デザインチーム" autocomplete="off">
           </div>
 
+          <!-- 修飾クラス -->
+          <div class="form-section-divider">
+            <span class="form-section-divider-label">修飾クラス（任意）</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">修飾クラス</label>
+            <div class="modifier-rows" id="modifier-rows">
+              <!-- admin.js で動的生成 -->
+            </div>
+            <button class="btn-add-modifier" id="btn-add-modifier" type="button">+ 修飾クラスを追加</button>
+            <span class="form-hint">CSSで定義するモディファイアクラスを登録します。カタログの「Modifier」タブに表示されます</span>
+          </div>
+
           <!-- AI メタデータ -->
           <div class="form-section-divider">
             <span class="form-section-divider-label">AI メタデータ（任意）</span>

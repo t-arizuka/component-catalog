@@ -29,6 +29,8 @@ const adminState = {
   defaultHtml: '',
   /** バリアント一覧 { label: string, html: string }[] */
   variantData: [],
+  /** 修飾クラス一覧 { class: string, description: string }[] */
+  modifierData: [],
 };
 
 /* ============================================================
@@ -304,6 +306,10 @@ function openEditForm(id) {
   setValue('f-html', adminState.defaultHtml);
   renderVariantTabs();
 
+  // 修飾クラスデータをロード
+  adminState.modifierData = JSON.parse(JSON.stringify(comp.modifiers ?? []));
+  renderModifierRows();
+
   const titleEl = document.getElementById('form-panel-title');
   if (titleEl) titleEl.textContent = `「${comp.name}」を編集`;
 
@@ -422,6 +428,72 @@ function deleteCurrentVariant() {
   switchVariantTab(-1);
 }
 
+/* ============================================================
+   修飾クラス管理
+   ============================================================ */
+
+/**
+ * 修飾クラス行を描画する
+ */
+function renderModifierRows() {
+  const container = document.getElementById('modifier-rows');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  adminState.modifierData.forEach((mod, i) => {
+    const row = document.createElement('div');
+    row.className = 'modifier-row';
+
+    const classInput = document.createElement('input');
+    classInput.type = 'text';
+    classInput.className = 'form-input modifier-row-class';
+    classInput.placeholder = '--bg-gray';
+    classInput.value = mod.class ?? '';
+    classInput.autocomplete = 'off';
+    classInput.addEventListener('input', (e) => {
+      adminState.modifierData[i].class = e.target.value;
+    });
+
+    const descInput = document.createElement('input');
+    descInput.type = 'text';
+    descInput.className = 'form-input modifier-row-desc';
+    descInput.placeholder = '説明（例：背景色をグレーに変更）';
+    descInput.value = mod.description ?? '';
+    descInput.autocomplete = 'off';
+    descInput.addEventListener('input', (e) => {
+      adminState.modifierData[i].description = e.target.value;
+    });
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.type = 'button';
+    deleteBtn.className = 'btn-delete-modifier';
+    deleteBtn.setAttribute('aria-label', '削除');
+    deleteBtn.textContent = '✕';
+    deleteBtn.addEventListener('click', () => {
+      adminState.modifierData.splice(i, 1);
+      renderModifierRows();
+    });
+
+    row.appendChild(classInput);
+    row.appendChild(descInput);
+    row.appendChild(deleteBtn);
+    container.appendChild(row);
+  });
+}
+
+/**
+ * 修飾クラス行を追加する
+ */
+function addModifierRow() {
+  adminState.modifierData.push({ class: '', description: '' });
+  renderModifierRows();
+  // 追加した行のクラス名入力にフォーカス
+  const container = document.getElementById('modifier-rows');
+  const lastRow = container?.querySelector('.modifier-row:last-child .modifier-row-class');
+  lastRow?.focus();
+}
+
 /**
  * フォームをリセットする
  */
@@ -440,6 +512,9 @@ function resetForm() {
   adminState.variantData = [];
   adminState.variantIndex = -1;
   renderVariantTabs();
+  // 修飾クラス状態をリセット
+  adminState.modifierData = [];
+  renderModifierRows();
 }
 
 /**
@@ -512,6 +587,12 @@ function getFormValues() {
   if (layout) result.layout = layout;
   if (columns.length > 0) result.columns = columns;
   if (variantsField) result.variants = variantsField;
+
+  // 修飾クラス（クラス名が空のエントリを除外）
+  const modifiers = adminState.modifierData
+    .filter(m => m.class?.trim())
+    .map(m => ({ class: m.class.trim(), description: m.description?.trim() ?? '' }));
+  if (modifiers.length > 0) result.modifiers = modifiers;
 
   return result;
 }
@@ -1137,6 +1218,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 初期バリアントタブ描画
   renderVariantTabs();
+
+  // 修飾クラス追加ボタン
+  document.getElementById('btn-add-modifier')?.addEventListener('click', addModifierRow);
+
+  // 初期修飾クラス行描画
+  renderModifierRows();
 
   // IDとコンポーネント名の同期チェックボックス
   const syncCheckbox = document.getElementById('sync-id-name');

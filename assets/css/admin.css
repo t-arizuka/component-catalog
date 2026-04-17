@@ -1021,6 +1021,66 @@ body {
 }
 
 /* ============================================================
+   修飾クラスエディタ
+   ============================================================ */
+.modifier-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.modifier-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 30px;
+  gap: 6px;
+  align-items: center;
+}
+
+.btn-delete-modifier {
+  width: 30px;
+  height: 30px;
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.btn-delete-modifier:hover {
+  background: #fef2f2;
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.btn-add-modifier {
+  padding: 7px 12px;
+  border: 1.5px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+  width: 100%;
+  text-align: left;
+}
+
+.btn-add-modifier:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: #eff6ff;
+}
+
+/* ============================================================
    ドラッグ&ドロップ
    ============================================================ */
 .form-textarea.drag-over {

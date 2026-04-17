@@ -630,10 +630,60 @@ function openModal(comp, initVariantHtml = null) {
   const displayHtml = initVariantHtml ?? comp.html ?? '';
   setModalCode('html', displayHtml);
   setModalCode('css', comp.css ?? '');
+
+  // Modifier タブを構築
+  setModalModifiers(comp);
+
   switchTab('html');
 
   overlay?.classList.add('visible');
   document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Modifier タブの内容を構築する
+ * modifiers がある場合はタブボタンを表示、ない場合は非表示にする
+ * @param {object} comp
+ */
+function setModalModifiers(comp) {
+  const pane = document.getElementById('modifier-pane');
+  const tabBtn = document.querySelector('.tab-btn[data-tab="modifier"]');
+  if (!pane) return;
+
+  const modifiers = comp.modifiers ?? [];
+
+  // modifiers がなければタブごと隠す
+  if (modifiers.length === 0) {
+    if (tabBtn) tabBtn.hidden = true;
+    pane.innerHTML = '';
+    return;
+  }
+
+  if (tabBtn) tabBtn.hidden = false;
+
+  const list = document.createElement('div');
+  list.className = 'modifier-list';
+
+  for (const mod of modifiers) {
+    const className = mod.class ?? '';
+    const description = mod.description ?? '';
+
+    const item = document.createElement('div');
+    item.className = 'modifier-item';
+    item.innerHTML = `
+      <code class="modifier-class">${escapeHtml(className)}</code>
+      <span class="modifier-description">${escapeHtml(description)}</span>
+      <button class="btn-modifier-copy">コピー</button>
+    `;
+    item.querySelector('.btn-modifier-copy').addEventListener('click', async () => {
+      const ok = await copyToClipboard(className);
+      showToast(ok ? `「${className}」をコピーしました` : 'コピーに失敗しました', ok ? 'success' : 'error');
+    });
+    list.appendChild(item);
+  }
+
+  pane.innerHTML = '';
+  pane.appendChild(list);
 }
 
 /**
