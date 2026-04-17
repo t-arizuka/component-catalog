@@ -413,6 +413,21 @@
         "お問い合わせ",
         "CTA"
       ]
+    },
+    {
+      "id": "comp-011",
+      "name": "faq-list-01",
+      "category": "FAQ",
+      "tags": [],
+      "description": "",
+      "html": "<div class=\"post\">\n<div class=\"package_parts\">\n<section class=\"l-faq\">\n  <div class=\"c-container\">\n    <ul class=\"c-support-faq-list-01\">\n      <li class=\"c-support-faq-list-01__item\">\n        <span class=\"c-support-faq-list-01__num\">Q1</span>\n        <div class=\"c-support-faq-list-01__body\">\n          <p class=\"c-support-faq-list-01__question\">家事代行って、どこまでやってくれるの？</p>\n          <p class=\"c-support-faq-list-01__answer\">30min.の家事代行サービスは、研修を受けたハウスキーパーがお客様宅にお伺いし、お客様がお持ちの道具・洗剤をお借りして、日常のお掃除（バスルームやキッチンなどの水回りなど）を実施します。</p>\n        </div>\n      </li>\n      <li class=\"c-support-faq-list-01__item\">\n        <span class=\"c-support-faq-list-01__num\">Q2</span>\n        <div class=\"c-support-faq-list-01__body\">\n          <p class=\"c-support-faq-list-01__question\">ハウスクリーニングとの違いは?</p>\n          <p class=\"c-support-faq-list-01__answer\">プロが利用する洗剤・機材を持ち込み、専門の技術を持ったプロが清掃するハウスクリーニングとは異なり、家事代行サービスは、お客様がお持ちの道具・洗剤をお借りし、お客様の代わりにハウスキーパーが日常的な家事を行うサービスとなります。</p>\n        </div>\n      </li>\n      <li class=\"c-support-faq-list-01__item\">\n        <span class=\"c-support-faq-list-01__num\">Q3</span>\n        <div class=\"c-support-faq-list-01__body\">\n          <p class=\"c-support-faq-list-01__question\">単発（スポット）で利用することはできますか？</p>\n          <p class=\"c-support-faq-list-01__answer\">現状、30min.は定期契約のみのサービスとなっております。初回お試し利用をしていただき、その後、定期契約していただいた場合のみご利用いただけるサービスです。</p>\n        </div>\n      </li>\n    </ul>\n  </div>\n</section>\n</div>\n</div>",
+      "css": ".post {\n    .l-faq {\n        width: 100%;\n        padding: var(--px80) 0;\n    }\n\n    .l-faq .c-container {\n        width: min(calc(100% - 40px), var(--content-max-width));\n        margin-right: auto;\n        margin-left: auto;\n    }\n\n    .l-faq.l-faq--bg-gray {\n        background-color: var(--color-secondary-tint);\n    }\n\n    ul.c-support-faq-list-01 {\n        list-style: none;\n        margin: 0;\n        padding: 0;\n    }\n\n    li.c-support-faq-list-01__item {\n        display: flex;\n        align-items: flex-start;\n        gap: var(--px20);\n        padding: var(--px24) 0;\n        margin: 0;\n        border-bottom: 1px solid var(--color-table-border);\n        border-top: none;\n    }\n\n    li.c-support-faq-list-01__item:first-child {\n        border-top: 1px solid var(--color-table-border);\n    }\n\n    span.c-support-faq-list-01__num {\n        flex-shrink: 0;\n        width: 36px;\n        font-size: 18px;\n        font-weight: 700;\n        font-family: var(--font-family02);\n        line-height: 1.6;\n        color: var(--color-primary);\n    }\n\n    .c-support-faq-list-01__body {\n        flex: 1;\n    }\n\n    p.c-support-faq-list-01__question {\n        font-size: 17px;\n        font-weight: 700;\n        line-height: 1.6;\n        text-align: left;\n        color: var(--color-font);\n        margin: 0 0 var(--px12) 0;\n        padding: 0;\n        background: none;\n    }\n\n    p.c-support-faq-list-01__answer {\n        font-size: 15px;\n        line-height: 1.9;\n        text-align: left;\n        color: var(--color-font);\n        margin: 0;\n        padding: 0;\n        background: none;\n    }\n}\n\n@media screen and (max-width: 768px) {\n    .post {\n        .l-faq {\n            padding: var(--px60) 0;\n        }\n\n        .l-faq .c-container {\n            width: min(calc(100% - 24px), var(--content-max-width));\n        }\n\n        li.c-support-faq-list-01__item {\n            gap: var(--px16);\n            padding: var(--px20) 0;\n        }\n\n        span.c-support-faq-list-01__num {\n            font-size: 16px;\n            width: 30px;\n        }\n\n        p.c-support-faq-list-01__question {\n            font-size: 15px;\n        }\n\n        p.c-support-faq-list-01__answer {\n            font-size: 14px;\n        }\n    }\n}",
+      "author": "",
+      "createdAt": "2026-04-18",
+      "updatedAt": "2026-04-18",
+      "useCases": [
+        "FAQ"
+      ]
     }
   ],
   "deletedComponents": []
