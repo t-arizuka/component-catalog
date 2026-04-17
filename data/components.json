@@ -6,7 +6,8 @@
     "FAQ",
     "COMPANY",
     "SERVICE",
-    "BUTTON"
+    "BUTTON",
+    "FLOW"
   ],
   "components": [
     {
