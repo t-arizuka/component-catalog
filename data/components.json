@@ -401,7 +401,7 @@
     {
       "id": "cta-spilit-01",
       "name": "cta-spilit-01",
-      "category": "ABOUT",
+      "category": "CTA",
       "tags": [],
       "description": "",
       "html": "<div class=\"post\">\n<div class=\"package_parts\">\n<section class=\"l-cta\">\n  <div class=\"c-container\">\n    <div class=\"c-conversion-cta-split-01\">\n      <p class=\"c-conversion-cta-split-01__catch\">効果が見えれば、成長が始まる。</p>\n      <div class=\"c-conversion-cta-split-01__actions\">\n        <a href=\"#\" class=\"c-conversion-cta-split-01__btn c-conversion-cta-split-01__btn--white\">資料請求</a>\n        <a href=\"#\" class=\"c-conversion-cta-split-01__btn c-conversion-cta-split-01__btn--dark\">ご相談・お見積もり</a>\n        <div class=\"c-conversion-cta-split-01__tel\">\n          <a href=\"tel:0366297093\" class=\"c-conversion-cta-split-01__tel-link\">\n            <svg class=\"c-conversion-cta-split-01__tel-icon\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z\"/></svg>\n            <span class=\"c-conversion-cta-split-01__tel-num\">03-6629-7093</span>\n          </a>\n          <p class=\"c-conversion-cta-split-01__tel-note\">受付時間：平日10-18時（年末年始除く）</p>\n        </div>\n      </div>\n    </div>\n  </div>\n</section>\n</div>\n</div>",
