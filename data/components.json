@@ -239,24 +239,5 @@
       ]
     }
   ],
-  "deletedComponents": [
-    {
-      "id": "badge-status-001",
-      "name": "ステータスバッジ",
-      "category": "バッジ",
-      "tags": [
-        "badge",
-        "status",
-        "label",
-        "tag"
-      ],
-      "description": "状態表示用のバッジセット。成功・警告・エラー・情報の4種類。",
-      "html": "<div class=\"badge-group\">\n  <span class=\"badge badge-success\">完了</span>\n  <span class=\"badge badge-warning\">保留中</span>\n  <span class=\"badge badge-danger\">エラー</span>\n  <span class=\"badge badge-info\">情報</span>\n</div>",
-      "css": ".badge-group {\n  display: flex;\n  gap: 8px;\n  flex-wrap: wrap;\n}\n.badge {\n  display: inline-flex;\n  align-items: center;\n  padding: 3px 10px;\n  border-radius: 99px;\n  font-size: 12px;\n  font-weight: 600;\n}\n.badge-success {\n  background: #D1FAE5;\n  color: #065F46;\n}\n.badge-warning {\n  background: #FEF3C7;\n  color: #92400E;\n}\n.badge-danger {\n  background: #FEE2E2;\n  color: #991B1B;\n}\n.badge-info {\n  background: #DBEAFE;\n  color: #1E40AF;\n}",
-      "author": "デザインチーム",
-      "createdAt": "2026-03-09",
-      "updatedAt": "2026-03-09",
-      "deletedAt": "2026-03-11"
-    }
-  ]
+  "deletedComponents": []
 }
