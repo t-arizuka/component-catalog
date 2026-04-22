@@ -3,19 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>コンポーネントカタログ</title>
+  <title>LP コンポーネントカタログ</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="assets/css/designcode.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- CSS（ダークテーマ） -->
+  <link rel="stylesheet" href="../assets/css/variables-dark.css">
+  <link rel="stylesheet" href="../assets/css/designcode.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
 
   <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-  <!-- シンタックスハイライト（highlight.js） -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <!-- シンタックスハイライト（highlight.js ダークテーマ） -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <!-- LP プラン設定 -->
+  <script>
+    window.CATALOG_JSON_PATH = '../data/lp-components.json';
+  </script>
 </head>
 <body>
 
@@ -32,8 +37,8 @@
 
     <!-- ロゴ -->
     <a class="site-logo" href="index.html">
-      <span class="site-logo-icon">⚡</span>
-      コンポーネントカタログ
+      <span class="site-logo-icon">✦</span>
+      LP コンポーネントカタログ
     </a>
 
     <!-- 検索バー -->
@@ -55,11 +60,12 @@
 
     <!-- ヘッダーアクション -->
     <div class="header-actions">
-      <a class="header-btn" href="lp/index.html">
+      <a class="header-btn" href="../index.html">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-          <path d="M3 3h10v10H3zM8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M4 5h8M4 8h8M4 11h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        LP版
+        ベーシック版
       </a>
       <a class="header-btn" href="admin.html">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -223,8 +229,8 @@
 
   <!-- JavaScript -->
   <!-- インラインデータ（file:// での直接開きに対応） -->
-  <script src="data/components-data.js"></script>
-  <script src="assets/js/utils.js"></script>
-  <script src="assets/js/catalog.js"></script>
+  <script src="../data/lp-components-data.js"></script>
+  <script src="../assets/js/utils.js"></script>
+  <script src="../assets/js/catalog.js"></script>
 </body>
 </html>

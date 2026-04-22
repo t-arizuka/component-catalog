@@ -6,7 +6,7 @@
 
 'use strict';
 
-const STORAGE_KEY = 'componentCatalogData';
+const STORAGE_KEY = window.CATALOG_STORAGE_KEY || 'componentCatalogData';
 const ADMIN_PASSWORD_STORAGE_KEY = 'componentCatalogAdminPassword';
 const REMOTE_SAVE_PATH = '/api/save-components';
 
@@ -79,7 +79,7 @@ async function fetchData() {
     return;
   }
   try {
-    const res = await fetch('data/components.json');
+    const res = await fetch(window.CATALOG_JSON_PATH || 'data/components.json');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     adminState.data = await res.json();
     saveToStorage();
@@ -934,7 +934,7 @@ function updateFileStatus() {
    ============================================================ */
 
 function exportJson() {
-  downloadJson(adminState.data, 'components.json');
+  downloadJson(adminState.data, window.CATALOG_EXPORT_FILENAME || 'components.json');
   showToast('JSONをダウンロードしました');
 }
 

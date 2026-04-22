@@ -3,11 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>管理画面 — コンポーネントカタログ</title>
+  <title>管理画面 — LP コンポーネントカタログ</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="assets/css/admin.css">
+  <!-- CSS（ダークテーマ） -->
+  <link rel="stylesheet" href="../assets/css/variables-dark.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+
+  <!-- LP プラン設定 -->
+  <script>
+    window.CATALOG_JSON_PATH     = '../data/lp-components.json';
+    window.CATALOG_STORAGE_KEY   = 'lpComponentCatalogData';
+    window.CATALOG_EXPORT_FILENAME = 'lp-components.json';
+  </script>
 </head>
 <body>
 
@@ -16,16 +23,17 @@
        ============================================================ -->
   <header class="admin-header">
     <a class="admin-logo" href="index.html">
-      <span class="admin-logo-icon">⚡</span>
-      コンポーネントカタログ
+      <span class="admin-logo-icon">✦</span>
+      LP コンポーネントカタログ
     </a>
     <span class="admin-badge">管理画面</span>
     <div class="header-spacer"></div>
-    <a class="header-link" href="lp/admin.html">
+    <a class="header-link" href="../admin.html">
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-        <path d="M3 3h10v10H3zM8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M4 5h8M4 8h8M4 11h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
-      LP管理
+      ベーシック管理
     </a>
     <a class="header-link" href="index.html">
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -303,7 +311,7 @@
             </div>
           </div>
           <p class="save-mode-hint" id="save-mode-hint">
-            公開反映したい場合は、Vercel 上の <code>admin.html</code> から保存してください。
+            公開反映したい場合は、Vercel 上の <code>lp/admin.html</code> から保存してください。
           </p>
           <div class="save-mode-fields" id="remote-save-fields" hidden>
             <div class="form-group compact">
@@ -380,8 +388,8 @@
 
   <!-- JavaScript -->
   <!-- インラインデータ（file:// での直接開きに対応） -->
-  <script src="data/components-data.js"></script>
-  <script src="assets/js/utils.js"></script>
-  <script src="assets/js/admin.js"></script>
+  <script src="../data/lp-components-data.js"></script>
+  <script src="../assets/js/utils.js"></script>
+  <script src="../assets/js/admin.js"></script>
 </body>
 </html>

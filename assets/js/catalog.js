@@ -62,7 +62,7 @@ async function fetchComponents() {
     return;
   }
   try {
-    const res = await fetch('data/components.json');
+    const res = await fetch(window.CATALOG_JSON_PATH || 'data/components.json');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     state.all = data.components ?? [];
