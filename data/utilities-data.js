@@ -6,7 +6,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-flex",
       "meaning": "横並び (Flexbox)",
-      "cssOutput": "display: flex;",
+      "cssOutput": "display: flex !important;",
       "mediaQuery": "",
       "keywords": [
         "flex",
@@ -25,7 +25,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-flex-col",
       "meaning": "縦並び",
-      "cssOutput": "flex-direction: column;",
+      "cssOutput": "flex-direction: column !important;",
       "mediaQuery": "",
       "keywords": [
         "縦並び",
@@ -43,7 +43,7 @@ window.UTILITY_DATA = {
       "category": "Gap",
       "className": "u-gap-0",
       "meaning": "0px gap",
-      "cssOutput": "gap: 0px;",
+      "cssOutput": "gap: 0px !important;",
       "mediaQuery": "",
       "keywords": [
         "gap",
@@ -61,7 +61,7 @@ window.UTILITY_DATA = {
       "category": "Gap",
       "className": "u-gap-1",
       "meaning": "4px gap",
-      "cssOutput": "gap: 4px;",
+      "cssOutput": "gap: 4px !important;",
       "mediaQuery": "",
       "keywords": [
         "gap",
@@ -79,7 +79,7 @@ window.UTILITY_DATA = {
       "category": "Gap",
       "className": "u-gap-2",
       "meaning": "8px gap",
-      "cssOutput": "gap: 8px;",
+      "cssOutput": "gap: 8px !important;",
       "mediaQuery": "",
       "keywords": [
         "gap",
@@ -97,7 +97,7 @@ window.UTILITY_DATA = {
       "category": "Gap",
       "className": "u-gap-3",
       "meaning": "12px gap",
-      "cssOutput": "gap: 12px;",
+      "cssOutput": "gap: 12px !important;",
       "mediaQuery": "",
       "keywords": [
         "gap",
@@ -115,7 +115,7 @@ window.UTILITY_DATA = {
       "category": "Gap",
       "className": "u-gap-4",
       "meaning": "要素間の隙間 16px",
-      "cssOutput": "gap: 1.6rem;",
+      "cssOutput": "gap: 1.6rem !important;",
       "mediaQuery": "",
       "keywords": [
         "隙間",
@@ -134,7 +134,7 @@ window.UTILITY_DATA = {
       "category": "Gap",
       "className": "u-gap-5",
       "meaning": "20px gap",
-      "cssOutput": "gap: 20px;",
+      "cssOutput": "gap: 20px !important;",
       "mediaQuery": "",
       "keywords": [
         "gap",
@@ -152,7 +152,7 @@ window.UTILITY_DATA = {
       "category": "Gap",
       "className": "u-gap-6",
       "meaning": "24px gap",
-      "cssOutput": "gap: 24px;",
+      "cssOutput": "gap: 24px !important;",
       "mediaQuery": "",
       "keywords": [
         "gap",
@@ -170,7 +170,7 @@ window.UTILITY_DATA = {
       "category": "Gap",
       "className": "u-gap-7",
       "meaning": "28px gap",
-      "cssOutput": "gap: 28px;",
+      "cssOutput": "gap: 28px !important;",
       "mediaQuery": "",
       "keywords": [
         "gap",
@@ -188,7 +188,7 @@ window.UTILITY_DATA = {
       "category": "Gap",
       "className": "u-gap-8",
       "meaning": "32px gap",
-      "cssOutput": "gap: 32px;",
+      "cssOutput": "gap: 32px !important;",
       "mediaQuery": "",
       "keywords": [
         "gap",
@@ -206,7 +206,7 @@ window.UTILITY_DATA = {
       "category": "Gap",
       "className": "u-gap-9",
       "meaning": "36px gap",
-      "cssOutput": "gap: 36px;",
+      "cssOutput": "gap: 36px !important;",
       "mediaQuery": "",
       "keywords": [
         "gap",
@@ -224,7 +224,7 @@ window.UTILITY_DATA = {
       "category": "Gap",
       "className": "u-gap-10",
       "meaning": "40px gap",
-      "cssOutput": "gap: 40px;",
+      "cssOutput": "gap: 40px !important;",
       "mediaQuery": "",
       "keywords": [
         "gap",
@@ -242,7 +242,7 @@ window.UTILITY_DATA = {
       "category": "Width",
       "className": "u-w-1/2",
       "meaning": "幅 50%",
-      "cssOutput": "width: 50%;",
+      "cssOutput": "width: 50% !important;",
       "mediaQuery": "",
       "keywords": [
         "幅",
@@ -259,7 +259,7 @@ window.UTILITY_DATA = {
       "category": "Width",
       "className": "u-w-full",
       "meaning": "幅 100%",
-      "cssOutput": "width: 100%;",
+      "cssOutput": "width: 100% !important;",
       "mediaQuery": "",
       "keywords": [
         "幅",
@@ -277,7 +277,7 @@ window.UTILITY_DATA = {
       "category": "Display",
       "className": "u-hidden",
       "meaning": "非表示",
-      "cssOutput": "display: none;",
+      "cssOutput": "display: none !important;",
       "mediaQuery": "",
       "keywords": [
         "非表示",
@@ -295,7 +295,7 @@ window.UTILITY_DATA = {
       "category": "Spacing",
       "className": "u-mt-4",
       "meaning": "上余白 16px",
-      "cssOutput": "margin-top: 1.6rem;",
+      "cssOutput": "margin-top: 1.6rem !important;",
       "mediaQuery": "",
       "keywords": [
         "上余白",
@@ -314,7 +314,7 @@ window.UTILITY_DATA = {
       "category": "Spacing",
       "className": "u-mt-8",
       "meaning": "上余白 32px",
-      "cssOutput": "margin-top: 3.2rem;",
+      "cssOutput": "margin-top: 3.2rem !important;",
       "mediaQuery": "",
       "keywords": [
         "上余白",
@@ -333,7 +333,7 @@ window.UTILITY_DATA = {
       "category": "Spacing",
       "className": "u-mb-4",
       "meaning": "下余白 16px",
-      "cssOutput": "margin-bottom: 1.6rem;",
+      "cssOutput": "margin-bottom: 1.6rem !important;",
       "mediaQuery": "",
       "keywords": [
         "下余白",
@@ -352,7 +352,7 @@ window.UTILITY_DATA = {
       "category": "Spacing",
       "className": "u-mb-8",
       "meaning": "下余白 32px",
-      "cssOutput": "margin-bottom: 3.2rem;",
+      "cssOutput": "margin-bottom: 3.2rem !important;",
       "mediaQuery": "",
       "keywords": [
         "下余白",
@@ -371,7 +371,7 @@ window.UTILITY_DATA = {
       "category": "Spacing",
       "className": "u-p-4",
       "meaning": "内側余白 16px",
-      "cssOutput": "padding: 1.6rem;",
+      "cssOutput": "padding: 1.6rem !important;",
       "mediaQuery": "",
       "keywords": [
         "内側余白",
@@ -390,7 +390,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-text-sm",
       "meaning": "少し小さめの文字 14px",
-      "cssOutput": "font-size: 1.4rem; line-height: 2.0rem;",
+      "cssOutput": "font-size: 1.4rem; line-height: 2.0rem !important;",
       "mediaQuery": "",
       "keywords": [
         "文字サイズ",
@@ -409,7 +409,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-text-base",
       "meaning": "標準の文字 16px",
-      "cssOutput": "font-size: 1.6rem; line-height: 2.4rem;",
+      "cssOutput": "font-size: 1.6rem; line-height: 2.4rem !important;",
       "mediaQuery": "",
       "keywords": [
         "文字サイズ",
@@ -428,7 +428,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-text-lg",
       "meaning": "少し大きめの文字 18px",
-      "cssOutput": "font-size: 1.8rem; line-height: 2.8rem;",
+      "cssOutput": "font-size: 1.8rem; line-height: 2.8rem !important;",
       "mediaQuery": "",
       "keywords": [
         "文字サイズ",
@@ -447,7 +447,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-font-bold",
       "meaning": "太字",
-      "cssOutput": "font-weight: 700;",
+      "cssOutput": "font-weight: 700 !important;",
       "mediaQuery": "",
       "keywords": [
         "太字",
@@ -465,7 +465,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-text-center",
       "meaning": "中央揃え",
-      "cssOutput": "text-align: center;",
+      "cssOutput": "text-align: center !important;",
       "mediaQuery": "",
       "keywords": [
         "中央揃え",
@@ -2307,7 +2307,7 @@ window.UTILITY_DATA = {
       "category": "Display",
       "className": "u-block",
       "meaning": "ブロック要素として表示",
-      "cssOutput": "display: block;",
+      "cssOutput": "display: block !important;",
       "mediaQuery": "",
       "keywords": [
         "block",
@@ -2324,7 +2324,7 @@ window.UTILITY_DATA = {
       "category": "Display",
       "className": "u-inline-block",
       "meaning": "インラインブロックとして表示",
-      "cssOutput": "display: inline-block;",
+      "cssOutput": "display: inline-block !important;",
       "mediaQuery": "",
       "keywords": [
         "inline-block",
@@ -2340,7 +2340,7 @@ window.UTILITY_DATA = {
       "category": "Display",
       "className": "u-inline",
       "meaning": "インライン要素として表示",
-      "cssOutput": "display: inline;",
+      "cssOutput": "display: inline !important;",
       "mediaQuery": "",
       "keywords": [
         "inline",
@@ -2356,7 +2356,7 @@ window.UTILITY_DATA = {
       "category": "Media",
       "className": "u-aspect-auto",
       "meaning": "アスペクト比 自動",
-      "cssOutput": "aspect-ratio: auto;",
+      "cssOutput": "aspect-ratio: auto !important;",
       "mediaQuery": "",
       "keywords": [
         "aspect-ratio",
@@ -2372,7 +2372,7 @@ window.UTILITY_DATA = {
       "category": "Media",
       "className": "u-aspect-square",
       "meaning": "アスペクト比 1:1（正方形）",
-      "cssOutput": "aspect-ratio: 1 / 1;",
+      "cssOutput": "aspect-ratio: 1 / 1 !important;",
       "mediaQuery": "",
       "keywords": [
         "aspect-ratio",
@@ -2390,7 +2390,7 @@ window.UTILITY_DATA = {
       "category": "Media",
       "className": "u-aspect-video",
       "meaning": "アスペクト比 16:9（動画）",
-      "cssOutput": "aspect-ratio: 16 / 9;",
+      "cssOutput": "aspect-ratio: 16 / 9 !important;",
       "mediaQuery": "",
       "keywords": [
         "aspect-ratio",
@@ -2408,7 +2408,7 @@ window.UTILITY_DATA = {
       "category": "Media",
       "className": "u-object-contain",
       "meaning": "画像・動画をはみ出さず収める",
-      "cssOutput": "object-fit: contain;",
+      "cssOutput": "object-fit: contain !important;",
       "mediaQuery": "",
       "keywords": [
         "object-fit",
@@ -2426,7 +2426,7 @@ window.UTILITY_DATA = {
       "category": "Media",
       "className": "u-object-cover",
       "meaning": "画像・動画をトリミングして埋める",
-      "cssOutput": "object-fit: cover;",
+      "cssOutput": "object-fit: cover !important;",
       "mediaQuery": "",
       "keywords": [
         "object-fit",
@@ -2444,7 +2444,7 @@ window.UTILITY_DATA = {
       "category": "Z-Index",
       "className": "u-z-min1",
       "meaning": "z-index: -1（背面へ）",
-      "cssOutput": "z-index: -1;",
+      "cssOutput": "z-index: -1 !important;",
       "mediaQuery": "",
       "keywords": [
         "z-index",
@@ -2461,7 +2461,7 @@ window.UTILITY_DATA = {
       "category": "Z-Index",
       "className": "u-z-0",
       "meaning": "z-index: 0（初期値）",
-      "cssOutput": "z-index: 0;",
+      "cssOutput": "z-index: 0 !important;",
       "mediaQuery": "",
       "keywords": [
         "z-index",
@@ -2477,7 +2477,7 @@ window.UTILITY_DATA = {
       "category": "Z-Index",
       "className": "u-z-10",
       "meaning": "z-index: 10",
-      "cssOutput": "z-index: 10;",
+      "cssOutput": "z-index: 10 !important;",
       "mediaQuery": "",
       "keywords": [
         "z-index",
@@ -2493,7 +2493,7 @@ window.UTILITY_DATA = {
       "category": "Z-Index",
       "className": "u-z-20",
       "meaning": "z-index: 20",
-      "cssOutput": "z-index: 20;",
+      "cssOutput": "z-index: 20 !important;",
       "mediaQuery": "",
       "keywords": [
         "z-index",
@@ -2509,7 +2509,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-5",
       "meaning": "不透明度 5%",
-      "cssOutput": "opacity: 0.05;",
+      "cssOutput": "opacity: 0.05 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2526,7 +2526,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-10",
       "meaning": "不透明度 10%",
-      "cssOutput": "opacity: 0.1;",
+      "cssOutput": "opacity: 0.1 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2543,7 +2543,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-20",
       "meaning": "不透明度 20%",
-      "cssOutput": "opacity: 0.2;",
+      "cssOutput": "opacity: 0.2 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2560,7 +2560,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-25",
       "meaning": "不透明度 25%",
-      "cssOutput": "opacity: 0.25;",
+      "cssOutput": "opacity: 0.25 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2577,7 +2577,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-30",
       "meaning": "不透明度 30%",
-      "cssOutput": "opacity: 0.3;",
+      "cssOutput": "opacity: 0.3 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2594,7 +2594,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-40",
       "meaning": "不透明度 40%",
-      "cssOutput": "opacity: 0.4;",
+      "cssOutput": "opacity: 0.4 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2611,7 +2611,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-50",
       "meaning": "不透明度 50%",
-      "cssOutput": "opacity: 0.5;",
+      "cssOutput": "opacity: 0.5 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2629,7 +2629,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-60",
       "meaning": "不透明度 60%",
-      "cssOutput": "opacity: 0.6;",
+      "cssOutput": "opacity: 0.6 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2646,7 +2646,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-70",
       "meaning": "不透明度 70%",
-      "cssOutput": "opacity: 0.7;",
+      "cssOutput": "opacity: 0.7 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2663,7 +2663,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-75",
       "meaning": "不透明度 75%",
-      "cssOutput": "opacity: 0.75;",
+      "cssOutput": "opacity: 0.75 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2680,7 +2680,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-80",
       "meaning": "不透明度 80%",
-      "cssOutput": "opacity: 0.8;",
+      "cssOutput": "opacity: 0.8 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2697,7 +2697,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-90",
       "meaning": "不透明度 90%",
-      "cssOutput": "opacity: 0.9;",
+      "cssOutput": "opacity: 0.9 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2714,7 +2714,7 @@ window.UTILITY_DATA = {
       "category": "Opacity",
       "className": "u-opacity-95",
       "meaning": "不透明度 95%",
-      "cssOutput": "opacity: 0.95;",
+      "cssOutput": "opacity: 0.95 !important;",
       "mediaQuery": "",
       "keywords": [
         "opacity",
@@ -2731,7 +2731,7 @@ window.UTILITY_DATA = {
       "category": "Blend Mode",
       "className": "u-mix-blend-normal",
       "meaning": "ブレンドモード: 通常",
-      "cssOutput": "mix-blend-mode: normal;",
+      "cssOutput": "mix-blend-mode: normal !important;",
       "mediaQuery": "",
       "keywords": [
         "mix-blend-mode",
@@ -2748,7 +2748,7 @@ window.UTILITY_DATA = {
       "category": "Blend Mode",
       "className": "u-mix-blend-multiply",
       "meaning": "ブレンドモード: 乗算",
-      "cssOutput": "mix-blend-mode: multiply;",
+      "cssOutput": "mix-blend-mode: multiply !important;",
       "mediaQuery": "",
       "keywords": [
         "mix-blend-mode",
@@ -2765,7 +2765,7 @@ window.UTILITY_DATA = {
       "category": "Blend Mode",
       "className": "u-mix-blend-screen",
       "meaning": "ブレンドモード: スクリーン",
-      "cssOutput": "mix-blend-mode: screen;",
+      "cssOutput": "mix-blend-mode: screen !important;",
       "mediaQuery": "",
       "keywords": [
         "mix-blend-mode",
@@ -2782,7 +2782,7 @@ window.UTILITY_DATA = {
       "category": "Blend Mode",
       "className": "u-mix-blend-overlay",
       "meaning": "ブレンドモード: オーバーレイ",
-      "cssOutput": "mix-blend-mode: overlay;",
+      "cssOutput": "mix-blend-mode: overlay !important;",
       "mediaQuery": "",
       "keywords": [
         "mix-blend-mode",
@@ -2799,7 +2799,7 @@ window.UTILITY_DATA = {
       "category": "Blend Mode",
       "className": "u-mix-blend-darken",
       "meaning": "ブレンドモード: 暗く",
-      "cssOutput": "mix-blend-mode: darken;",
+      "cssOutput": "mix-blend-mode: darken !important;",
       "mediaQuery": "",
       "keywords": [
         "mix-blend-mode",
@@ -2816,7 +2816,7 @@ window.UTILITY_DATA = {
       "category": "Blend Mode",
       "className": "u-mix-blend-lighten",
       "meaning": "ブレンドモード: 明るく",
-      "cssOutput": "mix-blend-mode: lighten;",
+      "cssOutput": "mix-blend-mode: lighten !important;",
       "mediaQuery": "",
       "keywords": [
         "mix-blend-mode",
@@ -2833,7 +2833,7 @@ window.UTILITY_DATA = {
       "category": "Blend Mode",
       "className": "u-mix-blend-color-dodge",
       "meaning": "ブレンドモード: 覆い焼き",
-      "cssOutput": "mix-blend-mode: color-dodge;",
+      "cssOutput": "mix-blend-mode: color-dodge !important;",
       "mediaQuery": "",
       "keywords": [
         "mix-blend-mode",
@@ -2850,7 +2850,7 @@ window.UTILITY_DATA = {
       "category": "Blend Mode",
       "className": "u-mix-blend-color-burn",
       "meaning": "ブレンドモード: 焼き込み",
-      "cssOutput": "mix-blend-mode: color-burn;",
+      "cssOutput": "mix-blend-mode: color-burn !important;",
       "mediaQuery": "",
       "keywords": [
         "mix-blend-mode",
@@ -2867,7 +2867,7 @@ window.UTILITY_DATA = {
       "category": "Blend Mode",
       "className": "u-mix-blend-hard-light",
       "meaning": "ブレンドモード: ハードライト",
-      "cssOutput": "mix-blend-mode: hard-light;",
+      "cssOutput": "mix-blend-mode: hard-light !important;",
       "mediaQuery": "",
       "keywords": [
         "mix-blend-mode",
@@ -2884,7 +2884,7 @@ window.UTILITY_DATA = {
       "category": "Blend Mode",
       "className": "u-mix-blend-soft-light",
       "meaning": "ブレンドモード: ソフトライト",
-      "cssOutput": "mix-blend-mode: soft-light;",
+      "cssOutput": "mix-blend-mode: soft-light !important;",
       "mediaQuery": "",
       "keywords": [
         "mix-blend-mode",
@@ -2901,7 +2901,7 @@ window.UTILITY_DATA = {
       "category": "Blend Mode",
       "className": "u-mix-blend-difference",
       "meaning": "ブレンドモード: 差の絶対値",
-      "cssOutput": "mix-blend-mode: difference;",
+      "cssOutput": "mix-blend-mode: difference !important;",
       "mediaQuery": "",
       "keywords": [
         "mix-blend-mode",
@@ -2917,7 +2917,7 @@ window.UTILITY_DATA = {
       "category": "Blend Mode",
       "className": "u-mix-blend-exclusion",
       "meaning": "ブレンドモード: 除外",
-      "cssOutput": "mix-blend-mode: exclusion;",
+      "cssOutput": "mix-blend-mode: exclusion !important;",
       "mediaQuery": "",
       "keywords": [
         "mix-blend-mode",
@@ -2934,7 +2934,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-flex-col-reverse",
       "meaning": "縦並び（逆順）",
-      "cssOutput": "flex-direction: column-reverse;",
+      "cssOutput": "flex-direction: column-reverse !important;",
       "mediaQuery": "",
       "keywords": [
         "縦並び",
@@ -2951,7 +2951,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-flex-grow",
       "meaning": "Flex 伸長: 有効（残余スペースを取得）",
-      "cssOutput": "flex-grow: 1;",
+      "cssOutput": "flex-grow: 1 !important;",
       "mediaQuery": "",
       "keywords": [
         "flex-grow",
@@ -2968,7 +2968,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-flex-grow-0",
       "meaning": "Flex 伸長: 無効",
-      "cssOutput": "flex-grow: 0;",
+      "cssOutput": "flex-grow: 0 !important;",
       "mediaQuery": "",
       "keywords": [
         "flex-grow",
@@ -2985,7 +2985,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-flex-shrink",
       "meaning": "Flex 収縮: 有効（スペース不足時に縮む）",
-      "cssOutput": "flex-shrink: 1;",
+      "cssOutput": "flex-shrink: 1 !important;",
       "mediaQuery": "",
       "keywords": [
         "flex-shrink",
@@ -3001,7 +3001,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-flex-shrink-0",
       "meaning": "Flex 収縮: 無効（縮まない）",
-      "cssOutput": "flex-shrink: 0;",
+      "cssOutput": "flex-shrink: 0 !important;",
       "mediaQuery": "",
       "keywords": [
         "flex-shrink",
@@ -3019,7 +3019,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-first",
       "meaning": "表示順序: 最初（order: -9999）",
-      "cssOutput": "order: -9999;",
+      "cssOutput": "order: -9999 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3036,7 +3036,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-last",
       "meaning": "表示順序: 最後（order: 9999）",
-      "cssOutput": "order: 9999;",
+      "cssOutput": "order: 9999 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3053,7 +3053,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-none",
       "meaning": "表示順序: なし（order: 0）",
-      "cssOutput": "order: 0;",
+      "cssOutput": "order: 0 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3070,7 +3070,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-1",
       "meaning": "表示順序 1",
-      "cssOutput": "order: 1;",
+      "cssOutput": "order: 1 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3086,7 +3086,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-2",
       "meaning": "表示順序 2",
-      "cssOutput": "order: 2;",
+      "cssOutput": "order: 2 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3102,7 +3102,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-3",
       "meaning": "表示順序 3",
-      "cssOutput": "order: 3;",
+      "cssOutput": "order: 3 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3118,7 +3118,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-4",
       "meaning": "表示順序 4",
-      "cssOutput": "order: 4;",
+      "cssOutput": "order: 4 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3134,7 +3134,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-5",
       "meaning": "表示順序 5",
-      "cssOutput": "order: 5;",
+      "cssOutput": "order: 5 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3150,7 +3150,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-6",
       "meaning": "表示順序 6",
-      "cssOutput": "order: 6;",
+      "cssOutput": "order: 6 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3166,7 +3166,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-7",
       "meaning": "表示順序 7",
-      "cssOutput": "order: 7;",
+      "cssOutput": "order: 7 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3182,7 +3182,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-8",
       "meaning": "表示順序 8",
-      "cssOutput": "order: 8;",
+      "cssOutput": "order: 8 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3198,7 +3198,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-9",
       "meaning": "表示順序 9",
-      "cssOutput": "order: 9;",
+      "cssOutput": "order: 9 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3214,7 +3214,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-10",
       "meaning": "表示順序 10",
-      "cssOutput": "order: 10;",
+      "cssOutput": "order: 10 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3230,7 +3230,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-11",
       "meaning": "表示順序 11",
-      "cssOutput": "order: 11;",
+      "cssOutput": "order: 11 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3246,7 +3246,7 @@ window.UTILITY_DATA = {
       "category": "Order",
       "className": "u-order-12",
       "meaning": "表示順序 12",
-      "cssOutput": "order: 12;",
+      "cssOutput": "order: 12 !important;",
       "mediaQuery": "",
       "keywords": [
         "order",
@@ -3262,7 +3262,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-flex-1",
       "meaning": "Flex: 均等に広がる（flex: 1 1 0%）",
-      "cssOutput": "flex: 1 1 0%;",
+      "cssOutput": "flex: 1 1 0% !important;",
       "mediaQuery": "",
       "keywords": [
         "flex",
@@ -3279,7 +3279,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-flex-auto",
       "meaning": "Flex: 自動で伸縮（flex: 1 1 auto）",
-      "cssOutput": "flex: 1 1 auto;",
+      "cssOutput": "flex: 1 1 auto !important;",
       "mediaQuery": "",
       "keywords": [
         "flex",
@@ -3296,7 +3296,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-flex-initial",
       "meaning": "Flex: 初期値（flex: 0 1 auto）",
-      "cssOutput": "flex: 0 1 auto;",
+      "cssOutput": "flex: 0 1 auto !important;",
       "mediaQuery": "",
       "keywords": [
         "flex",
@@ -3313,7 +3313,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-flex-none",
       "meaning": "Flex: 固定サイズ（flex: none）",
-      "cssOutput": "flex: none;",
+      "cssOutput": "flex: none !important;",
       "mediaQuery": "",
       "keywords": [
         "flex",
@@ -3330,7 +3330,7 @@ window.UTILITY_DATA = {
       "category": "Display",
       "className": "u-cursor-pointer",
       "meaning": "クリック可能なカーソル",
-      "cssOutput": "cursor: pointer;",
+      "cssOutput": "cursor: pointer !important;",
       "mediaQuery": "",
       "keywords": [
         "cursor",
@@ -3347,7 +3347,7 @@ window.UTILITY_DATA = {
       "category": "Display",
       "className": "u-pointer-events-none",
       "meaning": "ポインターイベント無効",
-      "cssOutput": "pointer-events: none;",
+      "cssOutput": "pointer-events: none !important;",
       "mediaQuery": "",
       "keywords": [
         "pointer-events",
@@ -3364,7 +3364,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid",
       "meaning": "グリッドレイアウト",
-      "cssOutput": "display: grid;",
+      "cssOutput": "display: grid !important;",
       "mediaQuery": "",
       "keywords": [
         "grid",
@@ -3380,7 +3380,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-inline-grid",
       "meaning": "インライングリッド",
-      "cssOutput": "display: inline-grid;",
+      "cssOutput": "display: inline-grid !important;",
       "mediaQuery": "",
       "keywords": [
         "inline-grid",
@@ -3397,7 +3397,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid-cols-1",
       "meaning": "グリッド 1カラム",
-      "cssRaw": ".u-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }",
+      "cssRaw": ".u-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }",
       "keywords": [
         "grid",
         "グリッド",
@@ -3413,7 +3413,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid-cols-2",
       "meaning": "グリッド 2カラム（SP: 1カラム）",
-      "cssRaw": ".u-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "cssRaw": ".u-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }\n}",
       "keywords": [
         "grid",
         "グリッド",
@@ -3430,7 +3430,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid-cols-3",
       "meaning": "グリッド 3カラム（SP: 1カラム）",
-      "cssRaw": ".u-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "cssRaw": ".u-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }\n}",
       "keywords": [
         "grid",
         "グリッド",
@@ -3447,7 +3447,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid-cols-4",
       "meaning": "グリッド 4カラム（SP: 1カラム）",
-      "cssRaw": ".u-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-4 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "cssRaw": ".u-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-4 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }\n}",
       "keywords": [
         "grid",
         "グリッド",
@@ -3464,7 +3464,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid-cols-5",
       "meaning": "グリッド 5カラム（SP: 1カラム）",
-      "cssRaw": ".u-grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-5 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "cssRaw": ".u-grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-5 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }\n}",
       "keywords": [
         "grid",
         "グリッド",
@@ -3481,7 +3481,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid-cols-6",
       "meaning": "グリッド 6カラム（SP: 1カラム）",
-      "cssRaw": ".u-grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-6 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "cssRaw": ".u-grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-6 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }\n}",
       "keywords": [
         "grid",
         "グリッド",
@@ -3498,7 +3498,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid-cols-7",
       "meaning": "グリッド 7カラム（SP: 1カラム）",
-      "cssRaw": ".u-grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-7 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "cssRaw": ".u-grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-7 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }\n}",
       "keywords": [
         "grid",
         "グリッド",
@@ -3515,7 +3515,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid-cols-8",
       "meaning": "グリッド 8カラム（SP: 1カラム）",
-      "cssRaw": ".u-grid-cols-8 { grid-template-columns: repeat(8, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-8 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "cssRaw": ".u-grid-cols-8 { grid-template-columns: repeat(8, minmax(0, 1fr)) !important; }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-8 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }\n}",
       "keywords": [
         "grid",
         "グリッド",
@@ -3532,7 +3532,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid-cols-9",
       "meaning": "グリッド 9カラム（SP: 1カラム）",
-      "cssRaw": ".u-grid-cols-9 { grid-template-columns: repeat(9, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-9 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "cssRaw": ".u-grid-cols-9 { grid-template-columns: repeat(9, minmax(0, 1fr)) !important; }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-9 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }\n}",
       "keywords": [
         "grid",
         "グリッド",
@@ -3549,7 +3549,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid-cols-10",
       "meaning": "グリッド 10カラム（SP: 1カラム）",
-      "cssRaw": ".u-grid-cols-10 { grid-template-columns: repeat(10, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-10 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "cssRaw": ".u-grid-cols-10 { grid-template-columns: repeat(10, minmax(0, 1fr)) !important; }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-10 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }\n}",
       "keywords": [
         "grid",
         "グリッド",
@@ -3566,7 +3566,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid-cols-11",
       "meaning": "グリッド 11カラム（SP: 1カラム）",
-      "cssRaw": ".u-grid-cols-11 { grid-template-columns: repeat(11, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-11 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "cssRaw": ".u-grid-cols-11 { grid-template-columns: repeat(11, minmax(0, 1fr)) !important; }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-11 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }\n}",
       "keywords": [
         "grid",
         "グリッド",
@@ -3583,7 +3583,7 @@ window.UTILITY_DATA = {
       "category": "Grid",
       "className": "u-grid-cols-12",
       "meaning": "グリッド 12カラム（SP: 1カラム）",
-      "cssRaw": ".u-grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-12 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "cssRaw": ".u-grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-12 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }\n}",
       "keywords": [
         "grid",
         "グリッド",
@@ -3600,7 +3600,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-justify-start",
       "meaning": "横軸: 左揃え",
-      "cssOutput": "justify-content: flex-start;",
+      "cssOutput": "justify-content: flex-start !important;",
       "mediaQuery": "",
       "keywords": [
         "justify-content",
@@ -3617,7 +3617,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-justify-end",
       "meaning": "横軸: 右揃え",
-      "cssOutput": "justify-content: flex-end;",
+      "cssOutput": "justify-content: flex-end !important;",
       "mediaQuery": "",
       "keywords": [
         "justify-content",
@@ -3634,7 +3634,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-justify-around",
       "meaning": "横軸: 均等（前後半分）",
-      "cssOutput": "justify-content: space-around;",
+      "cssOutput": "justify-content: space-around !important;",
       "mediaQuery": "",
       "keywords": [
         "justify-content",
@@ -3651,7 +3651,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-justify-evenly",
       "meaning": "横軸: 均等（前後等分）",
-      "cssOutput": "justify-content: space-evenly;",
+      "cssOutput": "justify-content: space-evenly !important;",
       "mediaQuery": "",
       "keywords": [
         "justify-content",
@@ -3668,7 +3668,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-items-stretch",
       "meaning": "縦軸: 引き延ばし（デフォルト）",
-      "cssOutput": "align-items: stretch;",
+      "cssOutput": "align-items: stretch !important;",
       "mediaQuery": "",
       "keywords": [
         "align-items",
@@ -3685,7 +3685,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-items-start",
       "meaning": "縦軸: 上揃え",
-      "cssOutput": "align-items: flex-start;",
+      "cssOutput": "align-items: flex-start !important;",
       "mediaQuery": "",
       "keywords": [
         "align-items",
@@ -3702,7 +3702,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-items-end",
       "meaning": "縦軸: 下揃え",
-      "cssOutput": "align-items: flex-end;",
+      "cssOutput": "align-items: flex-end !important;",
       "mediaQuery": "",
       "keywords": [
         "align-items",
@@ -3719,7 +3719,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-items-baseline",
       "meaning": "縦軸: ベースライン揃え",
-      "cssOutput": "align-items: baseline;",
+      "cssOutput": "align-items: baseline !important;",
       "mediaQuery": "",
       "keywords": [
         "align-items",
@@ -3736,7 +3736,7 @@ window.UTILITY_DATA = {
       "category": "Flexbox",
       "className": "u-place-items-center",
       "meaning": "縦横ともに中央揃え（Grid/Flex）",
-      "cssOutput": "place-items: center;",
+      "cssOutput": "place-items: center !important;",
       "mediaQuery": "",
       "keywords": [
         "place-items",
@@ -3753,7 +3753,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-text-transparent",
       "meaning": "テキスト色: 透明",
-      "cssOutput": "color: transparent;",
+      "cssOutput": "color: transparent !important;",
       "mediaQuery": "",
       "keywords": [
         "color",
@@ -3770,7 +3770,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-text-current",
       "meaning": "テキスト色: 継承色（currentColor）",
-      "cssOutput": "color: currentColor;",
+      "cssOutput": "color: currentColor !important;",
       "mediaQuery": "",
       "keywords": [
         "color",
@@ -3787,7 +3787,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-font-thin",
       "meaning": "フォントウェイト: 100（極細）",
-      "cssOutput": "font-weight: 100;",
+      "cssOutput": "font-weight: 100 !important;",
       "mediaQuery": "",
       "keywords": [
         "font-weight",
@@ -3805,7 +3805,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-font-extralight",
       "meaning": "フォントウェイト: 200（超細）",
-      "cssOutput": "font-weight: 200;",
+      "cssOutput": "font-weight: 200 !important;",
       "mediaQuery": "",
       "keywords": [
         "font-weight",
@@ -3823,7 +3823,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-font-light",
       "meaning": "フォントウェイト: 300（細め）",
-      "cssOutput": "font-weight: 300;",
+      "cssOutput": "font-weight: 300 !important;",
       "mediaQuery": "",
       "keywords": [
         "font-weight",
@@ -3841,7 +3841,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-font-normal",
       "meaning": "フォントウェイト: 400（標準）",
-      "cssOutput": "font-weight: 400;",
+      "cssOutput": "font-weight: 400 !important;",
       "mediaQuery": "",
       "keywords": [
         "font-weight",
@@ -3859,7 +3859,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-font-medium",
       "meaning": "フォントウェイト: 500（中太）",
-      "cssOutput": "font-weight: 500;",
+      "cssOutput": "font-weight: 500 !important;",
       "mediaQuery": "",
       "keywords": [
         "font-weight",
@@ -3877,7 +3877,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-font-semibold",
       "meaning": "フォントウェイト: 600（半太）",
-      "cssOutput": "font-weight: 600;",
+      "cssOutput": "font-weight: 600 !important;",
       "mediaQuery": "",
       "keywords": [
         "font-weight",
@@ -3895,7 +3895,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-font-extrabold",
       "meaning": "フォントウェイト: 800（極太）",
-      "cssOutput": "font-weight: 800;",
+      "cssOutput": "font-weight: 800 !important;",
       "mediaQuery": "",
       "keywords": [
         "font-weight",
@@ -3913,7 +3913,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-font-black",
       "meaning": "フォントウェイト: 900（最太）",
-      "cssOutput": "font-weight: 900;",
+      "cssOutput": "font-weight: 900 !important;",
       "mediaQuery": "",
       "keywords": [
         "font-weight",
@@ -3931,7 +3931,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-italic",
       "meaning": "イタリック体",
-      "cssOutput": "font-style: italic;",
+      "cssOutput": "font-style: italic !important;",
       "mediaQuery": "",
       "keywords": [
         "font-style",
@@ -3948,7 +3948,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-not-italic",
       "meaning": "イタリック解除",
-      "cssOutput": "font-style: normal;",
+      "cssOutput": "font-style: normal !important;",
       "mediaQuery": "",
       "keywords": [
         "font-style",
@@ -3965,7 +3965,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-tracking-tighter",
       "meaning": "文字間隔: -0.05em（最密）",
-      "cssOutput": "letter-spacing: -0.05em;",
+      "cssOutput": "letter-spacing: -0.05em !important;",
       "mediaQuery": "",
       "keywords": [
         "letter-spacing",
@@ -3983,7 +3983,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-tracking-tight",
       "meaning": "文字間隔: -0.025em（密）",
-      "cssOutput": "letter-spacing: -0.025em;",
+      "cssOutput": "letter-spacing: -0.025em !important;",
       "mediaQuery": "",
       "keywords": [
         "letter-spacing",
@@ -4001,7 +4001,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-tracking-normal",
       "meaning": "文字間隔: 0em（標準）",
-      "cssOutput": "letter-spacing: 0em;",
+      "cssOutput": "letter-spacing: 0em !important;",
       "mediaQuery": "",
       "keywords": [
         "letter-spacing",
@@ -4019,7 +4019,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-tracking-wide",
       "meaning": "文字間隔: 0.025em（広め）",
-      "cssOutput": "letter-spacing: 0.025em;",
+      "cssOutput": "letter-spacing: 0.025em !important;",
       "mediaQuery": "",
       "keywords": [
         "letter-spacing",
@@ -4037,7 +4037,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-tracking-wider",
       "meaning": "文字間隔: 0.05em（広い）",
-      "cssOutput": "letter-spacing: 0.05em;",
+      "cssOutput": "letter-spacing: 0.05em !important;",
       "mediaQuery": "",
       "keywords": [
         "letter-spacing",
@@ -4055,7 +4055,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-tracking-widest",
       "meaning": "文字間隔: 0.1em（最広）",
-      "cssOutput": "letter-spacing: 0.1em;",
+      "cssOutput": "letter-spacing: 0.1em !important;",
       "mediaQuery": "",
       "keywords": [
         "letter-spacing",
@@ -4073,7 +4073,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-none",
       "meaning": "行間: 1（行間なし）",
-      "cssOutput": "line-height: 1;",
+      "cssOutput": "line-height: 1 !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4090,7 +4090,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-tight",
       "meaning": "行間: 1.25（狭め）",
-      "cssOutput": "line-height: 1.25;",
+      "cssOutput": "line-height: 1.25 !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4108,7 +4108,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-snug",
       "meaning": "行間: 1.375（やや狭め）",
-      "cssOutput": "line-height: 1.375;",
+      "cssOutput": "line-height: 1.375 !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4125,7 +4125,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-normal",
       "meaning": "行間: 1.5（標準）",
-      "cssOutput": "line-height: 1.5;",
+      "cssOutput": "line-height: 1.5 !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4143,7 +4143,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-relaxed",
       "meaning": "行間: 1.625（ゆったり）",
-      "cssOutput": "line-height: 1.625;",
+      "cssOutput": "line-height: 1.625 !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4161,7 +4161,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-loose",
       "meaning": "行間: 2（広め）",
-      "cssOutput": "line-height: 2;",
+      "cssOutput": "line-height: 2 !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4179,7 +4179,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-3",
       "meaning": "行間: 0.75rem",
-      "cssOutput": "line-height: 0.75rem;",
+      "cssOutput": "line-height: 0.75rem !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4196,7 +4196,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-4",
       "meaning": "行間: 1rem",
-      "cssOutput": "line-height: 1rem;",
+      "cssOutput": "line-height: 1rem !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4213,7 +4213,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-5",
       "meaning": "行間: 1.25rem",
-      "cssOutput": "line-height: 1.25rem;",
+      "cssOutput": "line-height: 1.25rem !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4230,7 +4230,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-6",
       "meaning": "行間: 1.5rem",
-      "cssOutput": "line-height: 1.5rem;",
+      "cssOutput": "line-height: 1.5rem !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4247,7 +4247,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-7",
       "meaning": "行間: 1.75rem",
-      "cssOutput": "line-height: 1.75rem;",
+      "cssOutput": "line-height: 1.75rem !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4264,7 +4264,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-8",
       "meaning": "行間: 2rem",
-      "cssOutput": "line-height: 2rem;",
+      "cssOutput": "line-height: 2rem !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4281,7 +4281,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-9",
       "meaning": "行間: 2.25rem",
-      "cssOutput": "line-height: 2.25rem;",
+      "cssOutput": "line-height: 2.25rem !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4298,7 +4298,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-leading-10",
       "meaning": "行間: 2.5rem",
-      "cssOutput": "line-height: 2.5rem;",
+      "cssOutput": "line-height: 2.5rem !important;",
       "mediaQuery": "",
       "keywords": [
         "line-height",
@@ -4315,7 +4315,7 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-whitespace-nowrap",
       "meaning": "折り返しなし（white-space: nowrap）",
-      "cssOutput": "white-space: nowrap;",
+      "cssOutput": "white-space: nowrap !important;",
       "mediaQuery": "",
       "keywords": [
         "white-space",
@@ -4332,7 +4332,7 @@ window.UTILITY_DATA = {
       "category": "Border Radius",
       "className": "u-rounded-none",
       "meaning": "角丸なし（border-radius: 0）",
-      "cssOutput": "border-radius: 0;",
+      "cssOutput": "border-radius: 0 !important;",
       "mediaQuery": "",
       "keywords": [
         "border-radius",
@@ -4350,7 +4350,7 @@ window.UTILITY_DATA = {
       "category": "Border Radius",
       "className": "u-rounded-sm",
       "meaning": "角丸: 2px（小）",
-      "cssOutput": "border-radius: 2px;",
+      "cssOutput": "border-radius: 2px !important;",
       "mediaQuery": "",
       "keywords": [
         "border-radius",
@@ -4368,7 +4368,7 @@ window.UTILITY_DATA = {
       "category": "Border Radius",
       "className": "u-rounded",
       "meaning": "角丸: 4px（標準）",
-      "cssOutput": "border-radius: 4px;",
+      "cssOutput": "border-radius: 4px !important;",
       "mediaQuery": "",
       "keywords": [
         "border-radius",
@@ -4385,7 +4385,7 @@ window.UTILITY_DATA = {
       "category": "Border Radius",
       "className": "u-rounded-md",
       "meaning": "角丸: 6px（中）",
-      "cssOutput": "border-radius: 6px;",
+      "cssOutput": "border-radius: 6px !important;",
       "mediaQuery": "",
       "keywords": [
         "border-radius",
@@ -4403,7 +4403,7 @@ window.UTILITY_DATA = {
       "category": "Border Radius",
       "className": "u-rounded-lg",
       "meaning": "角丸: 8px（大）",
-      "cssOutput": "border-radius: 8px;",
+      "cssOutput": "border-radius: 8px !important;",
       "mediaQuery": "",
       "keywords": [
         "border-radius",
@@ -4421,7 +4421,7 @@ window.UTILITY_DATA = {
       "category": "Border Radius",
       "className": "u-rounded-xl",
       "meaning": "角丸: 12px（特大）",
-      "cssOutput": "border-radius: 12px;",
+      "cssOutput": "border-radius: 12px !important;",
       "mediaQuery": "",
       "keywords": [
         "border-radius",
@@ -4438,7 +4438,7 @@ window.UTILITY_DATA = {
       "category": "Border Radius",
       "className": "u-rounded-2xl",
       "meaning": "角丸: 16px",
-      "cssOutput": "border-radius: 16px;",
+      "cssOutput": "border-radius: 16px !important;",
       "mediaQuery": "",
       "keywords": [
         "border-radius",
@@ -4455,7 +4455,7 @@ window.UTILITY_DATA = {
       "category": "Border Radius",
       "className": "u-rounded-3xl",
       "meaning": "角丸: 24px",
-      "cssOutput": "border-radius: 24px;",
+      "cssOutput": "border-radius: 24px !important;",
       "mediaQuery": "",
       "keywords": [
         "border-radius",
@@ -4472,7 +4472,7 @@ window.UTILITY_DATA = {
       "category": "Border Radius",
       "className": "u-rounded-full",
       "meaning": "完全な丸（border-radius: 9999px）",
-      "cssOutput": "border-radius: 9999px;",
+      "cssOutput": "border-radius: 9999px !important;",
       "mediaQuery": "",
       "keywords": [
         "border-radius",
@@ -4491,7 +4491,7 @@ window.UTILITY_DATA = {
       "category": "Position",
       "className": "u-static",
       "meaning": "配置: static（通常の位置）",
-      "cssOutput": "position: static;",
+      "cssOutput": "position: static !important;",
       "mediaQuery": "",
       "keywords": [
         "position",
@@ -4507,7 +4507,7 @@ window.UTILITY_DATA = {
       "category": "Position",
       "className": "u-fixed",
       "meaning": "配置: fixed（ビューポート固定）",
-      "cssOutput": "position: fixed;",
+      "cssOutput": "position: fixed !important;",
       "mediaQuery": "",
       "keywords": [
         "position",
@@ -4525,7 +4525,7 @@ window.UTILITY_DATA = {
       "category": "Position",
       "className": "u-absolute",
       "meaning": "配置: absolute（絶対位置）",
-      "cssOutput": "position: absolute;",
+      "cssOutput": "position: absolute !important;",
       "mediaQuery": "",
       "keywords": [
         "position",
@@ -4542,7 +4542,7 @@ window.UTILITY_DATA = {
       "category": "Position",
       "className": "u-relative",
       "meaning": "配置: relative（相対位置）",
-      "cssOutput": "position: relative;",
+      "cssOutput": "position: relative !important;",
       "mediaQuery": "",
       "keywords": [
         "position",
@@ -4559,7 +4559,7 @@ window.UTILITY_DATA = {
       "category": "Position",
       "className": "u-sticky",
       "meaning": "配置: sticky（スクロール連動固定）",
-      "cssOutput": "position: sticky;",
+      "cssOutput": "position: sticky !important;",
       "mediaQuery": "",
       "keywords": [
         "position",
@@ -4577,7 +4577,7 @@ window.UTILITY_DATA = {
       "category": "Position",
       "className": "u-inset-1/2",
       "meaning": "上下左右を50%に設定",
-      "cssRaw": ".u-inset-1/2 { top: 50%; right: 50%; bottom: 50%; left: 50%; }",
+      "cssRaw": ".u-inset-1/2 { top: 50% !important; right: 50% !important; bottom: 50% !important; left: 50% !important; }",
       "mediaQuery": "",
       "keywords": [
         "inset",
@@ -4597,7 +4597,7 @@ window.UTILITY_DATA = {
       "category": "Position",
       "className": "u-inset-x-1/2",
       "meaning": "左右を50%に設定",
-      "cssRaw": ".u-inset-x-1/2 { left: 50%; right: 50%; }",
+      "cssRaw": ".u-inset-x-1/2 { left: 50% !important; right: 50% !important; }",
       "mediaQuery": "",
       "keywords": [
         "inset",
@@ -4615,7 +4615,7 @@ window.UTILITY_DATA = {
       "category": "Position",
       "className": "u-inset-y-1/2",
       "meaning": "上下を50%に設定",
-      "cssRaw": ".u-inset-y-1/2 { top: 50%; bottom: 50%; }",
+      "cssRaw": ".u-inset-y-1/2 { top: 50% !important; bottom: 50% !important; }",
       "mediaQuery": "",
       "keywords": [
         "inset",
@@ -4633,7 +4633,7 @@ window.UTILITY_DATA = {
       "category": "Position",
       "className": "u-top-1/2",
       "meaning": "上端を50%に設定",
-      "cssRaw": ".u-top-1/2 { top: 50%; }",
+      "cssRaw": ".u-top-1/2 { top: 50% !important; }",
       "mediaQuery": "",
       "keywords": [
         "top",
@@ -4649,7 +4649,7 @@ window.UTILITY_DATA = {
       "category": "Position",
       "className": "u-bottom-1/2",
       "meaning": "下端を50%に設定",
-      "cssRaw": ".u-bottom-1/2 { bottom: 50%; }",
+      "cssRaw": ".u-bottom-1/2 { bottom: 50% !important; }",
       "mediaQuery": "",
       "keywords": [
         "bottom",
@@ -4665,7 +4665,7 @@ window.UTILITY_DATA = {
       "category": "Position",
       "className": "u-right-1/2",
       "meaning": "右端を50%に設定",
-      "cssRaw": ".u-right-1/2 { right: 50%; }",
+      "cssRaw": ".u-right-1/2 { right: 50% !important; }",
       "mediaQuery": "",
       "keywords": [
         "right",
@@ -4681,7 +4681,7 @@ window.UTILITY_DATA = {
       "category": "Position",
       "className": "u-left-1/2",
       "meaning": "左端を50%に設定",
-      "cssRaw": ".u-left-1/2 { left: 50%; }",
+      "cssRaw": ".u-left-1/2 { left: 50% !important; }",
       "mediaQuery": "",
       "keywords": [
         "left",
@@ -4697,13 +4697,48 @@ window.UTILITY_DATA = {
       "category": "Typography",
       "className": "u-tabular-nums",
       "meaning": "数字を等幅に揃える",
-      "cssOutput": "font-variant-numeric: tabular-nums;",
+      "cssOutput": "font-variant-numeric: tabular-nums !important;",
       "mediaQuery": "",
       "keywords": [
         "font-variant-numeric",
         "tabular-nums",
         "等幅",
         "数字"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-mocpyqvs-bw",
+      "type": "utility",
+      "category": "Width",
+      "className": "u-basewidth",
+      "meaning": "コンテンツ最大幅センタリング",
+      "cssRaw": ".u-basewidth {\n  max-width: var(--content-max-width);\n  margin-left: auto;\n  margin-right: auto;\n  width: min(var(--content-max-width), 90%);\n}",
+      "keywords": [
+        "max-width",
+        "センタリング",
+        "コンテンツ幅",
+        "width",
+        "center",
+        "中央寄せ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-mocpyqvt-ma",
+      "type": "utility",
+      "category": "Spacing",
+      "className": "u-m-auto",
+      "meaning": "左右マージン auto（中央寄せ）",
+      "cssRaw": ".u-m-auto {\n  margin-left: auto !important;\n  margin-right: auto !important;\n}",
+      "keywords": [
+        "margin",
+        "auto",
+        "中央寄せ",
+        "center",
+        "センタリング"
       ],
       "createdAt": "2026-04-24",
       "updatedAt": "2026-04-24"
