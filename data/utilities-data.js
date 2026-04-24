@@ -1,0 +1,4712 @@
+window.UTILITY_DATA = {
+  "utilities": [
+    {
+      "id": "u-tw-001",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-flex",
+      "meaning": "横並び (Flexbox)",
+      "cssOutput": "display: flex;",
+      "mediaQuery": "",
+      "keywords": [
+        "flex",
+        "横並び",
+        "並べる",
+        "フレックス",
+        "flexbox",
+        "横"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-002",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-flex-col",
+      "meaning": "縦並び",
+      "cssOutput": "flex-direction: column;",
+      "mediaQuery": "",
+      "keywords": [
+        "縦並び",
+        "縦",
+        "column",
+        "flex-direction",
+        "列"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-154",
+      "type": "utility",
+      "category": "Gap",
+      "className": "u-gap-0",
+      "meaning": "0px gap",
+      "cssOutput": "gap: 0px;",
+      "mediaQuery": "",
+      "keywords": [
+        "gap",
+        "間隔",
+        "スペース",
+        "余白",
+        "0px"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-155",
+      "type": "utility",
+      "category": "Gap",
+      "className": "u-gap-1",
+      "meaning": "4px gap",
+      "cssOutput": "gap: 4px;",
+      "mediaQuery": "",
+      "keywords": [
+        "gap",
+        "間隔",
+        "スペース",
+        "余白",
+        "4px"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-156",
+      "type": "utility",
+      "category": "Gap",
+      "className": "u-gap-2",
+      "meaning": "8px gap",
+      "cssOutput": "gap: 8px;",
+      "mediaQuery": "",
+      "keywords": [
+        "gap",
+        "間隔",
+        "スペース",
+        "余白",
+        "8px"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-157",
+      "type": "utility",
+      "category": "Gap",
+      "className": "u-gap-3",
+      "meaning": "12px gap",
+      "cssOutput": "gap: 12px;",
+      "mediaQuery": "",
+      "keywords": [
+        "gap",
+        "間隔",
+        "スペース",
+        "余白",
+        "12px"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-005",
+      "type": "utility",
+      "category": "Gap",
+      "className": "u-gap-4",
+      "meaning": "要素間の隙間 16px",
+      "cssOutput": "gap: 1.6rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "隙間",
+        "gap",
+        "16px",
+        "1.6rem",
+        "余白",
+        "間隔"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-158",
+      "type": "utility",
+      "category": "Gap",
+      "className": "u-gap-5",
+      "meaning": "20px gap",
+      "cssOutput": "gap: 20px;",
+      "mediaQuery": "",
+      "keywords": [
+        "gap",
+        "間隔",
+        "スペース",
+        "余白",
+        "20px"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-159",
+      "type": "utility",
+      "category": "Gap",
+      "className": "u-gap-6",
+      "meaning": "24px gap",
+      "cssOutput": "gap: 24px;",
+      "mediaQuery": "",
+      "keywords": [
+        "gap",
+        "間隔",
+        "スペース",
+        "余白",
+        "24px"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-160",
+      "type": "utility",
+      "category": "Gap",
+      "className": "u-gap-7",
+      "meaning": "28px gap",
+      "cssOutput": "gap: 28px;",
+      "mediaQuery": "",
+      "keywords": [
+        "gap",
+        "間隔",
+        "スペース",
+        "余白",
+        "28px"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-161",
+      "type": "utility",
+      "category": "Gap",
+      "className": "u-gap-8",
+      "meaning": "32px gap",
+      "cssOutput": "gap: 32px;",
+      "mediaQuery": "",
+      "keywords": [
+        "gap",
+        "間隔",
+        "スペース",
+        "余白",
+        "32px"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-162",
+      "type": "utility",
+      "category": "Gap",
+      "className": "u-gap-9",
+      "meaning": "36px gap",
+      "cssOutput": "gap: 36px;",
+      "mediaQuery": "",
+      "keywords": [
+        "gap",
+        "間隔",
+        "スペース",
+        "余白",
+        "36px"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-163",
+      "type": "utility",
+      "category": "Gap",
+      "className": "u-gap-10",
+      "meaning": "40px gap",
+      "cssOutput": "gap: 40px;",
+      "mediaQuery": "",
+      "keywords": [
+        "gap",
+        "間隔",
+        "スペース",
+        "余白",
+        "40px"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-016",
+      "type": "utility",
+      "category": "Width",
+      "className": "u-w-1/2",
+      "meaning": "幅 50%",
+      "cssOutput": "width: 50%;",
+      "mediaQuery": "",
+      "keywords": [
+        "幅",
+        "width",
+        "50%",
+        "半分"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-017",
+      "type": "utility",
+      "category": "Width",
+      "className": "u-w-full",
+      "meaning": "幅 100%",
+      "cssOutput": "width: 100%;",
+      "mediaQuery": "",
+      "keywords": [
+        "幅",
+        "width",
+        "100%",
+        "全幅",
+        "フル"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-018",
+      "type": "utility",
+      "category": "Display",
+      "className": "u-hidden",
+      "meaning": "非表示",
+      "cssOutput": "display: none;",
+      "mediaQuery": "",
+      "keywords": [
+        "非表示",
+        "hidden",
+        "display",
+        "none",
+        "隠す"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-006",
+      "type": "utility",
+      "category": "Spacing",
+      "className": "u-mt-4",
+      "meaning": "上余白 16px",
+      "cssOutput": "margin-top: 1.6rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "16px",
+        "1.6rem",
+        "余白",
+        "マージン"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-007",
+      "type": "utility",
+      "category": "Spacing",
+      "className": "u-mt-8",
+      "meaning": "上余白 32px",
+      "cssOutput": "margin-top: 3.2rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "32px",
+        "3.2rem",
+        "余白",
+        "マージン"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-008",
+      "type": "utility",
+      "category": "Spacing",
+      "className": "u-mb-4",
+      "meaning": "下余白 16px",
+      "cssOutput": "margin-bottom: 1.6rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "16px",
+        "1.6rem",
+        "余白",
+        "マージン"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-009",
+      "type": "utility",
+      "category": "Spacing",
+      "className": "u-mb-8",
+      "meaning": "下余白 32px",
+      "cssOutput": "margin-bottom: 3.2rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "32px",
+        "3.2rem",
+        "余白",
+        "マージン"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-010",
+      "type": "utility",
+      "category": "Spacing",
+      "className": "u-p-4",
+      "meaning": "内側余白 16px",
+      "cssOutput": "padding: 1.6rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "内側余白",
+        "padding",
+        "16px",
+        "1.6rem",
+        "余白",
+        "パディング"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-011",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-text-sm",
+      "meaning": "少し小さめの文字 14px",
+      "cssOutput": "font-size: 1.4rem; line-height: 2.0rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "文字サイズ",
+        "フォント",
+        "small",
+        "14px",
+        "1.4rem",
+        "小さい"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-012",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-text-base",
+      "meaning": "標準の文字 16px",
+      "cssOutput": "font-size: 1.6rem; line-height: 2.4rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "文字サイズ",
+        "フォント",
+        "base",
+        "16px",
+        "1.6rem",
+        "標準"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-013",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-text-lg",
+      "meaning": "少し大きめの文字 18px",
+      "cssOutput": "font-size: 1.8rem; line-height: 2.8rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "文字サイズ",
+        "フォント",
+        "large",
+        "18px",
+        "1.8rem",
+        "大きい"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-014",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-font-bold",
+      "meaning": "太字",
+      "cssOutput": "font-weight: 700;",
+      "mediaQuery": "",
+      "keywords": [
+        "太字",
+        "bold",
+        "font-weight",
+        "ボールド",
+        "フォント"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-015",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-text-center",
+      "meaning": "中央揃え",
+      "cssOutput": "text-align: center;",
+      "mediaQuery": "",
+      "keywords": [
+        "中央揃え",
+        "テキスト",
+        "center",
+        "text-align",
+        "センター"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-019",
+      "type": "utility",
+      "category": "Responsive",
+      "className": "max-md:u-flex-col",
+      "meaning": "【スマホ用】縦並びに変更",
+      "cssOutput": "flex-direction: column;",
+      "mediaQuery": "@media (max-width: 768px)",
+      "keywords": [
+        "スマホ",
+        "レスポンシブ",
+        "縦並び",
+        "max-md",
+        "モバイル",
+        "SP"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-020",
+      "type": "utility",
+      "category": "Responsive",
+      "className": "max-md:u-w-full",
+      "meaning": "【スマホ用】幅を100%に変更",
+      "cssOutput": "width: 100%;",
+      "mediaQuery": "@media (max-width: 768px)",
+      "keywords": [
+        "スマホ",
+        "レスポンシブ",
+        "幅",
+        "max-md",
+        "モバイル",
+        "SP",
+        "100%"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-021",
+      "type": "utility",
+      "category": "Responsive",
+      "className": "max-md:u-hidden",
+      "meaning": "【スマホ用】非表示にする",
+      "cssOutput": "display: none;",
+      "mediaQuery": "@media (max-width: 768px)",
+      "keywords": [
+        "スマホ",
+        "レスポンシブ",
+        "非表示",
+        "max-md",
+        "モバイル",
+        "SP"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-022",
+      "type": "utility",
+      "category": "Responsive",
+      "className": "max-md:u-block",
+      "meaning": "【スマホ用】表示する",
+      "cssOutput": "display: block;",
+      "mediaQuery": "@media (max-width: 768px)",
+      "keywords": [
+        "スマホ",
+        "レスポンシブ",
+        "表示",
+        "max-md",
+        "モバイル",
+        "SP"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-023",
+      "type": "utility",
+      "category": "Responsive",
+      "className": "max-md:u-mt-4",
+      "meaning": "【スマホ用】上余白 16px に縮小",
+      "cssOutput": "margin-top: 1.6rem;",
+      "mediaQuery": "@media (max-width: 768px)",
+      "keywords": [
+        "スマホ",
+        "レスポンシブ",
+        "上余白",
+        "max-md",
+        "モバイル",
+        "SP",
+        "16px"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-024",
+      "type": "utility",
+      "category": "Responsive",
+      "className": "max-md:u-text-base",
+      "meaning": "【スマホ用】標準文字サイズ 16px に縮小",
+      "cssOutput": "font-size: 1.6rem; line-height: 2.4rem;",
+      "mediaQuery": "@media (max-width: 768px)",
+      "keywords": [
+        "スマホ",
+        "レスポンシブ",
+        "文字サイズ",
+        "max-md",
+        "モバイル",
+        "SP",
+        "16px"
+      ],
+      "createdAt": "2026-04-23",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-001",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w900",
+      "meaning": "最大幅 900px",
+      "cssOutput": "max-width: 900px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "900px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-002",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w960",
+      "meaning": "最大幅 960px",
+      "cssOutput": "max-width: 960px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "960px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-003",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w1000",
+      "meaning": "最大幅 1000px",
+      "cssOutput": "max-width: 1000px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "1000px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-004",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w1024",
+      "meaning": "最大幅 1024px",
+      "cssOutput": "max-width: 1024px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "1024px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-005",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w1100",
+      "meaning": "最大幅 1100px",
+      "cssOutput": "max-width: 1100px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "1100px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-006",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w1200",
+      "meaning": "最大幅 1200px",
+      "cssOutput": "max-width: 1200px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "1200px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-007",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w1240",
+      "meaning": "最大幅 1240px",
+      "cssOutput": "max-width: 1240px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "1240px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-008",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w1300",
+      "meaning": "最大幅 1300px",
+      "cssOutput": "max-width: 1300px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "1300px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-009",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w1400",
+      "meaning": "最大幅 1400px",
+      "cssOutput": "max-width: 1400px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "1400px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-010",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w1500",
+      "meaning": "最大幅 1500px",
+      "cssOutput": "max-width: 1500px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "1500px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-011",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w1600",
+      "meaning": "最大幅 1600px",
+      "cssOutput": "max-width: 1600px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "1600px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-012",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w1700",
+      "meaning": "最大幅 1700px",
+      "cssOutput": "max-width: 1700px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "1700px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-maxw-013",
+      "type": "designcode",
+      "category": "Max Width",
+      "className": "max_w1800",
+      "meaning": "最大幅 1800px",
+      "cssOutput": "max-width: 1800px;",
+      "mediaQuery": "",
+      "keywords": [
+        "最大幅",
+        "max-width",
+        "1800px",
+        "幅制限"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-000",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt0",
+      "meaning": "上余白なし",
+      "cssRaw": ".mt0 { margin-top: 0 !important; }",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "0",
+        "余白なし",
+        "リセット"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-001",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt1",
+      "meaning": "上余白 1rem（SP: 0.5rem）",
+      "cssRaw": ".mt1 { margin-top: 1rem !important; }\n@media screen and (max-width: 768px) {\n  .mt1 { margin-top: 0.5rem !important; }\n}",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "1rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-002",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt2",
+      "meaning": "上余白 2rem（SP: 1rem）",
+      "cssRaw": ".mt2 { margin-top: 2rem !important; }\n@media screen and (max-width: 768px) {\n  .mt2 { margin-top: 1rem !important; }\n}",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "2rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-003",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt3",
+      "meaning": "上余白 3rem（SP: 1.5rem）",
+      "cssRaw": ".mt3 { margin-top: 3rem !important; }\n@media screen and (max-width: 768px) {\n  .mt3 { margin-top: 1.5rem !important; }\n}",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "3rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-004",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt4",
+      "meaning": "上余白 4rem（SP: 2rem）",
+      "cssRaw": ".mt4 { margin-top: 4rem !important; }\n@media screen and (max-width: 768px) {\n  .mt4 { margin-top: 2rem !important; }\n}",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "4rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-005",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt5",
+      "meaning": "上余白 5rem（SP: 2.5rem）",
+      "cssRaw": ".mt5 { margin-top: 5rem !important; }\n@media screen and (max-width: 768px) {\n  .mt5 { margin-top: 2.5rem !important; }\n}",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "5rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-006",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt6",
+      "meaning": "上余白 6rem（SP: 3rem）",
+      "cssRaw": ".mt6 { margin-top: 6rem !important; }\n@media screen and (max-width: 768px) {\n  .mt6 { margin-top: 3rem !important; }\n}",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "6rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-007",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt7",
+      "meaning": "上余白 7rem（SP: 3.5rem）",
+      "cssRaw": ".mt7 { margin-top: 7rem !important; }\n@media screen and (max-width: 768px) {\n  .mt7 { margin-top: 3.5rem !important; }\n}",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "7rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-008",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt8",
+      "meaning": "上余白 8rem（SP: 4rem）",
+      "cssRaw": ".mt8 { margin-top: 8rem !important; }\n@media screen and (max-width: 768px) {\n  .mt8 { margin-top: 4rem !important; }\n}",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "8rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-009",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt9",
+      "meaning": "上余白 9rem（SP: 4.5rem）",
+      "cssRaw": ".mt9 { margin-top: 9rem !important; }\n@media screen and (max-width: 768px) {\n  .mt9 { margin-top: 4.5rem !important; }\n}",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "9rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-010",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt10",
+      "meaning": "上余白 10rem（SP: 5rem）",
+      "cssRaw": ".mt10 { margin-top: 10rem !important; }\n@media screen and (max-width: 768px) {\n  .mt10 { margin-top: 5rem !important; }\n}",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "10rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-015",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt15",
+      "meaning": "上余白 15rem（SP: 7.5rem）",
+      "cssRaw": ".mt15 { margin-top: 15rem !important; }\n@media screen and (max-width: 768px) {\n  .mt15 { margin-top: 7.5rem !important; }\n}",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "15rem",
+        "余白",
+        "大きい"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mt-016",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mt16",
+      "meaning": "上余白 16rem（SP: 8rem / 414px以下: 5rem）",
+      "cssRaw": ".mt16 { margin-top: 16rem !important; }\n@media screen and (max-width: 768px) {\n  .mt16 { margin-top: 8rem !important; }\n}\n@media screen and (max-width: 414px) {\n  .mt16 { margin-top: 5rem !important; }\n}",
+      "keywords": [
+        "上余白",
+        "margin-top",
+        "16rem",
+        "余白",
+        "大きい"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-000",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb0",
+      "meaning": "下余白なし",
+      "cssRaw": ".mb0 { margin-bottom: 0 !important; }",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "0",
+        "余白なし",
+        "リセット"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-001",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb1",
+      "meaning": "下余白 1rem（SP: 0.5rem）",
+      "cssRaw": ".mb1 { margin-bottom: 1rem !important; }\n@media screen and (max-width: 768px) {\n  .mb1 { margin-bottom: 0.5rem !important; }\n}",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "1rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-002",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb2",
+      "meaning": "下余白 2rem（SP: 1rem）",
+      "cssRaw": ".mb2 { margin-bottom: 2rem !important; }\n@media screen and (max-width: 768px) {\n  .mb2 { margin-bottom: 1rem !important; }\n}",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "2rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-003",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb3",
+      "meaning": "下余白 3rem（SP: 1.5rem）",
+      "cssRaw": ".mb3 { margin-bottom: 3rem !important; }\n@media screen and (max-width: 768px) {\n  .mb3 { margin-bottom: 1.5rem !important; }\n}",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "3rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-004",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb4",
+      "meaning": "下余白 4rem（SP: 2rem）",
+      "cssRaw": ".mb4 { margin-bottom: 4rem !important; }\n@media screen and (max-width: 768px) {\n  .mb4 { margin-bottom: 2rem !important; }\n}",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "4rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-005",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb5",
+      "meaning": "下余白 5rem（SP: 2.5rem）",
+      "cssRaw": ".mb5 { margin-bottom: 5rem !important; }\n@media screen and (max-width: 768px) {\n  .mb5 { margin-bottom: 2.5rem !important; }\n}",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "5rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-006",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb6",
+      "meaning": "下余白 6rem（SP: 3rem）",
+      "cssRaw": ".mb6 { margin-bottom: 6rem !important; }\n@media screen and (max-width: 768px) {\n  .mb6 { margin-bottom: 3rem !important; }\n}",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "6rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-007",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb7",
+      "meaning": "下余白 7rem（SP: 3.5rem）",
+      "cssRaw": ".mb7 { margin-bottom: 7rem !important; }\n@media screen and (max-width: 768px) {\n  .mb7 { margin-bottom: 3.5rem !important; }\n}",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "7rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-008",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb8",
+      "meaning": "下余白 8rem（SP: 4rem）",
+      "cssRaw": ".mb8 { margin-bottom: 8rem !important; }\n@media screen and (max-width: 768px) {\n  .mb8 { margin-bottom: 4rem !important; }\n}",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "8rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-009",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb9",
+      "meaning": "下余白 9rem（SP: 4.5rem）",
+      "cssRaw": ".mb9 { margin-bottom: 9rem !important; }\n@media screen and (max-width: 768px) {\n  .mb9 { margin-bottom: 4.5rem !important; }\n}",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "9rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-010",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb10",
+      "meaning": "下余白 10rem（SP: 5rem）",
+      "cssRaw": ".mb10 { margin-bottom: 10rem !important; }\n@media screen and (max-width: 768px) {\n  .mb10 { margin-bottom: 5rem !important; }\n}",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "10rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-015",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb15",
+      "meaning": "下余白 15rem（SP: 7.5rem）",
+      "cssRaw": ".mb15 { margin-bottom: 15rem !important; }\n@media screen and (max-width: 768px) {\n  .mb15 { margin-bottom: 7.5rem !important; }\n}",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "15rem",
+        "余白",
+        "大きい"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-mb-016",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "mb16",
+      "meaning": "下余白 16rem（SP: 8rem / 414px以下: 5rem）",
+      "cssRaw": ".mb16 { margin-bottom: 16rem !important; }\n@media screen and (max-width: 768px) {\n  .mb16 { margin-bottom: 8rem !important; }\n}\n@media screen and (max-width: 414px) {\n  .mb16 { margin-bottom: 5rem !important; }\n}",
+      "keywords": [
+        "下余白",
+        "margin-bottom",
+        "16rem",
+        "余白",
+        "大きい"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pt-000",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pt0",
+      "meaning": "上内余白なし",
+      "cssRaw": ".pt0 { padding-top: 0 !important; }",
+      "keywords": [
+        "上内余白",
+        "padding-top",
+        "0",
+        "余白なし",
+        "リセット"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pt-001",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pt1",
+      "meaning": "上内余白 1rem（SP: 0.5rem）",
+      "cssRaw": ".pt1 { padding-top: 1rem !important; }\n@media screen and (max-width: 768px) {\n  .pt1 { padding-top: 0.5rem !important; }\n}",
+      "keywords": [
+        "上内余白",
+        "padding-top",
+        "1rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pt-002",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pt2",
+      "meaning": "上内余白 2rem（SP: 1rem）",
+      "cssRaw": ".pt2 { padding-top: 2rem !important; }\n@media screen and (max-width: 768px) {\n  .pt2 { padding-top: 1rem !important; }\n}",
+      "keywords": [
+        "上内余白",
+        "padding-top",
+        "2rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pt-003",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pt3",
+      "meaning": "上内余白 3rem（SP: 1.5rem）",
+      "cssRaw": ".pt3 { padding-top: 3rem !important; }\n@media screen and (max-width: 768px) {\n  .pt3 { padding-top: 1.5rem !important; }\n}",
+      "keywords": [
+        "上内余白",
+        "padding-top",
+        "3rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pt-004",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pt4",
+      "meaning": "上内余白 4rem（SP: 2rem）",
+      "cssRaw": ".pt4 { padding-top: 4rem !important; }\n@media screen and (max-width: 768px) {\n  .pt4 { padding-top: 2rem !important; }\n}",
+      "keywords": [
+        "上内余白",
+        "padding-top",
+        "4rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pt-005",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pt5",
+      "meaning": "上内余白 5rem（SP: 2.5rem）",
+      "cssRaw": ".pt5 { padding-top: 5rem !important; }\n@media screen and (max-width: 768px) {\n  .pt5 { padding-top: 2.5rem !important; }\n}",
+      "keywords": [
+        "上内余白",
+        "padding-top",
+        "5rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pt-006",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pt6",
+      "meaning": "上内余白 6rem（SP: 3rem）",
+      "cssRaw": ".pt6 { padding-top: 6rem !important; }\n@media screen and (max-width: 768px) {\n  .pt6 { padding-top: 3rem !important; }\n}",
+      "keywords": [
+        "上内余白",
+        "padding-top",
+        "6rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pt-007",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pt7",
+      "meaning": "上内余白 7rem（SP: 3.5rem）",
+      "cssRaw": ".pt7 { padding-top: 7rem !important; }\n@media screen and (max-width: 768px) {\n  .pt7 { padding-top: 3.5rem !important; }\n}",
+      "keywords": [
+        "上内余白",
+        "padding-top",
+        "7rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pt-008",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pt8",
+      "meaning": "上内余白 8rem（SP: 4rem）",
+      "cssRaw": ".pt8 { padding-top: 8rem !important; }\n@media screen and (max-width: 768px) {\n  .pt8 { padding-top: 4rem !important; }\n}",
+      "keywords": [
+        "上内余白",
+        "padding-top",
+        "8rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pt-009",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pt9",
+      "meaning": "上内余白 9rem（SP: 4.5rem）",
+      "cssRaw": ".pt9 { padding-top: 9rem !important; }\n@media screen and (max-width: 768px) {\n  .pt9 { padding-top: 4.5rem !important; }\n}",
+      "keywords": [
+        "上内余白",
+        "padding-top",
+        "9rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pt-010",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pt10",
+      "meaning": "上内余白 10rem（SP: 5rem）",
+      "cssRaw": ".pt10 { padding-top: 10rem !important; }\n@media screen and (max-width: 768px) {\n  .pt10 { padding-top: 5rem !important; }\n}",
+      "keywords": [
+        "上内余白",
+        "padding-top",
+        "10rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pb-000",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pb0",
+      "meaning": "下内余白なし",
+      "cssRaw": ".pb0 { padding-bottom: 0 !important; }",
+      "keywords": [
+        "下内余白",
+        "padding-bottom",
+        "0",
+        "余白なし",
+        "リセット"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pb-001",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pb1",
+      "meaning": "下内余白 1rem（SP: 0.5rem）",
+      "cssRaw": ".pb1 { padding-bottom: 1rem !important; }\n@media screen and (max-width: 768px) {\n  .pb1 { padding-bottom: 0.5rem !important; }\n}",
+      "keywords": [
+        "下内余白",
+        "padding-bottom",
+        "1rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pb-002",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pb2",
+      "meaning": "下内余白 2rem（SP: 1rem）",
+      "cssRaw": ".pb2 { padding-bottom: 2rem !important; }\n@media screen and (max-width: 768px) {\n  .pb2 { padding-bottom: 1rem !important; }\n}",
+      "keywords": [
+        "下内余白",
+        "padding-bottom",
+        "2rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pb-003",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pb3",
+      "meaning": "下内余白 3rem（SP: 1.5rem）",
+      "cssRaw": ".pb3 { padding-bottom: 3rem !important; }\n@media screen and (max-width: 768px) {\n  .pb3 { padding-bottom: 1.5rem !important; }\n}",
+      "keywords": [
+        "下内余白",
+        "padding-bottom",
+        "3rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pb-004",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pb4",
+      "meaning": "下内余白 4rem（SP: 2rem）",
+      "cssRaw": ".pb4 { padding-bottom: 4rem !important; }\n@media screen and (max-width: 768px) {\n  .pb4 { padding-bottom: 2rem !important; }\n}",
+      "keywords": [
+        "下内余白",
+        "padding-bottom",
+        "4rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pb-005",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pb5",
+      "meaning": "下内余白 5rem（SP: 2.5rem）",
+      "cssRaw": ".pb5 { padding-bottom: 5rem !important; }\n@media screen and (max-width: 768px) {\n  .pb5 { padding-bottom: 2.5rem !important; }\n}",
+      "keywords": [
+        "下内余白",
+        "padding-bottom",
+        "5rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pb-006",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pb6",
+      "meaning": "下内余白 6rem（SP: 3rem）",
+      "cssRaw": ".pb6 { padding-bottom: 6rem !important; }\n@media screen and (max-width: 768px) {\n  .pb6 { padding-bottom: 3rem !important; }\n}",
+      "keywords": [
+        "下内余白",
+        "padding-bottom",
+        "6rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pb-007",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pb7",
+      "meaning": "下内余白 7rem（SP: 3.5rem）",
+      "cssRaw": ".pb7 { padding-bottom: 7rem !important; }\n@media screen and (max-width: 768px) {\n  .pb7 { padding-bottom: 3.5rem !important; }\n}",
+      "keywords": [
+        "下内余白",
+        "padding-bottom",
+        "7rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pb-008",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pb8",
+      "meaning": "下内余白 8rem（SP: 4rem）",
+      "cssRaw": ".pb8 { padding-bottom: 8rem !important; }\n@media screen and (max-width: 768px) {\n  .pb8 { padding-bottom: 4rem !important; }\n}",
+      "keywords": [
+        "下内余白",
+        "padding-bottom",
+        "8rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pb-009",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pb9",
+      "meaning": "下内余白 9rem（SP: 4.5rem）",
+      "cssRaw": ".pb9 { padding-bottom: 9rem !important; }\n@media screen and (max-width: 768px) {\n  .pb9 { padding-bottom: 4.5rem !important; }\n}",
+      "keywords": [
+        "下内余白",
+        "padding-bottom",
+        "9rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pb-010",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pb10",
+      "meaning": "下内余白 10rem（SP: 5rem）",
+      "cssRaw": ".pb10 { padding-bottom: 10rem !important; }\n@media screen and (max-width: 768px) {\n  .pb10 { padding-bottom: 5rem !important; }\n}",
+      "keywords": [
+        "下内余白",
+        "padding-bottom",
+        "10rem",
+        "余白"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pd-002",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pd2",
+      "meaning": "全方向の内余白 2rem（SP: 1rem）",
+      "cssRaw": ".pd2 { padding: 2rem !important; }\n@media screen and (max-width: 768px) {\n  .pd2 { padding: 1rem !important; }\n}",
+      "keywords": [
+        "内余白",
+        "padding",
+        "2rem",
+        "全方向"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pd-003",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pd3",
+      "meaning": "全方向の内余白 3rem（SP: 1.5rem）",
+      "cssRaw": ".pd3 { padding: 3rem !important; }\n@media screen and (max-width: 768px) {\n  .pd3 { padding: 1.5rem !important; }\n}",
+      "keywords": [
+        "内余白",
+        "padding",
+        "3rem",
+        "全方向"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pd-004",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pd4",
+      "meaning": "全方向の内余白 4rem（SP: 2rem）",
+      "cssRaw": ".pd4 { padding: 4rem !important; }\n@media screen and (max-width: 768px) {\n  .pd4 { padding: 2rem !important; }\n}",
+      "keywords": [
+        "内余白",
+        "padding",
+        "4rem",
+        "全方向"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-pd-005",
+      "type": "designcode",
+      "category": "Spacing",
+      "className": "pd5",
+      "meaning": "全方向の内余白 5rem（SP: 2.5rem）",
+      "cssRaw": ".pd5 { padding: 5rem !important; }\n@media screen and (max-width: 768px) {\n  .pd5 { padding: 2.5rem !important; }\n}",
+      "keywords": [
+        "内余白",
+        "padding",
+        "5rem",
+        "全方向"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-disp-001",
+      "type": "designcode",
+      "category": "Display",
+      "className": "spbr",
+      "meaning": "SP改行（PC:非表示 / SP:表示）",
+      "cssRaw": ".spbr { display: none; }\n@media screen and (max-width: 768px) {\n  .spbr { display: block; }\n}",
+      "keywords": [
+        "SP",
+        "改行",
+        "非表示",
+        "表示",
+        "スマホ",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-disp-002",
+      "type": "designcode",
+      "category": "Display",
+      "className": "pcbr",
+      "meaning": "PC改行（PC:表示 / SP:非表示）",
+      "cssRaw": ".pcbr { display: block; }\n@media screen and (max-width: 768px) {\n  .pcbr { display: none; }\n}",
+      "keywords": [
+        "PC",
+        "改行",
+        "非表示",
+        "表示",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-disp-003",
+      "type": "designcode",
+      "category": "Display",
+      "className": "pc_none",
+      "meaning": "PC非表示（PC:none / SP:表示）",
+      "cssRaw": ".pc_none { display: none; }\n@media screen and (max-width: 768px) {\n  .pc_none { display: inherit; }\n}",
+      "keywords": [
+        "PC",
+        "非表示",
+        "表示",
+        "レスポンシブ",
+        "hidden"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-disp-004",
+      "type": "designcode",
+      "category": "Display",
+      "className": "sp_none",
+      "meaning": "SP非表示（PC:表示 / SP:none）",
+      "cssRaw": "@media screen and (max-width: 768px) {\n  .sp_none { display: none; }\n}",
+      "keywords": [
+        "SP",
+        "非表示",
+        "表示",
+        "スマホ",
+        "レスポンシブ",
+        "hidden"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-align-001",
+      "type": "designcode",
+      "category": "Typography",
+      "className": "pc_center",
+      "meaning": "PC専用: テキスト中央揃え",
+      "cssRaw": "@media screen and (min-width: 769px) {\n  .pc_center { text-align: center !important; }\n}",
+      "keywords": [
+        "中央揃え",
+        "テキスト",
+        "PC",
+        "center",
+        "text-align"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-align-002",
+      "type": "designcode",
+      "category": "Typography",
+      "className": "pc_right",
+      "meaning": "PC専用: テキスト右揃え",
+      "cssRaw": "@media screen and (min-width: 769px) {\n  .pc_right { text-align: right !important; }\n}",
+      "keywords": [
+        "右揃え",
+        "テキスト",
+        "PC",
+        "right",
+        "text-align"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-align-003",
+      "type": "designcode",
+      "category": "Typography",
+      "className": "pc_left",
+      "meaning": "PC専用: テキスト左揃え",
+      "cssRaw": "@media screen and (min-width: 769px) {\n  .pc_left { text-align: left !important; }\n}",
+      "keywords": [
+        "左揃え",
+        "テキスト",
+        "PC",
+        "left",
+        "text-align"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-w-010",
+      "type": "designcode",
+      "category": "Width",
+      "className": "w10",
+      "meaning": "幅 10%（SP: 100%）",
+      "cssRaw": ".w10 { width: 10%; }\n@media screen and (max-width: 768px) {\n  .w10 { width: 100%; margin-bottom: 20px; }\n}",
+      "keywords": [
+        "幅",
+        "width",
+        "10%",
+        "カラム"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-w-020",
+      "type": "designcode",
+      "category": "Width",
+      "className": "w20",
+      "meaning": "幅 20%（SP: 100%）",
+      "cssRaw": ".w20 { width: 20%; }\n@media screen and (max-width: 768px) {\n  .w20 { width: 100%; margin-bottom: 20px; }\n}",
+      "keywords": [
+        "幅",
+        "width",
+        "20%",
+        "カラム"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-w-030",
+      "type": "designcode",
+      "category": "Width",
+      "className": "w30",
+      "meaning": "幅 30%（SP: 100%）",
+      "cssRaw": ".w30 { width: 30%; }\n@media screen and (max-width: 768px) {\n  .w30 { width: 100%; margin-bottom: 20px; }\n}",
+      "keywords": [
+        "幅",
+        "width",
+        "30%",
+        "カラム"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-w-040",
+      "type": "designcode",
+      "category": "Width",
+      "className": "w40",
+      "meaning": "幅 40%（SP: 100%）",
+      "cssRaw": ".w40 { width: 40%; }\n@media screen and (max-width: 768px) {\n  .w40 { width: 100%; margin-bottom: 20px; }\n}",
+      "keywords": [
+        "幅",
+        "width",
+        "40%",
+        "カラム"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-w-050",
+      "type": "designcode",
+      "category": "Width",
+      "className": "w50",
+      "meaning": "幅 50%（SP: 100%）",
+      "cssRaw": ".w50 { width: 50%; }\n@media screen and (max-width: 768px) {\n  .w50 { width: 100%; margin-bottom: 20px; }\n}",
+      "keywords": [
+        "幅",
+        "width",
+        "50%",
+        "カラム",
+        "半分"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-w-060",
+      "type": "designcode",
+      "category": "Width",
+      "className": "w60",
+      "meaning": "幅 60%（SP: 100%）",
+      "cssRaw": ".w60 { width: 60%; }\n@media screen and (max-width: 768px) {\n  .w60 { width: 100%; margin-bottom: 20px; }\n}",
+      "keywords": [
+        "幅",
+        "width",
+        "60%",
+        "カラム"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-w-070",
+      "type": "designcode",
+      "category": "Width",
+      "className": "w70",
+      "meaning": "幅 70%（SP: 100%）",
+      "cssRaw": ".w70 { width: 70%; }\n@media screen and (max-width: 768px) {\n  .w70 { width: 100%; margin-bottom: 20px; }\n}",
+      "keywords": [
+        "幅",
+        "width",
+        "70%",
+        "カラム"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-w-080",
+      "type": "designcode",
+      "category": "Width",
+      "className": "w80",
+      "meaning": "幅 80%（SP: 100%）",
+      "cssRaw": ".w80 { width: 80%; }\n@media screen and (max-width: 768px) {\n  .w80 { width: 100%; margin-bottom: 20px; }\n}",
+      "keywords": [
+        "幅",
+        "width",
+        "80%",
+        "カラム"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-w-090",
+      "type": "designcode",
+      "category": "Width",
+      "className": "w90",
+      "meaning": "幅 90%（SP: 100%）",
+      "cssRaw": ".w90 { width: 90%; }\n@media screen and (max-width: 768px) {\n  .w90 { width: 100%; margin-bottom: 20px; }\n}",
+      "keywords": [
+        "幅",
+        "width",
+        "90%",
+        "カラム"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-001",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "columns",
+      "meaning": "PC: Flexコンテナ（display: flex）",
+      "cssRaw": "@media screen and (min-width: 769px) {\n  .columns { display: flex; }\n}",
+      "keywords": [
+        "flex",
+        "横並び",
+        "PC",
+        "コンテナ",
+        "フレックス"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-002",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "flexbox",
+      "meaning": "PC: Flexコンテナ（display: flex）",
+      "cssRaw": "@media screen and (min-width: 769px) {\n  .flexbox { display: flex; }\n}",
+      "keywords": [
+        "flex",
+        "横並び",
+        "PC",
+        "コンテナ",
+        "フレックス"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-003",
+      "type": "designcode",
+      "category": "Gap",
+      "className": "gap",
+      "meaning": "要素間の隙間 5%",
+      "cssOutput": "gap: 5%;",
+      "mediaQuery": "",
+      "keywords": [
+        "gap",
+        "隙間",
+        "5%",
+        "余白",
+        "間隔"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-004",
+      "type": "designcode",
+      "category": "Gap",
+      "className": "gap3",
+      "meaning": "要素間の隙間 3%",
+      "cssOutput": "gap: 3%;",
+      "mediaQuery": "",
+      "keywords": [
+        "gap",
+        "隙間",
+        "3%",
+        "余白",
+        "間隔"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-005",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "ai_center",
+      "meaning": "交差軸の中央揃え（縦中央）",
+      "cssOutput": "align-items: center;",
+      "mediaQuery": "",
+      "keywords": [
+        "align-items",
+        "中央",
+        "縦",
+        "center",
+        "フレックス"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-006",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "ai_self_center",
+      "meaning": "自身だけ交差軸の中央に揃える",
+      "cssOutput": "align-self: center;",
+      "mediaQuery": "",
+      "keywords": [
+        "align-self",
+        "中央",
+        "縦",
+        "center",
+        "自身"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-007",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "jc_center",
+      "meaning": "主軸の中央揃え（横中央）",
+      "cssOutput": "justify-content: center;",
+      "mediaQuery": "",
+      "keywords": [
+        "justify-content",
+        "中央",
+        "横",
+        "center",
+        "フレックス"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-008",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "jc_between",
+      "meaning": "両端揃え（space-between）",
+      "cssOutput": "justify-content: space-between;",
+      "mediaQuery": "",
+      "keywords": [
+        "justify-content",
+        "両端",
+        "space-between",
+        "フレックス"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-009",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "rev",
+      "meaning": "横並びを逆順にする（row-reverse）",
+      "cssOutput": "flex-direction: row-reverse;",
+      "mediaQuery": "",
+      "keywords": [
+        "flex-direction",
+        "逆順",
+        "reverse",
+        "反転",
+        "フレックス"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-010",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "sp_nowrap",
+      "meaning": "SP: 横並び維持（子要素の幅を保持したままflex）",
+      "cssRaw": "@media screen and (max-width: 768px) {\n  .sp_nowrap { display: flex; }\n  .sp_nowrap .w10 { width: 10%; }\n  .sp_nowrap .w20 { width: 20%; }\n  .sp_nowrap .w30 { width: 30%; }\n  .sp_nowrap .w40 { width: 40%; }\n  .sp_nowrap .w50 { width: 50%; }\n  .sp_nowrap .w60 { width: 60%; }\n  .sp_nowrap .w70 { width: 70%; }\n  .sp_nowrap .w80 { width: 80%; }\n  .sp_nowrap .w90 { width: 90%; }\n}",
+      "keywords": [
+        "SP",
+        "横並び",
+        "スマホ",
+        "flex",
+        "維持"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-011",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "sp_ai_top",
+      "meaning": "SP: 交差軸を上揃えに上書き",
+      "cssRaw": "@media screen and (max-width: 768px) {\n  .sp_ai_top { align-items: flex-start; }\n}",
+      "keywords": [
+        "SP",
+        "align-items",
+        "上揃え",
+        "スマホ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-012",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "sp_no_mb",
+      "meaning": "SP: 下余白を強制ゼロ",
+      "cssRaw": "@media screen and (max-width: 768px) {\n  .sp_no_mb { margin-bottom: 0 !important; }\n}",
+      "keywords": [
+        "SP",
+        "下余白",
+        "スマホ",
+        "リセット",
+        "margin-bottom"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-flex-013",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "sp_no_pb",
+      "meaning": "SP: 下内余白を強制ゼロ",
+      "cssRaw": "@media screen and (max-width: 768px) {\n  .sp_no_pb { padding-bottom: 0 !important; }\n}",
+      "keywords": [
+        "SP",
+        "下内余白",
+        "スマホ",
+        "リセット",
+        "padding-bottom"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-misc-001",
+      "type": "designcode",
+      "category": "Navigation",
+      "className": "anchor_link",
+      "meaning": "固定ヘッダー分のアンカーオフセット補正（80px）",
+      "cssRaw": ".anchor_link::before {\n  content: '';\n  display: block;\n  padding-top: 80px;\n  margin-top: -80px;\n}",
+      "keywords": [
+        "アンカー",
+        "固定ヘッダー",
+        "オフセット",
+        "anchor",
+        "スクロール"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-embed-001",
+      "type": "designcode",
+      "category": "Embed",
+      "className": "googlemap",
+      "meaning": "Googleマップ埋め込み（PC: 45% / SP: 80% アスペクト比）",
+      "cssRaw": ".googlemap { padding-bottom: 45%; margin: var(--px50) auto; }\n@media print, screen and (max-width: 768px) {\n  .googlemap { padding-bottom: 80%; }\n}",
+      "keywords": [
+        "Googleマップ",
+        "地図",
+        "埋め込み",
+        "iframe",
+        "アスペクト比"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-embed-002",
+      "type": "designcode",
+      "category": "Embed",
+      "className": "youtubeArea",
+      "meaning": "YouTube埋め込み（16:9 アスペクト比維持）",
+      "cssRaw": ".youtubeArea {\n  position: relative;\n  overflow: hidden;\n  margin: var(--px50) auto;\n}\n.youtubeArea::before {\n  content: '';\n  display: block;\n  padding-top: 56.25%;\n}\n.youtubeArea > iframe {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}",
+      "keywords": [
+        "YouTube",
+        "動画",
+        "埋め込み",
+        "iframe",
+        "16:9",
+        "アスペクト比"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-block-001",
+      "type": "designcode",
+      "category": "Content Block",
+      "className": "fw_contents",
+      "meaning": "フルワイドセクションのコンテナ（子要素が画面幅いっぱいに広がる）",
+      "cssRaw": ".fw_contents { margin-top: 0; margin-bottom: 0; }\n.fw_contents .page_contents_inner {\n  margin-right: calc(((100vw - 100%) / 2) * -1);\n  margin-left: calc(((100vw - 100%) / 2) * -1);\n  padding: var(--px120) calc((100vw - 100%) / 2) var(--px150);\n  margin-top: 0;\n}\n.fw_contents .page_contents_inner:nth-child(even) { background: #f5f5f5; }",
+      "keywords": [
+        "フルワイド",
+        "全幅",
+        "セクション",
+        "コンテナ",
+        "レイアウト"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-block-002",
+      "type": "designcode",
+      "category": "Content Block",
+      "className": "read_txt",
+      "meaning": "リード文スタイル（中央揃え・18px・行間2.2）",
+      "cssRaw": ".read_txt {\n  font-size: var(--rem18);\n  text-align: center;\n  letter-spacing: .1rem;\n  line-height: 2.2;\n  margin: var(--px60) auto var(--px80);\n}",
+      "keywords": [
+        "リード文",
+        "テキスト",
+        "中央揃え",
+        "フォント",
+        "導入文"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-block-003",
+      "type": "designcode",
+      "category": "Content Block",
+      "className": "wh_bg",
+      "meaning": "白背景ボックス（background: #fff + padding）",
+      "cssRaw": ".wh_bg { background: #fff; padding: var(--px30w); }",
+      "keywords": [
+        "白背景",
+        "ボックス",
+        "背景",
+        "白",
+        "パディング"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-grid-001",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "col2_list",
+      "meaning": "2カラムリスト（.post内・414px以下で1カラム）",
+      "cssRaw": ".post .col2_list {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n.post .col2_list > li {\n  width: 49%;\n  margin-bottom: 2%;\n}\n@media screen and (max-width: 414px) {\n  .post .col2_list > li { width: 100%; }\n  .post .col2_list > li:last-child { margin-bottom: 0; }\n}",
+      "keywords": [
+        "2カラム",
+        "リスト",
+        "グリッド",
+        "col2",
+        "2列"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-grid-002",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "col3_list",
+      "meaning": "3カラムリスト（.post内・768px以下で2カラム・414px以下で1カラム）",
+      "cssRaw": ".post .col3_list {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n.post .col3_list > li {\n  width: 32%;\n  margin-bottom: 2%;\n}\n.post .col3_list::before, .post .col3_list::after {\n  content: '';\n  display: block;\n  width: 32%;\n  height: 0;\n}\n.post .col3_list::before { order: 1; }\n@media screen and (max-width: 768px) {\n  .post .col3_list > li { width: 49%; }\n  .post .col3_list::before, .post .col3_list::after { content: none; }\n}\n@media screen and (max-width: 414px) {\n  .post .col3_list > li { width: 100%; }\n  .post .col3_list > li:last-child { margin-bottom: 0; }\n}",
+      "keywords": [
+        "3カラム",
+        "リスト",
+        "グリッド",
+        "col3",
+        "3列"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "dc-grid-003",
+      "type": "designcode",
+      "category": "Flexbox",
+      "className": "col4_list",
+      "meaning": "4カラムリスト（.post内・1240px以下で3カラム・768px以下で2カラム・414px以下で1カラム）",
+      "cssRaw": ".post .col4_list {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n.post .col4_list > li {\n  width: 24%;\n  margin-bottom: 1.5%;\n}\n.post .col4_list::before, .post .col4_list::after {\n  content: '';\n  display: block;\n  width: 24%;\n  height: 0;\n}\n.post .col4_list::before { order: 1; }\n@media screen and (max-width: 1240px) {\n  .post .col4_list > li,\n  .post .col4_list::before,\n  .post .col4_list::after { width: 32%; margin-bottom: 2%; }\n}\n@media screen and (max-width: 768px) {\n  .post .col4_list > li { width: 49%; }\n  .post .col4_list::before, .post .col4_list::after { content: none; }\n}\n@media screen and (max-width: 414px) {\n  .post .col4_list > li { width: 100%; }\n  .post .col4_list > li:last-child { margin-bottom: 0; }\n}",
+      "keywords": [
+        "4カラム",
+        "リスト",
+        "グリッド",
+        "col4",
+        "4列"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-025",
+      "type": "utility",
+      "category": "Display",
+      "className": "u-block",
+      "meaning": "ブロック要素として表示",
+      "cssOutput": "display: block;",
+      "mediaQuery": "",
+      "keywords": [
+        "block",
+        "表示",
+        "ブロック",
+        "display"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-026",
+      "type": "utility",
+      "category": "Display",
+      "className": "u-inline-block",
+      "meaning": "インラインブロックとして表示",
+      "cssOutput": "display: inline-block;",
+      "mediaQuery": "",
+      "keywords": [
+        "inline-block",
+        "インラインブロック",
+        "display"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-027",
+      "type": "utility",
+      "category": "Display",
+      "className": "u-inline",
+      "meaning": "インライン要素として表示",
+      "cssOutput": "display: inline;",
+      "mediaQuery": "",
+      "keywords": [
+        "inline",
+        "インライン",
+        "display"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-028",
+      "type": "utility",
+      "category": "Media",
+      "className": "u-aspect-auto",
+      "meaning": "アスペクト比 自動",
+      "cssOutput": "aspect-ratio: auto;",
+      "mediaQuery": "",
+      "keywords": [
+        "aspect-ratio",
+        "アスペクト比",
+        "auto"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-029",
+      "type": "utility",
+      "category": "Media",
+      "className": "u-aspect-square",
+      "meaning": "アスペクト比 1:1（正方形）",
+      "cssOutput": "aspect-ratio: 1 / 1;",
+      "mediaQuery": "",
+      "keywords": [
+        "aspect-ratio",
+        "アスペクト比",
+        "正方形",
+        "1:1",
+        "square"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-030",
+      "type": "utility",
+      "category": "Media",
+      "className": "u-aspect-video",
+      "meaning": "アスペクト比 16:9（動画）",
+      "cssOutput": "aspect-ratio: 16 / 9;",
+      "mediaQuery": "",
+      "keywords": [
+        "aspect-ratio",
+        "アスペクト比",
+        "16:9",
+        "動画",
+        "video"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-031",
+      "type": "utility",
+      "category": "Media",
+      "className": "u-object-contain",
+      "meaning": "画像・動画をはみ出さず収める",
+      "cssOutput": "object-fit: contain;",
+      "mediaQuery": "",
+      "keywords": [
+        "object-fit",
+        "contain",
+        "収める",
+        "画像",
+        "フィット"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-032",
+      "type": "utility",
+      "category": "Media",
+      "className": "u-object-cover",
+      "meaning": "画像・動画をトリミングして埋める",
+      "cssOutput": "object-fit: cover;",
+      "mediaQuery": "",
+      "keywords": [
+        "object-fit",
+        "cover",
+        "トリミング",
+        "画像",
+        "フィット"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-033",
+      "type": "utility",
+      "category": "Z-Index",
+      "className": "u-z-min1",
+      "meaning": "z-index: -1（背面へ）",
+      "cssOutput": "z-index: -1;",
+      "mediaQuery": "",
+      "keywords": [
+        "z-index",
+        "重なり",
+        "背面",
+        "-1"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-034",
+      "type": "utility",
+      "category": "Z-Index",
+      "className": "u-z-0",
+      "meaning": "z-index: 0（初期値）",
+      "cssOutput": "z-index: 0;",
+      "mediaQuery": "",
+      "keywords": [
+        "z-index",
+        "重なり",
+        "0"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-035",
+      "type": "utility",
+      "category": "Z-Index",
+      "className": "u-z-10",
+      "meaning": "z-index: 10",
+      "cssOutput": "z-index: 10;",
+      "mediaQuery": "",
+      "keywords": [
+        "z-index",
+        "重なり",
+        "10"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-036",
+      "type": "utility",
+      "category": "Z-Index",
+      "className": "u-z-20",
+      "meaning": "z-index: 20",
+      "cssOutput": "z-index: 20;",
+      "mediaQuery": "",
+      "keywords": [
+        "z-index",
+        "重なり",
+        "20"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-037",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-5",
+      "meaning": "不透明度 5%",
+      "cssOutput": "opacity: 0.05;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "5%",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-038",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-10",
+      "meaning": "不透明度 10%",
+      "cssOutput": "opacity: 0.1;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "10%",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-039",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-20",
+      "meaning": "不透明度 20%",
+      "cssOutput": "opacity: 0.2;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "20%",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-040",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-25",
+      "meaning": "不透明度 25%",
+      "cssOutput": "opacity: 0.25;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "25%",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-041",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-30",
+      "meaning": "不透明度 30%",
+      "cssOutput": "opacity: 0.3;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "30%",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-042",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-40",
+      "meaning": "不透明度 40%",
+      "cssOutput": "opacity: 0.4;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "40%",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-043",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-50",
+      "meaning": "不透明度 50%",
+      "cssOutput": "opacity: 0.5;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "50%",
+        "半透明",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-044",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-60",
+      "meaning": "不透明度 60%",
+      "cssOutput": "opacity: 0.6;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "60%",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-045",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-70",
+      "meaning": "不透明度 70%",
+      "cssOutput": "opacity: 0.7;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "70%",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-046",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-75",
+      "meaning": "不透明度 75%",
+      "cssOutput": "opacity: 0.75;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "75%",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-047",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-80",
+      "meaning": "不透明度 80%",
+      "cssOutput": "opacity: 0.8;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "80%",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-048",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-90",
+      "meaning": "不透明度 90%",
+      "cssOutput": "opacity: 0.9;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "90%",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-049",
+      "type": "utility",
+      "category": "Opacity",
+      "className": "u-opacity-95",
+      "meaning": "不透明度 95%",
+      "cssOutput": "opacity: 0.95;",
+      "mediaQuery": "",
+      "keywords": [
+        "opacity",
+        "不透明度",
+        "95%",
+        "透明"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-050",
+      "type": "utility",
+      "category": "Blend Mode",
+      "className": "u-mix-blend-normal",
+      "meaning": "ブレンドモード: 通常",
+      "cssOutput": "mix-blend-mode: normal;",
+      "mediaQuery": "",
+      "keywords": [
+        "mix-blend-mode",
+        "ブレンド",
+        "normal",
+        "通常"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-051",
+      "type": "utility",
+      "category": "Blend Mode",
+      "className": "u-mix-blend-multiply",
+      "meaning": "ブレンドモード: 乗算",
+      "cssOutput": "mix-blend-mode: multiply;",
+      "mediaQuery": "",
+      "keywords": [
+        "mix-blend-mode",
+        "ブレンド",
+        "multiply",
+        "乗算"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-052",
+      "type": "utility",
+      "category": "Blend Mode",
+      "className": "u-mix-blend-screen",
+      "meaning": "ブレンドモード: スクリーン",
+      "cssOutput": "mix-blend-mode: screen;",
+      "mediaQuery": "",
+      "keywords": [
+        "mix-blend-mode",
+        "ブレンド",
+        "screen",
+        "スクリーン"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-053",
+      "type": "utility",
+      "category": "Blend Mode",
+      "className": "u-mix-blend-overlay",
+      "meaning": "ブレンドモード: オーバーレイ",
+      "cssOutput": "mix-blend-mode: overlay;",
+      "mediaQuery": "",
+      "keywords": [
+        "mix-blend-mode",
+        "ブレンド",
+        "overlay",
+        "オーバーレイ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-054",
+      "type": "utility",
+      "category": "Blend Mode",
+      "className": "u-mix-blend-darken",
+      "meaning": "ブレンドモード: 暗く",
+      "cssOutput": "mix-blend-mode: darken;",
+      "mediaQuery": "",
+      "keywords": [
+        "mix-blend-mode",
+        "ブレンド",
+        "darken",
+        "暗く"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-055",
+      "type": "utility",
+      "category": "Blend Mode",
+      "className": "u-mix-blend-lighten",
+      "meaning": "ブレンドモード: 明るく",
+      "cssOutput": "mix-blend-mode: lighten;",
+      "mediaQuery": "",
+      "keywords": [
+        "mix-blend-mode",
+        "ブレンド",
+        "lighten",
+        "明るく"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-056",
+      "type": "utility",
+      "category": "Blend Mode",
+      "className": "u-mix-blend-color-dodge",
+      "meaning": "ブレンドモード: 覆い焼き",
+      "cssOutput": "mix-blend-mode: color-dodge;",
+      "mediaQuery": "",
+      "keywords": [
+        "mix-blend-mode",
+        "ブレンド",
+        "color-dodge",
+        "覆い焼き"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-057",
+      "type": "utility",
+      "category": "Blend Mode",
+      "className": "u-mix-blend-color-burn",
+      "meaning": "ブレンドモード: 焼き込み",
+      "cssOutput": "mix-blend-mode: color-burn;",
+      "mediaQuery": "",
+      "keywords": [
+        "mix-blend-mode",
+        "ブレンド",
+        "color-burn",
+        "焼き込み"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-058",
+      "type": "utility",
+      "category": "Blend Mode",
+      "className": "u-mix-blend-hard-light",
+      "meaning": "ブレンドモード: ハードライト",
+      "cssOutput": "mix-blend-mode: hard-light;",
+      "mediaQuery": "",
+      "keywords": [
+        "mix-blend-mode",
+        "ブレンド",
+        "hard-light",
+        "ハードライト"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-059",
+      "type": "utility",
+      "category": "Blend Mode",
+      "className": "u-mix-blend-soft-light",
+      "meaning": "ブレンドモード: ソフトライト",
+      "cssOutput": "mix-blend-mode: soft-light;",
+      "mediaQuery": "",
+      "keywords": [
+        "mix-blend-mode",
+        "ブレンド",
+        "soft-light",
+        "ソフトライト"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-060",
+      "type": "utility",
+      "category": "Blend Mode",
+      "className": "u-mix-blend-difference",
+      "meaning": "ブレンドモード: 差の絶対値",
+      "cssOutput": "mix-blend-mode: difference;",
+      "mediaQuery": "",
+      "keywords": [
+        "mix-blend-mode",
+        "ブレンド",
+        "difference"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-061",
+      "type": "utility",
+      "category": "Blend Mode",
+      "className": "u-mix-blend-exclusion",
+      "meaning": "ブレンドモード: 除外",
+      "cssOutput": "mix-blend-mode: exclusion;",
+      "mediaQuery": "",
+      "keywords": [
+        "mix-blend-mode",
+        "ブレンド",
+        "exclusion",
+        "除外"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-062",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-flex-col-reverse",
+      "meaning": "縦並び（逆順）",
+      "cssOutput": "flex-direction: column-reverse;",
+      "mediaQuery": "",
+      "keywords": [
+        "縦並び",
+        "逆順",
+        "column-reverse",
+        "flex-direction"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-063",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-flex-grow",
+      "meaning": "Flex 伸長: 有効（残余スペースを取得）",
+      "cssOutput": "flex-grow: 1;",
+      "mediaQuery": "",
+      "keywords": [
+        "flex-grow",
+        "伸長",
+        "拡大",
+        "grow"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-064",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-flex-grow-0",
+      "meaning": "Flex 伸長: 無効",
+      "cssOutput": "flex-grow: 0;",
+      "mediaQuery": "",
+      "keywords": [
+        "flex-grow",
+        "伸長",
+        "0",
+        "grow"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-065",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-flex-shrink",
+      "meaning": "Flex 収縮: 有効（スペース不足時に縮む）",
+      "cssOutput": "flex-shrink: 1;",
+      "mediaQuery": "",
+      "keywords": [
+        "flex-shrink",
+        "収縮",
+        "shrink"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-066",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-flex-shrink-0",
+      "meaning": "Flex 収縮: 無効（縮まない）",
+      "cssOutput": "flex-shrink: 0;",
+      "mediaQuery": "",
+      "keywords": [
+        "flex-shrink",
+        "収縮",
+        "0",
+        "shrink",
+        "縮まない"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-067",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-first",
+      "meaning": "表示順序: 最初（order: -9999）",
+      "cssOutput": "order: -9999;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "最初",
+        "first"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-068",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-last",
+      "meaning": "表示順序: 最後（order: 9999）",
+      "cssOutput": "order: 9999;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "最後",
+        "last"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-069",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-none",
+      "meaning": "表示順序: なし（order: 0）",
+      "cssOutput": "order: 0;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "0",
+        "none"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-070",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-1",
+      "meaning": "表示順序 1",
+      "cssOutput": "order: 1;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "1"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-071",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-2",
+      "meaning": "表示順序 2",
+      "cssOutput": "order: 2;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "2"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-072",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-3",
+      "meaning": "表示順序 3",
+      "cssOutput": "order: 3;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "3"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-073",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-4",
+      "meaning": "表示順序 4",
+      "cssOutput": "order: 4;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "4"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-074",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-5",
+      "meaning": "表示順序 5",
+      "cssOutput": "order: 5;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "5"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-075",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-6",
+      "meaning": "表示順序 6",
+      "cssOutput": "order: 6;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "6"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-076",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-7",
+      "meaning": "表示順序 7",
+      "cssOutput": "order: 7;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "7"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-077",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-8",
+      "meaning": "表示順序 8",
+      "cssOutput": "order: 8;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "8"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-078",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-9",
+      "meaning": "表示順序 9",
+      "cssOutput": "order: 9;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "9"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-079",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-10",
+      "meaning": "表示順序 10",
+      "cssOutput": "order: 10;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "10"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-080",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-11",
+      "meaning": "表示順序 11",
+      "cssOutput": "order: 11;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "11"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-081",
+      "type": "utility",
+      "category": "Order",
+      "className": "u-order-12",
+      "meaning": "表示順序 12",
+      "cssOutput": "order: 12;",
+      "mediaQuery": "",
+      "keywords": [
+        "order",
+        "順序",
+        "12"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-082",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-flex-1",
+      "meaning": "Flex: 均等に広がる（flex: 1 1 0%）",
+      "cssOutput": "flex: 1 1 0%;",
+      "mediaQuery": "",
+      "keywords": [
+        "flex",
+        "均等",
+        "広がる",
+        "1"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-083",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-flex-auto",
+      "meaning": "Flex: 自動で伸縮（flex: 1 1 auto）",
+      "cssOutput": "flex: 1 1 auto;",
+      "mediaQuery": "",
+      "keywords": [
+        "flex",
+        "自動",
+        "伸縮",
+        "auto"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-084",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-flex-initial",
+      "meaning": "Flex: 初期値（flex: 0 1 auto）",
+      "cssOutput": "flex: 0 1 auto;",
+      "mediaQuery": "",
+      "keywords": [
+        "flex",
+        "初期値",
+        "initial",
+        "0 1 auto"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-085",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-flex-none",
+      "meaning": "Flex: 固定サイズ（flex: none）",
+      "cssOutput": "flex: none;",
+      "mediaQuery": "",
+      "keywords": [
+        "flex",
+        "固定",
+        "none",
+        "固定サイズ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-086",
+      "type": "utility",
+      "category": "Display",
+      "className": "u-cursor-pointer",
+      "meaning": "クリック可能なカーソル",
+      "cssOutput": "cursor: pointer;",
+      "mediaQuery": "",
+      "keywords": [
+        "cursor",
+        "pointer",
+        "クリック",
+        "カーソル"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-087",
+      "type": "utility",
+      "category": "Display",
+      "className": "u-pointer-events-none",
+      "meaning": "ポインターイベント無効",
+      "cssOutput": "pointer-events: none;",
+      "mediaQuery": "",
+      "keywords": [
+        "pointer-events",
+        "none",
+        "無効",
+        "クリック無効"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-088",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid",
+      "meaning": "グリッドレイアウト",
+      "cssOutput": "display: grid;",
+      "mediaQuery": "",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "display"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-089",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-inline-grid",
+      "meaning": "インライングリッド",
+      "cssOutput": "display: inline-grid;",
+      "mediaQuery": "",
+      "keywords": [
+        "inline-grid",
+        "グリッド",
+        "display",
+        "インライン"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-090",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid-cols-1",
+      "meaning": "グリッド 1カラム",
+      "cssRaw": ".u-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "1カラム",
+        "grid-template-columns"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-091",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid-cols-2",
+      "meaning": "グリッド 2カラム（SP: 1カラム）",
+      "cssRaw": ".u-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "2カラム",
+        "grid-template-columns",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-092",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid-cols-3",
+      "meaning": "グリッド 3カラム（SP: 1カラム）",
+      "cssRaw": ".u-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "3カラム",
+        "grid-template-columns",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-093",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid-cols-4",
+      "meaning": "グリッド 4カラム（SP: 1カラム）",
+      "cssRaw": ".u-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-4 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "4カラム",
+        "grid-template-columns",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-094",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid-cols-5",
+      "meaning": "グリッド 5カラム（SP: 1カラム）",
+      "cssRaw": ".u-grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-5 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "5カラム",
+        "grid-template-columns",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-095",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid-cols-6",
+      "meaning": "グリッド 6カラム（SP: 1カラム）",
+      "cssRaw": ".u-grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-6 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "6カラム",
+        "grid-template-columns",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-096",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid-cols-7",
+      "meaning": "グリッド 7カラム（SP: 1カラム）",
+      "cssRaw": ".u-grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-7 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "7カラム",
+        "grid-template-columns",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-097",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid-cols-8",
+      "meaning": "グリッド 8カラム（SP: 1カラム）",
+      "cssRaw": ".u-grid-cols-8 { grid-template-columns: repeat(8, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-8 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "8カラム",
+        "grid-template-columns",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-098",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid-cols-9",
+      "meaning": "グリッド 9カラム（SP: 1カラム）",
+      "cssRaw": ".u-grid-cols-9 { grid-template-columns: repeat(9, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-9 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "9カラム",
+        "grid-template-columns",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-099",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid-cols-10",
+      "meaning": "グリッド 10カラム（SP: 1カラム）",
+      "cssRaw": ".u-grid-cols-10 { grid-template-columns: repeat(10, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-10 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "10カラム",
+        "grid-template-columns",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-100",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid-cols-11",
+      "meaning": "グリッド 11カラム（SP: 1カラム）",
+      "cssRaw": ".u-grid-cols-11 { grid-template-columns: repeat(11, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-11 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "11カラム",
+        "grid-template-columns",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-101",
+      "type": "utility",
+      "category": "Grid",
+      "className": "u-grid-cols-12",
+      "meaning": "グリッド 12カラム（SP: 1カラム）",
+      "cssRaw": ".u-grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }\n@media screen and (max-width: 768px) {\n  .u-grid-cols-12 { grid-template-columns: repeat(1, minmax(0, 1fr)); }\n}",
+      "keywords": [
+        "grid",
+        "グリッド",
+        "12カラム",
+        "grid-template-columns",
+        "レスポンシブ"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-102",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-justify-start",
+      "meaning": "横軸: 左揃え",
+      "cssOutput": "justify-content: flex-start;",
+      "mediaQuery": "",
+      "keywords": [
+        "justify-content",
+        "左揃え",
+        "flex-start",
+        "justify"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-103",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-justify-end",
+      "meaning": "横軸: 右揃え",
+      "cssOutput": "justify-content: flex-end;",
+      "mediaQuery": "",
+      "keywords": [
+        "justify-content",
+        "右揃え",
+        "flex-end",
+        "justify"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-105",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-justify-around",
+      "meaning": "横軸: 均等（前後半分）",
+      "cssOutput": "justify-content: space-around;",
+      "mediaQuery": "",
+      "keywords": [
+        "justify-content",
+        "space-around",
+        "均等",
+        "justify"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-106",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-justify-evenly",
+      "meaning": "横軸: 均等（前後等分）",
+      "cssOutput": "justify-content: space-evenly;",
+      "mediaQuery": "",
+      "keywords": [
+        "justify-content",
+        "space-evenly",
+        "均等",
+        "justify"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-107",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-items-stretch",
+      "meaning": "縦軸: 引き延ばし（デフォルト）",
+      "cssOutput": "align-items: stretch;",
+      "mediaQuery": "",
+      "keywords": [
+        "align-items",
+        "stretch",
+        "引き延ばし",
+        "items"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-108",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-items-start",
+      "meaning": "縦軸: 上揃え",
+      "cssOutput": "align-items: flex-start;",
+      "mediaQuery": "",
+      "keywords": [
+        "align-items",
+        "上揃え",
+        "flex-start",
+        "items"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-109",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-items-end",
+      "meaning": "縦軸: 下揃え",
+      "cssOutput": "align-items: flex-end;",
+      "mediaQuery": "",
+      "keywords": [
+        "align-items",
+        "下揃え",
+        "flex-end",
+        "items"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-110",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-items-baseline",
+      "meaning": "縦軸: ベースライン揃え",
+      "cssOutput": "align-items: baseline;",
+      "mediaQuery": "",
+      "keywords": [
+        "align-items",
+        "baseline",
+        "ベースライン",
+        "items"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-111",
+      "type": "utility",
+      "category": "Flexbox",
+      "className": "u-place-items-center",
+      "meaning": "縦横ともに中央揃え（Grid/Flex）",
+      "cssOutput": "place-items: center;",
+      "mediaQuery": "",
+      "keywords": [
+        "place-items",
+        "center",
+        "中央揃え",
+        "縦横"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-112",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-text-transparent",
+      "meaning": "テキスト色: 透明",
+      "cssOutput": "color: transparent;",
+      "mediaQuery": "",
+      "keywords": [
+        "color",
+        "transparent",
+        "透明",
+        "テキスト色"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-113",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-text-current",
+      "meaning": "テキスト色: 継承色（currentColor）",
+      "cssOutput": "color: currentColor;",
+      "mediaQuery": "",
+      "keywords": [
+        "color",
+        "currentColor",
+        "継承",
+        "テキスト色"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-114",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-font-thin",
+      "meaning": "フォントウェイト: 100（極細）",
+      "cssOutput": "font-weight: 100;",
+      "mediaQuery": "",
+      "keywords": [
+        "font-weight",
+        "100",
+        "極細",
+        "thin",
+        "フォント"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-115",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-font-extralight",
+      "meaning": "フォントウェイト: 200（超細）",
+      "cssOutput": "font-weight: 200;",
+      "mediaQuery": "",
+      "keywords": [
+        "font-weight",
+        "200",
+        "超細",
+        "extralight",
+        "フォント"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-116",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-font-light",
+      "meaning": "フォントウェイト: 300（細め）",
+      "cssOutput": "font-weight: 300;",
+      "mediaQuery": "",
+      "keywords": [
+        "font-weight",
+        "300",
+        "細め",
+        "light",
+        "フォント"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-117",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-font-normal",
+      "meaning": "フォントウェイト: 400（標準）",
+      "cssOutput": "font-weight: 400;",
+      "mediaQuery": "",
+      "keywords": [
+        "font-weight",
+        "400",
+        "標準",
+        "normal",
+        "フォント"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-118",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-font-medium",
+      "meaning": "フォントウェイト: 500（中太）",
+      "cssOutput": "font-weight: 500;",
+      "mediaQuery": "",
+      "keywords": [
+        "font-weight",
+        "500",
+        "中太",
+        "medium",
+        "フォント"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-119",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-font-semibold",
+      "meaning": "フォントウェイト: 600（半太）",
+      "cssOutput": "font-weight: 600;",
+      "mediaQuery": "",
+      "keywords": [
+        "font-weight",
+        "600",
+        "半太",
+        "semibold",
+        "フォント"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-120",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-font-extrabold",
+      "meaning": "フォントウェイト: 800（極太）",
+      "cssOutput": "font-weight: 800;",
+      "mediaQuery": "",
+      "keywords": [
+        "font-weight",
+        "800",
+        "極太",
+        "extrabold",
+        "フォント"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-121",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-font-black",
+      "meaning": "フォントウェイト: 900（最太）",
+      "cssOutput": "font-weight: 900;",
+      "mediaQuery": "",
+      "keywords": [
+        "font-weight",
+        "900",
+        "最太",
+        "black",
+        "フォント"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-122",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-italic",
+      "meaning": "イタリック体",
+      "cssOutput": "font-style: italic;",
+      "mediaQuery": "",
+      "keywords": [
+        "font-style",
+        "italic",
+        "イタリック",
+        "斜体"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-123",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-not-italic",
+      "meaning": "イタリック解除",
+      "cssOutput": "font-style: normal;",
+      "mediaQuery": "",
+      "keywords": [
+        "font-style",
+        "normal",
+        "イタリック解除",
+        "通常"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-124",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-tracking-tighter",
+      "meaning": "文字間隔: -0.05em（最密）",
+      "cssOutput": "letter-spacing: -0.05em;",
+      "mediaQuery": "",
+      "keywords": [
+        "letter-spacing",
+        "tracking",
+        "文字間隔",
+        "-0.05em",
+        "密"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-125",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-tracking-tight",
+      "meaning": "文字間隔: -0.025em（密）",
+      "cssOutput": "letter-spacing: -0.025em;",
+      "mediaQuery": "",
+      "keywords": [
+        "letter-spacing",
+        "tracking",
+        "文字間隔",
+        "-0.025em",
+        "密"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-126",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-tracking-normal",
+      "meaning": "文字間隔: 0em（標準）",
+      "cssOutput": "letter-spacing: 0em;",
+      "mediaQuery": "",
+      "keywords": [
+        "letter-spacing",
+        "tracking",
+        "文字間隔",
+        "0em",
+        "標準"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-127",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-tracking-wide",
+      "meaning": "文字間隔: 0.025em（広め）",
+      "cssOutput": "letter-spacing: 0.025em;",
+      "mediaQuery": "",
+      "keywords": [
+        "letter-spacing",
+        "tracking",
+        "文字間隔",
+        "0.025em",
+        "広め"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-128",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-tracking-wider",
+      "meaning": "文字間隔: 0.05em（広い）",
+      "cssOutput": "letter-spacing: 0.05em;",
+      "mediaQuery": "",
+      "keywords": [
+        "letter-spacing",
+        "tracking",
+        "文字間隔",
+        "0.05em",
+        "広い"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-129",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-tracking-widest",
+      "meaning": "文字間隔: 0.1em（最広）",
+      "cssOutput": "letter-spacing: 0.1em;",
+      "mediaQuery": "",
+      "keywords": [
+        "letter-spacing",
+        "tracking",
+        "文字間隔",
+        "0.1em",
+        "最広"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-130",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-none",
+      "meaning": "行間: 1（行間なし）",
+      "cssOutput": "line-height: 1;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "1"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-131",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-tight",
+      "meaning": "行間: 1.25（狭め）",
+      "cssOutput": "line-height: 1.25;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "1.25",
+        "狭め"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-132",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-snug",
+      "meaning": "行間: 1.375（やや狭め）",
+      "cssOutput": "line-height: 1.375;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "1.375"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-133",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-normal",
+      "meaning": "行間: 1.5（標準）",
+      "cssOutput": "line-height: 1.5;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "1.5",
+        "標準"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-134",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-relaxed",
+      "meaning": "行間: 1.625（ゆったり）",
+      "cssOutput": "line-height: 1.625;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "1.625",
+        "ゆったり"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-135",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-loose",
+      "meaning": "行間: 2（広め）",
+      "cssOutput": "line-height: 2;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "2",
+        "広め"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-136",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-3",
+      "meaning": "行間: 0.75rem",
+      "cssOutput": "line-height: 0.75rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "0.75rem"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-137",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-4",
+      "meaning": "行間: 1rem",
+      "cssOutput": "line-height: 1rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "1rem"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-138",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-5",
+      "meaning": "行間: 1.25rem",
+      "cssOutput": "line-height: 1.25rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "1.25rem"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-139",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-6",
+      "meaning": "行間: 1.5rem",
+      "cssOutput": "line-height: 1.5rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "1.5rem"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-140",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-7",
+      "meaning": "行間: 1.75rem",
+      "cssOutput": "line-height: 1.75rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "1.75rem"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-141",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-8",
+      "meaning": "行間: 2rem",
+      "cssOutput": "line-height: 2rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "2rem"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-142",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-9",
+      "meaning": "行間: 2.25rem",
+      "cssOutput": "line-height: 2.25rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "2.25rem"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-143",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-leading-10",
+      "meaning": "行間: 2.5rem",
+      "cssOutput": "line-height: 2.5rem;",
+      "mediaQuery": "",
+      "keywords": [
+        "line-height",
+        "leading",
+        "行間",
+        "2.5rem"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-144",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-whitespace-nowrap",
+      "meaning": "折り返しなし（white-space: nowrap）",
+      "cssOutput": "white-space: nowrap;",
+      "mediaQuery": "",
+      "keywords": [
+        "white-space",
+        "nowrap",
+        "折り返しなし",
+        "改行なし"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-145",
+      "type": "utility",
+      "category": "Border Radius",
+      "className": "u-rounded-none",
+      "meaning": "角丸なし（border-radius: 0）",
+      "cssOutput": "border-radius: 0;",
+      "mediaQuery": "",
+      "keywords": [
+        "border-radius",
+        "角丸",
+        "none",
+        "0",
+        "角なし"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-146",
+      "type": "utility",
+      "category": "Border Radius",
+      "className": "u-rounded-sm",
+      "meaning": "角丸: 2px（小）",
+      "cssOutput": "border-radius: 2px;",
+      "mediaQuery": "",
+      "keywords": [
+        "border-radius",
+        "角丸",
+        "2px",
+        "sm",
+        "小"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-147",
+      "type": "utility",
+      "category": "Border Radius",
+      "className": "u-rounded",
+      "meaning": "角丸: 4px（標準）",
+      "cssOutput": "border-radius: 4px;",
+      "mediaQuery": "",
+      "keywords": [
+        "border-radius",
+        "角丸",
+        "4px",
+        "標準"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-148",
+      "type": "utility",
+      "category": "Border Radius",
+      "className": "u-rounded-md",
+      "meaning": "角丸: 6px（中）",
+      "cssOutput": "border-radius: 6px;",
+      "mediaQuery": "",
+      "keywords": [
+        "border-radius",
+        "角丸",
+        "6px",
+        "md",
+        "中"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-149",
+      "type": "utility",
+      "category": "Border Radius",
+      "className": "u-rounded-lg",
+      "meaning": "角丸: 8px（大）",
+      "cssOutput": "border-radius: 8px;",
+      "mediaQuery": "",
+      "keywords": [
+        "border-radius",
+        "角丸",
+        "8px",
+        "lg",
+        "大"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-150",
+      "type": "utility",
+      "category": "Border Radius",
+      "className": "u-rounded-xl",
+      "meaning": "角丸: 12px（特大）",
+      "cssOutput": "border-radius: 12px;",
+      "mediaQuery": "",
+      "keywords": [
+        "border-radius",
+        "角丸",
+        "12px",
+        "xl"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-151",
+      "type": "utility",
+      "category": "Border Radius",
+      "className": "u-rounded-2xl",
+      "meaning": "角丸: 16px",
+      "cssOutput": "border-radius: 16px;",
+      "mediaQuery": "",
+      "keywords": [
+        "border-radius",
+        "角丸",
+        "16px",
+        "2xl"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-152",
+      "type": "utility",
+      "category": "Border Radius",
+      "className": "u-rounded-3xl",
+      "meaning": "角丸: 24px",
+      "cssOutput": "border-radius: 24px;",
+      "mediaQuery": "",
+      "keywords": [
+        "border-radius",
+        "角丸",
+        "24px",
+        "3xl"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-153",
+      "type": "utility",
+      "category": "Border Radius",
+      "className": "u-rounded-full",
+      "meaning": "完全な丸（border-radius: 9999px）",
+      "cssOutput": "border-radius: 9999px;",
+      "mediaQuery": "",
+      "keywords": [
+        "border-radius",
+        "角丸",
+        "9999px",
+        "丸",
+        "circle",
+        "full"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-164",
+      "type": "utility",
+      "category": "Position",
+      "className": "u-static",
+      "meaning": "配置: static（通常の位置）",
+      "cssOutput": "position: static;",
+      "mediaQuery": "",
+      "keywords": [
+        "position",
+        "static",
+        "配置"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-165",
+      "type": "utility",
+      "category": "Position",
+      "className": "u-fixed",
+      "meaning": "配置: fixed（ビューポート固定）",
+      "cssOutput": "position: fixed;",
+      "mediaQuery": "",
+      "keywords": [
+        "position",
+        "fixed",
+        "配置",
+        "固定",
+        "ビューポート"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-166",
+      "type": "utility",
+      "category": "Position",
+      "className": "u-absolute",
+      "meaning": "配置: absolute（絶対位置）",
+      "cssOutput": "position: absolute;",
+      "mediaQuery": "",
+      "keywords": [
+        "position",
+        "absolute",
+        "配置",
+        "絶対"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-167",
+      "type": "utility",
+      "category": "Position",
+      "className": "u-relative",
+      "meaning": "配置: relative（相対位置）",
+      "cssOutput": "position: relative;",
+      "mediaQuery": "",
+      "keywords": [
+        "position",
+        "relative",
+        "配置",
+        "相対"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-168",
+      "type": "utility",
+      "category": "Position",
+      "className": "u-sticky",
+      "meaning": "配置: sticky（スクロール連動固定）",
+      "cssOutput": "position: sticky;",
+      "mediaQuery": "",
+      "keywords": [
+        "position",
+        "sticky",
+        "配置",
+        "固定",
+        "スクロール"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-169",
+      "type": "utility",
+      "category": "Position",
+      "className": "u-inset-1/2",
+      "meaning": "上下左右を50%に設定",
+      "cssRaw": ".u-inset-1/2 { top: 50%; right: 50%; bottom: 50%; left: 50%; }",
+      "mediaQuery": "",
+      "keywords": [
+        "inset",
+        "top",
+        "right",
+        "bottom",
+        "left",
+        "50%",
+        "中央"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-170",
+      "type": "utility",
+      "category": "Position",
+      "className": "u-inset-x-1/2",
+      "meaning": "左右を50%に設定",
+      "cssRaw": ".u-inset-x-1/2 { left: 50%; right: 50%; }",
+      "mediaQuery": "",
+      "keywords": [
+        "inset",
+        "left",
+        "right",
+        "50%",
+        "横"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-171",
+      "type": "utility",
+      "category": "Position",
+      "className": "u-inset-y-1/2",
+      "meaning": "上下を50%に設定",
+      "cssRaw": ".u-inset-y-1/2 { top: 50%; bottom: 50%; }",
+      "mediaQuery": "",
+      "keywords": [
+        "inset",
+        "top",
+        "bottom",
+        "50%",
+        "縦"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-172",
+      "type": "utility",
+      "category": "Position",
+      "className": "u-top-1/2",
+      "meaning": "上端を50%に設定",
+      "cssRaw": ".u-top-1/2 { top: 50%; }",
+      "mediaQuery": "",
+      "keywords": [
+        "top",
+        "50%",
+        "上"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-173",
+      "type": "utility",
+      "category": "Position",
+      "className": "u-bottom-1/2",
+      "meaning": "下端を50%に設定",
+      "cssRaw": ".u-bottom-1/2 { bottom: 50%; }",
+      "mediaQuery": "",
+      "keywords": [
+        "bottom",
+        "50%",
+        "下"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-174",
+      "type": "utility",
+      "category": "Position",
+      "className": "u-right-1/2",
+      "meaning": "右端を50%に設定",
+      "cssRaw": ".u-right-1/2 { right: 50%; }",
+      "mediaQuery": "",
+      "keywords": [
+        "right",
+        "50%",
+        "右"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-175",
+      "type": "utility",
+      "category": "Position",
+      "className": "u-left-1/2",
+      "meaning": "左端を50%に設定",
+      "cssRaw": ".u-left-1/2 { left: 50%; }",
+      "mediaQuery": "",
+      "keywords": [
+        "left",
+        "50%",
+        "左"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    },
+    {
+      "id": "u-tw-176",
+      "type": "utility",
+      "category": "Typography",
+      "className": "u-tabular-nums",
+      "meaning": "数字を等幅に揃える",
+      "cssOutput": "font-variant-numeric: tabular-nums;",
+      "mediaQuery": "",
+      "keywords": [
+        "font-variant-numeric",
+        "tabular-nums",
+        "等幅",
+        "数字"
+      ],
+      "createdAt": "2026-04-24",
+      "updatedAt": "2026-04-24"
+    }
+  ]
+};

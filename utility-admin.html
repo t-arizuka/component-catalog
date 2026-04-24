@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ユーティリティ管理 — コンポーネントカタログ</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/utility.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       ヘッダー
+       ============================================================ -->
+  <header class="admin-header">
+    <a class="admin-logo" href="index.html">
+      <span class="admin-logo-icon">⚡</span>
+      コンポーネントカタログ
+    </a>
+    <span class="admin-badge">ユーティリティ管理</span>
+    <div class="header-spacer"></div>
+    <a class="header-link" href="utility.html">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M2 4h12M2 8h9M2 12h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      辞書を見る
+    </a>
+    <a class="header-link" href="admin.html">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M4 5h8M4 8h8M4 11h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      コンポーネント管理
+    </a>
+    <a class="header-link" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      カタログへ戻る
+    </a>
+  </header>
+
+  <!-- ============================================================
+       メインレイアウト（左カラム | 右カラム）
+       ============================================================ -->
+  <div class="utility-admin-body">
+
+    <!-- ===== 左カラム：一覧 ===== -->
+    <div class="admin-left-col">
+
+      <div class="section-card">
+
+        <!-- カードヘッダー -->
+        <div class="section-card-header">
+          <h2 class="section-card-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 4h12M2 8h9M2 12h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            ユーティリティクラス一覧
+          </h2>
+        </div>
+
+        <!-- 検索 + 新規追加 -->
+        <div class="section-card-body">
+          <div class="admin-toolbar">
+            <div class="admin-search-wrapper">
+              <span class="admin-search-icon">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <input
+                class="admin-search-input"
+                id="admin-search"
+                type="search"
+                placeholder="/ でフォーカス — クラス名・意味・キーワードで絞り込み"
+                autocomplete="off"
+              >
+            </div>
+            <select class="admin-cat-filter" id="admin-cat-filter" aria-label="カテゴリ絞り込み">
+              <option value="">すべてのカテゴリ</option>
+            </select>
+            <button class="btn-new" id="btn-new">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              新規追加
+            </button>
+          </div>
+
+          <!-- テーブル -->
+          <div class="admin-table-wrapper">
+            <table class="admin-table" aria-label="ユーティリティクラス管理一覧">
+              <thead>
+                <tr>
+                  <th style="width:100px">種類</th>
+                  <th class="col-class">クラス名</th>
+                  <th class="col-meaning">意味</th>
+                  <th style="width:80px; text-align:right">操作</th>
+                </tr>
+              </thead>
+              <tbody id="admin-tbody">
+                <!-- utility-admin.js で動的生成 -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 件数表示 -->
+          <div style="margin-top:0.5rem; font-size:0.75rem; color:var(--color-text-muted)">
+            <span id="admin-result-count"></span>
+          </div>
+        </div>
+
+        <!-- JSON操作バー -->
+        <div class="json-actions-bar">
+          <button class="btn-json" id="btn-open-file">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M2 3h5l2 2h5v9H2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            JSONファイルを開く
+          </button>
+          <button class="btn-json btn-json-export" id="btn-export">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M8 1v10M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            JSONをエクスポート
+          </button>
+          <span class="file-status" id="file-status">未接続</span>
+        </div>
+
+        <!-- 保存モード表示 -->
+        <div class="save-mode-bar" id="save-mode-bar" hidden>
+          <span class="save-mode-status" id="save-mode-status">公開保存モード（GitHub を更新）</span>
+          <div class="remote-save-fields" id="remote-save-fields">
+            <input
+              class="form-input"
+              type="password"
+              id="remote-admin-password"
+              placeholder="管理用パスワード（保存時に GitHub へ自動反映）"
+              autocomplete="current-password"
+            >
+          </div>
+          <p class="save-mode-hint" id="save-mode-hint"></p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ===== 右カラム：登録・編集フォーム ===== -->
+    <div class="admin-right-col">
+
+      <div class="section-card">
+        <div class="section-card-header">
+          <h2 class="section-card-title" id="form-panel-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            新規追加
+          </h2>
+        </div>
+
+        <div class="section-card-body">
+          <div class="form-panel" id="form-panel">
+
+            <!-- 種類 -->
+            <div class="form-group">
+              <label class="form-label" for="f-type">
+                種類<span class="required-mark">*</span>
+              </label>
+              <select class="form-select" id="f-type">
+                <option value="utility">utility</option>
+                <option value="designcode">designcode</option>
+              </select>
+            </div>
+
+            <!-- カテゴリ -->
+            <div class="form-group">
+              <label class="form-label" for="f-category">
+                カテゴリ<span class="required-mark">*</span>
+              </label>
+              <input
+                class="form-input"
+                type="text"
+                id="f-category"
+                list="category-datalist"
+                placeholder="例: レイアウト、余白、テキスト"
+                autocomplete="off"
+              >
+              <datalist id="category-datalist">
+                <option value="レイアウト">
+                <option value="余白">
+                <option value="テキスト">
+                <option value="レスポンシブ">
+              </datalist>
+            </div>
+
+            <!-- クラス名 -->
+            <div class="form-group">
+              <label class="form-label" for="f-class-name">
+                クラス名<span class="required-mark">*</span>
+              </label>
+              <input
+                class="form-input mono"
+                type="text"
+                id="f-class-name"
+                placeholder="例: u-mt-4、u-flex"
+                autocomplete="off"
+                spellcheck="false"
+              >
+              <p class="form-hint">ユーティリティクラスには必ず <code style="font-family:monospace">u-</code> をつけてください</p>
+            </div>
+
+            <!-- 意味 -->
+            <div class="form-group">
+              <label class="form-label" for="f-meaning">
+                意味<span class="required-mark">*</span>
+              </label>
+              <input
+                class="form-input"
+                type="text"
+                id="f-meaning"
+                placeholder="例: 上余白 16px"
+                autocomplete="off"
+              >
+            </div>
+
+            <!-- CSS -->
+            <div class="form-group">
+              <label class="form-label" for="f-css-raw">
+                CSS<span class="required-mark">*</span>
+              </label>
+              <textarea
+                class="form-textarea mono"
+                id="f-css-raw"
+                placeholder="例（通常クラス）:
+.u-mt-4 { margin-top: 1.6rem; }
+
+例（レスポンシブクラス）:
+@media (max-width: 768px) {
+  .max-md\:u-flex-col { flex-direction: column; }
+}
+
+例（複合クラス）:
+.spbr { display: none; }
+@media (max-width: 768px) {
+  .spbr { display: block; }
+}"
+                rows="10"
+                spellcheck="false"
+              ></textarea>
+              <p class="form-hint">セレクタから完全な CSS を記述してください。@media ブロックも記述できます。<code style="font-family:monospace">/</code> や <code style="font-family:monospace">:</code> を含むクラス名は手動でエスケープ（<code style="font-family:monospace">\/</code>、<code style="font-family:monospace">\:</code>）してください。</p>
+            </div>
+
+            <!-- 検索キーワード -->
+            <div class="form-group">
+              <label class="form-label" for="f-keywords">
+                検索キーワード
+              </label>
+              <input
+                class="form-input"
+                type="text"
+                id="f-keywords"
+                placeholder="例: 余白, margin, 16px"
+                autocomplete="off"
+              >
+              <p class="form-hint">カンマ区切りで複数入力できます（検索時のヒットに使用）</p>
+            </div>
+
+            <!-- フォームアクション -->
+            <div class="form-actions">
+              <button class="btn-submit" id="btn-submit" type="button">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                保存
+              </button>
+              <button class="btn-cancel" id="btn-cancel" type="button">
+                キャンセル
+              </button>
+              <button class="btn-delete-form" id="btn-delete-form" type="button" hidden>
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 4h10M5 4V2h6v2M6 7v5M10 7v5M4 4l1 9h6l1-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                削除
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       削除確認ダイアログ
+       ============================================================ -->
+  <div class="dialog-overlay" id="delete-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+    <div class="dialog">
+      <p class="dialog-title" id="dialog-title">クラスを削除しますか？</p>
+      <p class="dialog-message" id="dialog-message"></p>
+      <div class="dialog-actions">
+        <button class="btn-dialog-cancel" id="dialog-cancel">キャンセル</button>
+        <button class="btn-dialog-confirm" id="dialog-confirm">削除する</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- トースト通知コンテナ -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- JavaScript -->
+  <script src="data/utilities-data.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/utility-admin.js"></script>
+</body>
+</html>

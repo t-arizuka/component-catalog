@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ユーティリティクラス辞書 — コンポーネントカタログ</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/utility.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       ヘッダー
+       ============================================================ -->
+  <header class="site-header">
+    <a class="site-logo" href="index.html">
+      <span class="site-logo-icon">⚡</span>
+      コンポーネントカタログ
+    </a>
+
+    <div class="header-spacer"></div>
+
+    <div class="header-actions">
+      <a class="header-btn active" href="utility.html">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M2 4h12M2 8h9M2 12h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        クラス辞書
+      </a>
+      <a class="header-btn" href="utility-admin.html">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        辞書管理
+      </a>
+      <a class="header-btn" href="index.html">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        カタログへ
+      </a>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       ページ本体
+       ============================================================ -->
+  <div class="utility-page">
+
+    <h1 class="page-title">
+      <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
+        <path d="M2 4h12M2 8h9M2 12h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      ユーティリティクラス辞書
+    </h1>
+
+    <!-- ---- ツールバー（タブ + 検索 + 件数） ---- -->
+    <div class="utility-toolbar">
+      <div class="utility-tabs" role="tablist">
+        <button class="tab-btn active" data-tab="all" role="tab" aria-selected="true">すべて表示</button>
+        <button class="tab-btn" data-tab="utility" role="tab" aria-selected="false">utility</button>
+        <button class="tab-btn" data-tab="designcode" role="tab" aria-selected="false">designcode</button>
+      </div>
+
+      <div class="cat-toggle-btns">
+        <button class="btn-cat-toggle" id="btn-expand-all" title="全カテゴリを展開">
+          <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
+            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          全展開
+        </button>
+        <button class="btn-cat-toggle" id="btn-collapse-all" title="全カテゴリを折りたたむ">
+          <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
+            <path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          全閉じる
+        </button>
+      </div>
+
+      <div class="search-wrapper">
+        <span class="search-icon">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <input
+          class="search-input"
+          id="search-input"
+          type="search"
+          placeholder="クラス名・意味・キーワード（例: 余白, 16px）で検索..."
+          autocomplete="off"
+        >
+        <button class="search-clear-btn" id="search-clear-btn" aria-label="クリア" title="クリア" hidden>
+          <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
+            <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="css-view-group" id="css-view-group">
+        <button class="btn-css-view btn-css-view-main" id="btn-css-view" title="全クラスのCSSを確認・ダウンロード">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+            <rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M5 6l-2 2 2 2M11 6l2 2-2 2M8.5 5l-1 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          CSSを見る
+        </button>
+        <button class="btn-css-view-caret" id="btn-css-view-caret" aria-label="CSS出力の種別を選択" aria-haspopup="true" aria-expanded="false">
+          <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
+            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="css-view-dropdown" id="css-view-dropdown" hidden role="menu">
+          <button class="css-view-dropdown-item" data-css-type="all" role="menuitem">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+              <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            すべて
+          </button>
+          <button class="css-view-dropdown-item" data-css-type="utility" role="menuitem">
+            <span class="badge badge-utility">utility</span>
+            utility のみ
+          </button>
+          <button class="css-view-dropdown-item" data-css-type="designcode" role="menuitem">
+            <span class="badge badge-designcode">designcode</span>
+            designcode のみ
+          </button>
+        </div>
+      </div>
+
+      <span class="result-count" id="result-count"></span>
+    </div>
+
+    <!-- ---- カテゴリナビ ---- -->
+    <div class="cat-nav-wrapper" id="cat-nav-wrapper"></div>
+
+    <!-- ---- 一覧 ---- -->
+    <div class="utility-list-wrapper" id="utility-list-wrapper" aria-label="ユーティリティクラス一覧">
+      <!-- utility.js で動的生成 -->
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       CSSプレビューモーダル
+       ============================================================ -->
+  <div class="css-modal-overlay" id="css-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="css-modal-title">
+    <div class="css-modal">
+
+      <div class="css-modal-header">
+        <div>
+          <h2 class="css-modal-title" id="css-modal-title">生成CSS</h2>
+          <p class="css-modal-subtitle" id="css-modal-subtitle"></p>
+        </div>
+        <div class="css-modal-actions">
+          <button class="btn-css-copy" id="btn-css-copy">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+              <rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M11 5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            コピー
+          </button>
+          <button class="btn-css-download" id="btn-css-download">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+              <path d="M8 2v8M5 7l3 3 3-3M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            ダウンロード
+          </button>
+          <button class="css-modal-close" id="css-modal-close" aria-label="閉じる">✕</button>
+        </div>
+      </div>
+
+      <div class="css-modal-body">
+        <pre class="css-preview-pre"><code id="css-preview-code"></code></pre>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       行CSS プレビューモーダル
+       ============================================================ -->
+  <div class="css-row-modal-overlay" id="css-row-modal-overlay" role="dialog" aria-modal="true">
+    <div class="css-row-modal">
+
+      <div class="css-row-modal-header">
+        <div>
+          <p class="css-row-modal-eyebrow">CSS プレビュー</p>
+          <h3 class="css-row-modal-classname" id="css-row-modal-classname"></h3>
+        </div>
+        <button class="css-modal-close" id="css-row-modal-close" aria-label="閉じる">✕</button>
+      </div>
+
+      <div class="css-row-modal-body">
+        <pre class="css-preview-pre"><code id="css-row-preview-code"></code></pre>
+      </div>
+
+      <div class="css-row-modal-footer">
+        <button class="btn-css-copy" id="btn-row-css-copy">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+            <rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M11 5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          コピー
+        </button>
+        <button class="btn-css-download" id="btn-row-css-download">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+            <path d="M8 2v8M5 7l3 3 3-3M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          ダウンロード
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- トースト通知コンテナ -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- JavaScript -->
+  <script src="data/utilities-data.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/utility.js"></script>
+</body>
+</html>
