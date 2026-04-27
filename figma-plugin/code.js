@@ -131,6 +131,12 @@ function createRectangleNode(data) {
   rect.name = data.name || data.tagName || 'rectangle';
   rect.resize(safeSize(data.width), safeSize(data.height));
   applyShapeStyles(rect, data.styles);
+  // CSS transform の回転をFigmaノードに適用する
+  // CSS rotate(Xdeg) は時計回り正、Figma の rotation は反時計回り正なので符号を反転する
+  const rotation = data.styles && data.styles.cssTransformRotation;
+  if (rotation) {
+    rect.rotation = -rotation;
+  }
   return rect;
 }
 
@@ -189,7 +195,11 @@ async function createImageNode(data) {
 }
 
 function applyShapeStyles(node, styles = {}, options = {}) {
-  node.fills = buildSolidPaints(styles.backgroundColor, false, options.fallbackBackgroundColor);
+  // fallback優先順位: isRoot指定色 > background-imageから抽出したグラデーション先頭色
+  const fallback = options.fallbackBackgroundColor != null
+    ? options.fallbackBackgroundColor
+    : (styles.backgroundImageColor != null ? styles.backgroundImageColor : null);
+  node.fills = buildSolidPaints(styles.backgroundColor, false, fallback);
 
   const borderWeights = getVisibleBorderWeights(styles.borderWidths, styles.borderStyles, styles.borderColors);
   const strokeWeight = getStrokeWeight(borderWeights);
@@ -212,6 +222,44 @@ function applyShapeStyles(node, styles = {}, options = {}) {
   if ('opacity' in node && typeof styles.opacity === 'number') {
     node.opacity = clamp(styles.opacity, 0, 1);
   }
+
+  const effects = buildDropShadowEffects(styles.boxShadows);
+  if (effects.length > 0 && 'effects' in node) {
+    node.effects = effects;
+  }
+}
+
+// box-shadow の配列を Figma の effects 配列に変換する
+function buildDropShadowEffects(boxShadows) {
+  if (!Array.isArray(boxShadows) || boxShadows.length === 0) return [];
+  return boxShadows.map((s) => {
+    if (!s) return null;
+    const color = { r: s.color.r, g: s.color.g, b: s.color.b, a: s.color.a };
+    const offset = { x: s.offsetX, y: s.offsetY };
+    const radius = Math.max(0, s.blur);
+    const spread = s.spread || 0;
+    if (s.isInset) {
+      return {
+        type: 'INNER_SHADOW',
+        color: color,
+        offset: offset,
+        radius: radius,
+        spread: spread,
+        visible: true,
+        blendMode: 'NORMAL',
+      };
+    }
+    return {
+      type: 'DROP_SHADOW',
+      color: color,
+      offset: offset,
+      radius: radius,
+      spread: spread,
+      visible: true,
+      blendMode: 'NORMAL',
+      showShadowBehindNode: false,
+    };
+  }).filter(Boolean);
 }
 
 function applyAutoLayoutToFrame(frame, layout, width, height) {

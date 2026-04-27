@@ -366,6 +366,131 @@ function downloadJson(data, filename = 'components.json') {
 }
 
 /* ============================================================
+   Figma プラグイン ZIP ダウンロード
+   ============================================================ */
+
+/**
+ * Figma プラグインの 3 ファイルを ZIP にまとめてダウンロードする
+ */
+async function downloadPluginZip() {
+  const files = [
+    'figma-plugin/manifest.json',
+    'figma-plugin/code.js',
+    'figma-plugin/ui.html',
+  ];
+  try {
+    const entries = await Promise.all(files.map(async (path) => {
+      const res = await fetch(path);
+      if (!res.ok) throw new Error(path + ' の取得に失敗しました');
+      const text = await res.text();
+      return { name: path.split('/').pop(), data: new TextEncoder().encode(text) };
+    }));
+    const blob = buildZipBlob(entries);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'component-catalog-figma-plugin.zip';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('プラグインファイルをダウンロードしました', 'success');
+  } catch (e) {
+    showToast('ダウンロードに失敗しました: ' + e.message, 'error');
+  }
+}
+
+/**
+ * ファイルエントリ配列から ZIP の Blob を生成する（STORE・無圧縮）
+ * @param {{ name: string, data: Uint8Array }[]} entries
+ * @returns {Blob}
+ */
+function buildZipBlob(entries) {
+  const localParts = [];
+  const cdParts = [];
+  let offset = 0;
+
+  for (const entry of entries) {
+    const name = new TextEncoder().encode(entry.name);
+    const data = entry.data;
+    const crc = zipCrc32(data);
+    const size = data.length;
+
+    // ローカルファイルヘッダー
+    const lh = new Uint8Array(30 + name.length);
+    const lv = new DataView(lh.buffer);
+    lv.setUint32(0, 0x04034b50, true);
+    lv.setUint16(4, 20, true);
+    lv.setUint16(6, 0, true);
+    lv.setUint16(8, 0, true);   // STORE（無圧縮）
+    lv.setUint16(10, 0, true);
+    lv.setUint16(12, 0, true);
+    lv.setUint32(14, crc, true);
+    lv.setUint32(18, size, true);
+    lv.setUint32(22, size, true);
+    lv.setUint16(26, name.length, true);
+    lv.setUint16(28, 0, true);
+    lh.set(name, 30);
+
+    // セントラルディレクトリエントリ
+    const cd = new Uint8Array(46 + name.length);
+    const cv = new DataView(cd.buffer);
+    cv.setUint32(0, 0x02014b50, true);
+    cv.setUint16(4, 20, true);
+    cv.setUint16(6, 20, true);
+    cv.setUint16(8, 0, true);
+    cv.setUint16(10, 0, true);
+    cv.setUint16(12, 0, true);
+    cv.setUint16(14, 0, true);
+    cv.setUint32(16, crc, true);
+    cv.setUint32(20, size, true);
+    cv.setUint32(24, size, true);
+    cv.setUint16(28, name.length, true);
+    cv.setUint16(30, 0, true);
+    cv.setUint16(32, 0, true);
+    cv.setUint16(34, 0, true);
+    cv.setUint16(36, 0, true);
+    cv.setUint32(38, 0, true);
+    cv.setUint32(42, offset, true);   // ローカルヘッダーのオフセット
+    cd.set(name, 46);
+
+    localParts.push(lh, data);
+    cdParts.push(cd);
+    offset += lh.length + data.length;
+  }
+
+  const cdSize = cdParts.reduce(function(s, p) { return s + p.length; }, 0);
+
+  // End of Central Directory
+  const eocd = new Uint8Array(22);
+  const ev = new DataView(eocd.buffer);
+  ev.setUint32(0, 0x06054b50, true);
+  ev.setUint16(4, 0, true);
+  ev.setUint16(6, 0, true);
+  ev.setUint16(8, entries.length, true);
+  ev.setUint16(10, entries.length, true);
+  ev.setUint32(12, cdSize, true);
+  ev.setUint32(16, offset, true);
+  ev.setUint16(20, 0, true);
+
+  return new Blob(localParts.concat(cdParts).concat([eocd]), { type: 'application/zip' });
+}
+
+/**
+ * ZIP 用 CRC-32 を計算する
+ * @param {Uint8Array} data
+ * @returns {number}
+ */
+function zipCrc32(data) {
+  var crc = 0xFFFFFFFF;
+  for (var i = 0; i < data.length; i++) {
+    crc ^= data[i];
+    for (var j = 0; j < 8; j++) {
+      crc = (crc >>> 1) ^ ((crc & 1) ? 0xEDB88320 : 0);
+    }
+  }
+  return (crc ^ 0xFFFFFFFF) >>> 0;
+}
+
+/* ============================================================
    iframe srcdoc 生成
    ============================================================ */
 

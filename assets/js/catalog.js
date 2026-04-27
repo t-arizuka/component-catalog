@@ -418,7 +418,7 @@ function createCard(comp) {
     const btn = e.currentTarget;
     btn.disabled = true;
     btn.style.opacity = '0.5';
-    const ok = await copyComponentForFigma(comp);
+    const ok = await copyComponentForFigma(comp, activeVariantHtml);
     btn.disabled = false;
     btn.style.opacity = '';
     showToast(
@@ -827,12 +827,14 @@ function switchTab(tab) {
 /**
  * Figmaプラグインに渡すコンポーネントJSONを生成する
  * @param {object} comp
+ * @param {string|null} variantHtml - 選択中のバリアントHTML（null = デフォルト）
  * @returns {string}
  */
-function buildFigmaPayload(comp) {
+function buildFigmaPayload(comp, variantHtml = null) {
+  const html = variantHtml !== null ? variantHtml : (typeof comp?.html === 'string' ? comp.html : '');
   return JSON.stringify({
     name: typeof comp?.name === 'string' ? comp.name : '',
-    html: typeof comp?.html === 'string' ? comp.html : '',
+    html,
     css: typeof comp?.css === 'string' ? comp.css : '',
   }, null, 2);
 }
@@ -840,10 +842,11 @@ function buildFigmaPayload(comp) {
 /**
  * コンポーネントJSONをクリップボードにコピーする
  * @param {object} comp
+ * @param {string|null} variantHtml - 選択中のバリアントHTML（null = デフォルト）
  * @returns {Promise<boolean>} コピー成功なら true
  */
-async function copyComponentForFigma(comp) {
-  return copyToClipboard(buildFigmaPayload(comp));
+async function copyComponentForFigma(comp, variantHtml = null) {
+  return copyToClipboard(buildFigmaPayload(comp, variantHtml));
 }
 
 /* ============================================================
@@ -873,6 +876,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       updateResultHeader();
     });
   }
+
+  // Figma プラグイン ZIP ダウンロード
+  document.getElementById('btn-download-plugin')?.addEventListener('click', () => {
+    downloadPluginZip();
+  });
 
   // リセットボタン
   document.getElementById('reset-btn')?.addEventListener('click', () => {
@@ -939,7 +947,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const btn = e.currentTarget;
     btn.disabled = true;
     btn.style.opacity = '0.5';
-    const ok = await copyComponentForFigma(state.modalComponent ?? {});
+    const ok = await copyComponentForFigma(state.modalComponent ?? {}, state.modalVariantHtml);
     btn.disabled = false;
     btn.style.opacity = '';
     showToast(

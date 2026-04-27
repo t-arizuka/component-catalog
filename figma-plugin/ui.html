@@ -335,7 +335,10 @@
     }
 
     function buildSrcdoc(component) {
-      const isLayoutTag = /^<(section|header|main|footer|nav)[\s>]/i.test(component.html.trimStart());
+      const trimmed = component.html.trimStart();
+      // section/main 等のレイアウト系タグ、または <div class="post"> + package_parts ラッパー形式を全幅レイアウトとして扱う
+      const isLayoutTag = /^<(section|header|main|footer|nav|article)[\s>]/i.test(trimmed)
+        || (/^<div\b[^>]*\bclass="[^"]*\bpost\b/.test(trimmed) && /class="[^"]*\bpackage_parts\b/.test(trimmed));
       const rootStyle = isLayoutTag
         ? `position:relative;display:block;width:${VIEWPORT_WIDTH}px;min-width:${VIEWPORT_WIDTH}px;`
         : 'position:relative;display:inline-block;';
@@ -347,6 +350,9 @@
         '*,*::before,*::after{box-sizing:border-box;}',
         'html,body{margin:0;padding:0;background:#fff;}',
         'body{font-family:var(--body-font-family,"Noto Sans JP",sans-serif);font-size:var(--body-font-size,14px);color:var(--color-font,#111);}',
+        // UA スタイルシートの差異により Figma の Chromium が details の非表示を適用しない場合があるため明示的に強制する
+        'details:not([open])>*:not(summary){display:none!important;}',
+        'summary{list-style:none;}summary::-webkit-details-marker{display:none;}',
         '#figma-component-root{', rootStyle, '}',
         component.css,
         '</style></head><body><div id="figma-component-root">',
@@ -508,6 +514,7 @@
       const border = extractBorderSnapshot(style);
       return {
         backgroundColor: style.backgroundColor,
+        backgroundImageColor: extractGradientFirstColor(style.backgroundImage),
         borderColor: border.color,
         borderColors: border.colors,
         borderStyles: border.styles,
@@ -527,7 +534,103 @@
         opacity: parseFloat(style.opacity) || 1,
         overflowHidden: ['hidden', 'clip'].includes(style.overflow) || ['hidden', 'clip'].includes(style.overflowX) || ['hidden', 'clip'].includes(style.overflowY),
         textAlign: style.textAlign,
+        cssTransformRotation: extractRotationDegFromTransform(style.transform),
+        boxShadows: parseBoxShadow(style.boxShadow),
       };
+    }
+
+    // linear-gradient(...) から最初の rgba/rgb 色値を抽出する
+    function extractGradientFirstColor(backgroundImage) {
+      if (typeof backgroundImage !== 'string' || backgroundImage === 'none') return null;
+      const match = backgroundImage.match(/rgba?\(\s*[\d.]+\s*,\s*[\d.]+\s*,\s*[\d.]+\s*(?:,\s*[\d.]+\s*)?\)/i);
+      return match ? match[0] : null;
+    }
+
+    // CSS transform から回転角度（度数）を抽出する
+    // ブラウザはcomputed styleをmatrix()形式で返すため、matrix成分から角度を計算する
+    function extractRotationDegFromTransform(transform) {
+      if (typeof transform !== 'string' || !transform || transform === 'none') return 0;
+      const m = transform.match(/^matrix\(\s*([-\d.e]+)\s*,\s*([-\d.e]+)/i);
+      if (m) {
+        const a = parseFloat(m[1]);
+        const b = parseFloat(m[2]);
+        const deg = Math.atan2(b, a) * (180 / Math.PI);
+        return Math.round(deg * 100) / 100;
+      }
+      const direct = transform.match(/rotate\(\s*([-\d.]+)deg\s*\)/i);
+      if (direct) return parseFloat(direct[1]);
+      return 0;
+    }
+
+    // CSS transform から Y 方向の平行移動量（px）を抽出する
+    // translateY(-70%) rotate(45deg) → matrix(..., 0, ty) の ty を返す
+    function extractTranslateYPxFromTransform(transform) {
+      if (typeof transform !== 'string' || !transform || transform === 'none') return 0;
+      const m = transform.match(/^matrix\(\s*[-\d.e]+\s*,\s*[-\d.e]+\s*,\s*[-\d.e]+\s*,\s*[-\d.e]+\s*,\s*([-\d.e]+)\s*,\s*([-\d.e]+)/i);
+      if (m) return parseFloat(m[2]);
+      const direct = transform.match(/translateY\(\s*([-\d.]+)px\s*\)/i);
+      if (direct) return parseFloat(direct[1]);
+      return 0;
+    }
+
+    // box-shadow を構造化データの配列にパースする
+    function parseBoxShadow(boxShadow) {
+      if (typeof boxShadow !== 'string' || !boxShadow || boxShadow === 'none') return [];
+      const parts = splitBoxShadows(boxShadow);
+      return parts.map(parseSingleBoxShadow).filter(Boolean);
+    }
+
+    // box-shadow 値をカンマ分割する（rgba() 内のカンマは無視）
+    function splitBoxShadows(value) {
+      const parts = [];
+      let depth = 0;
+      let current = '';
+      for (let i = 0; i < value.length; i++) {
+        const ch = value[i];
+        if (ch === '(') depth++;
+        else if (ch === ')') depth--;
+        else if (ch === ',' && depth === 0) {
+          parts.push(current.trim());
+          current = '';
+          continue;
+        }
+        current += ch;
+      }
+      if (current.trim()) parts.push(current.trim());
+      return parts;
+    }
+
+    // シャドウ1件をパースして { offsetX, offsetY, blur, spread, color, isInset } を返す
+    function parseSingleBoxShadow(shadow) {
+      const isInset = /\binset\b/i.test(shadow);
+      let str = shadow.replace(/\binset\b/gi, '').trim();
+
+      // 色を抽出（rgba/rgb）
+      const colorMatch = str.match(/rgba?\([^)]+\)/i);
+      const colorStr = colorMatch ? colorMatch[0] : null;
+      if (colorStr) str = str.replace(colorStr, '').trim();
+
+      // 残りの px 値（offsetX offsetY blur spread）をパース
+      const values = str.split(/\s+/).filter(Boolean).map(t => parsePx(t)).filter(v => v !== null);
+      if (values.length < 2) return null;
+
+      const [offsetX = 0, offsetY = 0, blur = 0, spread = 0] = values;
+
+      // 色を {r,g,b,a} (0–1) に変換
+      let color = { r: 0, g: 0, b: 0, a: 0.25 };
+      if (colorStr) {
+        const m = colorStr.match(/rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)(?:\s*,\s*([\d.]+))?\s*\)/i);
+        if (m) {
+          color = {
+            r: parseFloat(m[1]) / 255,
+            g: parseFloat(m[2]) / 255,
+            b: parseFloat(m[3]) / 255,
+            a: m[4] !== undefined ? parseFloat(m[4]) : 1,
+          };
+        }
+      }
+
+      return { offsetX, offsetY, blur, spread, color, isInset };
     }
 
     function extractTextStyles(style) {
@@ -638,6 +741,11 @@
       const rect = getPseudoRect(element, pseudoType, pseudoStyle);
       if (!rect) return null;
 
+      // CSS transform の translateY 分だけ Y 座標を補正する
+      // getPseudoRect は CSS position (top/right 等) のみで座標を計算するため、
+      // transform による視覚的な移動量（matrix の ty 成分）を手動で加算する
+      const transformY = extractTranslateYPxFromTransform(pseudoStyle.transform);
+
       const content = normalizePseudoContent(pseudoStyle.content);
       const name = `${buildElementName(element)}::${pseudoType}`;
 
@@ -647,7 +755,7 @@
           name,
           tagName: `::${pseudoType}`,
           x: round(rect.left - origin.left),
-          y: round(rect.top - origin.top),
+          y: round(rect.top - origin.top + transformY),
           width: round(rect.width),
           height: round(rect.height),
           src: '',
@@ -663,7 +771,7 @@
         name,
         tagName: `::${pseudoType}`,
         x: round(rect.left - origin.left),
-        y: round(rect.top - origin.top),
+        y: round(rect.top - origin.top + transformY),
         width: round(rect.width),
         height: round(rect.height),
         src: '',
@@ -722,12 +830,12 @@
       if (style.position === 'absolute' || style.position === 'fixed') return false;
       if (style.transform && style.transform !== 'none') return false;
       if (style.justifyContent === 'space-around' || style.justifyContent === 'space-evenly') return false;
-      if (children.length < 2 && modeHint !== 'force') return false;
+      if (children.length < 1 && modeHint !== 'force') return false;
 
       const direction = style.flexDirection || 'row';
       const isHorizontal = direction.indexOf('row') === 0;
       const flowChildren = children.filter((child) => !child.layoutItem || child.layoutItem.positioning !== 'ABSOLUTE');
-      if (flowChildren.length < 2 && modeHint !== 'force') return false;
+      if (flowChildren.length < 1 && modeHint !== 'force') return false;
       if (!isOrderedFlow(flowChildren, isHorizontal) && modeHint !== 'force') return false;
       if (hasOverlappingFlow(flowChildren, isHorizontal) && modeHint !== 'force') return false;
 
@@ -913,11 +1021,24 @@
       if (style.display === 'none' || style.visibility === 'hidden') return false;
 
       const content = normalizePseudoContent(style.content);
-      const hasBox = hasVisibleBackground(style.backgroundColor) || hasVisibleBorderSnapshot(extractBorderSnapshot(style));
+      const hasBgColor = hasVisibleBackground(style.backgroundColor);
+      const hasBgImage = hasVisibleBackgroundImage(style.backgroundImage);
+      const hasBox = hasBgColor || hasBgImage || hasVisibleBorderSnapshot(extractBorderSnapshot(style));
+
+      if (!content && !hasBox) return false;
+
+      // background-image を持つ絶対配置要素はブラウザのレイアウト計算を信頼してサイズチェックを省略
+      if (hasBgImage && (style.position === 'absolute' || style.position === 'fixed')) {
+        return true;
+      }
+
       const width = resolvePseudoSize(style.width, 0, style, true);
       const height = resolvePseudoSize(style.height, 0, style, false);
+      return width > 0 && height > 0;
+    }
 
-      return Boolean(content || hasBox) && width > 0 && height > 0;
+    function hasVisibleBackgroundImage(value) {
+      return typeof value === 'string' && value !== 'none' && value.trim() !== '';
     }
 
     function hasVisiblePseudoElement(element) {
