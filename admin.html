@@ -130,11 +130,18 @@
               <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
               <path d="M10 10l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <input class="form-input" type="search" id="list-search" placeholder="名前・タグで絞り込み" autocomplete="off">
+            <input class="form-input" type="search" id="list-search" placeholder="名前・タグで絞り込み（/ キーでフォーカス）" autocomplete="off">
+            <button class="btn-search-clear" type="button" id="btn-search-clear" hidden aria-label="検索をクリア">
+              <svg width="10" height="10" viewBox="0 0 16 16" fill="none">
+                <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </button>
           </div>
           <button class="btn-list-search" type="button" id="btn-list-search">検索</button>
         </div>
       </div>
+
+      <div class="list-count" id="list-count"></div>
 
       <div class="table-wrapper">
         <table class="component-table">

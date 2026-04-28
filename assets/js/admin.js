@@ -259,6 +259,24 @@ function renderListTabs() {
    一覧テーブル描画
    ============================================================ */
 
+/** 件数表示を更新する（tabTotal: タブ絞り込み後の件数、shown: テキスト検索後の件数） */
+function updateListCount(tabTotal, shown) {
+  const el = document.getElementById('list-count');
+  if (!el) return;
+  if (tabTotal === 0) {
+    el.textContent = '';
+    return;
+  }
+  el.textContent = tabTotal === shown ? `${shown}件` : `${tabTotal}件中 ${shown}件を表示`;
+}
+
+/** 検索クリアボタンの表示/非表示を切り替える */
+function updateSearchClearBtn() {
+  const btn = document.getElementById('btn-search-clear');
+  if (!btn) return;
+  btn.hidden = !adminState.searchQuery;
+}
+
 function renderTable() {
   const tbody = document.getElementById('component-tbody');
   if (!tbody) return;
@@ -266,25 +284,29 @@ function renderTable() {
   // タブを最新状態に更新
   renderListTabs();
 
-  let components = [...(adminState.data.components ?? [])].sort((a, b) => {
+  const allSorted = [...(adminState.data.components ?? [])].sort((a, b) => {
     const cat = (a.category ?? '').localeCompare(b.category ?? '', 'ja');
     if (cat !== 0) return cat;
     return (a.name ?? '').localeCompare(b.name ?? '', 'ja');
   });
 
   // カテゴリタブでフィルタ
-  if (adminState.activeTab !== '__all__') {
-    components = components.filter(c => c.category === adminState.activeTab);
-  }
+  const tabFiltered = adminState.activeTab === '__all__'
+    ? allSorted
+    : allSorted.filter(c => c.category === adminState.activeTab);
 
   // テキスト検索でフィルタ（名前・タグ）
   const q = adminState.searchQuery.trim().toLowerCase();
-  if (q) {
-    components = components.filter(c =>
-      (c.name ?? '').toLowerCase().includes(q) ||
-      (c.tags ?? []).some(t => t.toLowerCase().includes(q))
-    );
-  }
+  const components = q
+    ? tabFiltered.filter(c =>
+        (c.name ?? '').toLowerCase().includes(q) ||
+        (c.tags ?? []).some(t => t.toLowerCase().includes(q))
+      )
+    : tabFiltered;
+
+  // 件数・クリアボタンを更新
+  updateListCount(tabFiltered.length, components.length);
+  updateSearchClearBtn();
 
   if (components.length === 0) {
     const hasAny = (adminState.data.components ?? []).length > 0;
@@ -1345,6 +1367,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       adminState.searchQuery = listSearchEl.value;
       renderTable();
     }
+  });
+
+  // 検索クリアボタン
+  document.getElementById('btn-search-clear')?.addEventListener('click', () => {
+    if (listSearchEl) listSearchEl.value = '';
+    adminState.searchQuery = '';
+    renderTable();
+    listSearchEl?.focus();
+  });
+
+  // / キーで検索フォーカス（入力中は無効）
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== '/') return;
+    const tag = document.activeElement?.tagName;
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag) || document.activeElement?.isContentEditable) return;
+    e.preventDefault();
+    listSearchEl?.focus();
   });
 
   // 保存ボタン
