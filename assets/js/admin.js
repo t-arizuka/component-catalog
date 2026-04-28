@@ -31,6 +31,10 @@ const adminState = {
   variantData: [],
   /** 修飾クラス一覧 { class: string, description: string }[] */
   modifierData: [],
+  /** 一覧タブの選択中カテゴリ（'__all__' = すべて） */
+  activeTab: '__all__',
+  /** 一覧テキスト検索クエリ */
+  searchQuery: '',
 };
 
 /* ============================================================
@@ -205,6 +209,53 @@ async function saveToRemote() {
 }
 
 /* ============================================================
+   一覧タブ描画
+   ============================================================ */
+
+function renderListTabs() {
+  const container = document.getElementById('list-tabs');
+  if (!container) return;
+
+  const components = adminState.data.components ?? [];
+
+  // カテゴリ別件数を集計
+  const countMap = new Map();
+  for (const comp of components) {
+    const cat = comp.category ?? '';
+    countMap.set(cat, (countMap.get(cat) ?? 0) + 1);
+  }
+
+  // 五十音順・実際に使われているカテゴリのみ
+  const usedCats = [...(adminState.data.categories ?? [])]
+    .filter(c => countMap.has(c))
+    .sort((a, b) => a.localeCompare(b, 'ja'));
+
+  // 選択中タブが無効になった場合はリセット
+  if (adminState.activeTab !== '__all__' && !usedCats.includes(adminState.activeTab)) {
+    adminState.activeTab = '__all__';
+  }
+
+  container.innerHTML = '';
+
+  const makeTab = (html, value) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `list-tab${adminState.activeTab === value ? ' active' : ''}`;
+    btn.innerHTML = html;
+    btn.addEventListener('click', () => {
+      adminState.activeTab = value;
+      renderTable();
+    });
+    container.appendChild(btn);
+  };
+
+  makeTab(`すべて<span class="list-tab-count">(${components.length})</span>`, '__all__');
+  for (const cat of usedCats) {
+    makeTab(`${escapeHtml(cat)}<span class="list-tab-count">(${countMap.get(cat)})</span>`, cat);
+  }
+}
+
+/* ============================================================
    一覧テーブル描画
    ============================================================ */
 
@@ -212,11 +263,35 @@ function renderTable() {
   const tbody = document.getElementById('component-tbody');
   if (!tbody) return;
 
-  const components = adminState.data.components ?? [];
+  // タブを最新状態に更新
+  renderListTabs();
+
+  let components = [...(adminState.data.components ?? [])].sort((a, b) => {
+    const cat = (a.category ?? '').localeCompare(b.category ?? '', 'ja');
+    if (cat !== 0) return cat;
+    return (a.name ?? '').localeCompare(b.name ?? '', 'ja');
+  });
+
+  // カテゴリタブでフィルタ
+  if (adminState.activeTab !== '__all__') {
+    components = components.filter(c => c.category === adminState.activeTab);
+  }
+
+  // テキスト検索でフィルタ（名前・タグ）
+  const q = adminState.searchQuery.trim().toLowerCase();
+  if (q) {
+    components = components.filter(c =>
+      (c.name ?? '').toLowerCase().includes(q) ||
+      (c.tags ?? []).some(t => t.toLowerCase().includes(q))
+    );
+  }
 
   if (components.length === 0) {
+    const hasAny = (adminState.data.components ?? []).length > 0;
     tbody.innerHTML = `
-      <tr><td colspan="5" class="table-empty">コンポーネントがまだ登録されていません</td></tr>
+      <tr><td colspan="5" class="table-empty">${
+        hasAny ? '条件に一致するコンポーネントがありません' : 'コンポーネントがまだ登録されていません'
+      }</td></tr>
     `;
     return;
   }
@@ -1250,6 +1325,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // ドラッグ&ドロップ
   setupDragDrop();
+
+  // 一覧テキスト検索
+  document.getElementById('list-search')?.addEventListener('input', (e) => {
+    adminState.searchQuery = e.target.value;
+    renderTable();
+  });
 
   // 保存ボタン
   document.getElementById('btn-save')?.addEventListener('click', saveComponent);

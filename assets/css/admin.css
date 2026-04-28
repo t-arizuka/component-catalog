@@ -139,6 +139,83 @@ body {
 }
 
 /* ============================================================
+   コンポーネント一覧 フィルター（タブ + 検索）
+   ============================================================ */
+.list-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.list-tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.list-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.list-tabs::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 99px;
+}
+
+.list-tab {
+  padding: 6px 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.list-tab:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: #eff6ff;
+}
+
+.list-tab.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.list-tab-count {
+  font-size: 11px;
+  opacity: 0.75;
+  margin-left: 3px;
+}
+
+.list-search-wrap {
+  position: relative;
+}
+
+.list-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.list-search {
+  padding-left: 32px;
+}
+
+/* ============================================================
    コンポーネント一覧テーブル
    ============================================================ */
 .table-wrapper {
