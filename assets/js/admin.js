@@ -1326,10 +1326,25 @@ document.addEventListener('DOMContentLoaded', async () => {
   // ドラッグ&ドロップ
   setupDragDrop();
 
-  // 一覧テキスト検索
+  // 一覧テキスト検索（リアルタイム）
   document.getElementById('list-search')?.addEventListener('input', (e) => {
     adminState.searchQuery = e.target.value;
     renderTable();
+  });
+
+  // 検索ボタン・Enter キー
+  const listSearchEl = document.getElementById('list-search');
+  document.getElementById('btn-list-search')?.addEventListener('click', () => {
+    adminState.searchQuery = listSearchEl?.value ?? '';
+    renderTable();
+    listSearchEl?.focus();
+  });
+  listSearchEl?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      adminState.searchQuery = listSearchEl.value;
+      renderTable();
+    }
   });
 
   // 保存ボタン

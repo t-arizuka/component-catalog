@@ -199,7 +199,14 @@ body {
 }
 
 .list-search-wrap {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.list-search-field {
   position: relative;
+  flex: 1;
 }
 
 .list-search-icon {
@@ -211,8 +218,27 @@ body {
   pointer-events: none;
 }
 
-.list-search {
+/* .form-input より詳細度を上げて padding-left を確実に適用する */
+.list-search-field .form-input {
   padding-left: 32px;
+}
+
+.btn-list-search {
+  padding: 9px 18px;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-list-search:hover {
+  background: var(--color-primary-hover);
 }
 
 /* ============================================================

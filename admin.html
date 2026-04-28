@@ -125,11 +125,14 @@
           <!-- admin.js で動的生成 -->
         </div>
         <div class="list-search-wrap">
-          <svg class="list-search-icon" width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M10 10l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <input class="form-input list-search" type="search" id="list-search" placeholder="名前・タグで絞り込み" autocomplete="off">
+          <div class="list-search-field">
+            <svg class="list-search-icon" width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 10l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <input class="form-input" type="search" id="list-search" placeholder="名前・タグで絞り込み" autocomplete="off">
+          </div>
+          <button class="btn-list-search" type="button" id="btn-list-search">検索</button>
         </div>
       </div>
 
