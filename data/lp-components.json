@@ -1,4 +1,7 @@
 {
-  "categories": [],
-  "components": []
+  "categories": [
+    "SECTION"
+  ],
+  "components": [],
+  "deletedComponents": []
 }
