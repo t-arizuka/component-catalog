@@ -2,6 +2,33 @@
   "categories": [
     "SECTION"
   ],
-  "components": [],
+  "components": [
+    {
+      "id": "comp-001",
+      "name": "section-layout01",
+      "category": "SECTION",
+      "tags": [
+        "head",
+        "title",
+        "section",
+        "layout",
+        "wrap"
+      ],
+      "description": "セクションのアウターレイアウトデザイン",
+      "html": "<div class=\"package_parts\">\n\t<section class=\"l-section\">\n\t\t<div class=\"c-title\">\n\t\t\t<h2 class=\"c-title__txt\">\n\t\t\t\t<span class=\"c-title__en\">ENTEXT</span>\n\t\t\t\t<span class=\"c-title__ja\">見出し見出し</span>\n\t\t\t</h2>\n\t\t</div>\n\t\t<div class=\"l-section__wrap\">\n\t\t\t<div class=\"l-section__inner\">\n\t\t\t\t各種コンポーネントが入ります。\n\t\t\t</div>\n\t\t</div>\n\t</section>\n\n</div>",
+      "css": "/* =========================================\n   Component Styles\n   ========================================= */\n\n.post .package_parts {\n\n\t/* l-section */\n\n\t.l-section {\n\t\tfont-family: var(--body-font-family);\n\t\tfont-weight: 400;\n\t\tcolor: var(--color-font);\n\t}\n\n\t/* c-title */\n\n\t.c-title {\n\t\tbackground-color: var(--color-primary);\n\t\tpadding: var(--px60) var(--px20) var(--px80);\n\t}\n\n\t.c-title__txt {\n\t\tline-height: 1;\n\t\tdisplay: flex;\n\t\tgap: var(--px12);\n\t\tflex-direction: column;\n\t\talign-items: center;\n\t\ttext-align: center;\n\t\tmargin: 0 auto;\n\t\tmax-width: 1100px;\n\t}\n\n\t.c-title__en {\n\t\tfont-family: var(--font-family02);\n\t\tfont-size: var(--px14);\n\t\tfont-weight: 400;\n\t\tcolor: var(--color-primary);\n\t\tdisplay: block;\n\t\twidth: fit-content;\n\t\tpadding: 8px;\n\t\tmin-width: var(--px80);\n\t\tborder-radius: var(--px40);\n\t\tbackground-color: #fff;\n\t}\n\n\t.c-title__ja {\n\t\tfont-family: var(--body-font-family);\n\t\tfont-size: var(--px50);\n\t\tfont-weight: 700;\n\t\tcolor: #fff;\n\t\tline-height: 1.4;\n\t\tletter-spacing: 0.1em;\n\t}\n\n\t.l-section__inner {\n\t\tmax-width: 1100px;\n\t\tmargin: 0 auto;\n\t}\n\n\t.l-section__wrap {\n\t\tpadding: var(--px80) var(--px20);\n\t\tbackground-color: var(--color-secondary-tint);\n\t}\n}",
+      "author": "sh",
+      "createdAt": "2026-06-09",
+      "updatedAt": "2026-06-09",
+      "useCases": [
+        "見出し",
+        "タイトル",
+        "セクション",
+        "レイアウト",
+        "wrap"
+      ],
+      "layout": "section"
+    }
+  ],
   "deletedComponents": []
 }
