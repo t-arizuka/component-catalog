@@ -191,6 +191,7 @@ async function saveToRemote() {
     body: JSON.stringify({
       password: getRemoteAdminPassword(),
       data: adminState.data,
+      path: window.CATALOG_REMOTE_PATH || 'data/components.json',
     }),
   });
 
@@ -973,6 +974,17 @@ async function openJsonFile() {
     const [handle] = await window.showOpenFilePicker({
       types: [{ description: 'JSON', accept: { 'application/json': ['.json'] } }],
     });
+
+    // 期待するファイル名と異なる場合は警告して中断
+    const expectedName = window.CATALOG_EXPORT_FILENAME || 'components.json';
+    if (handle.name !== expectedName) {
+      showToast(
+        `ファイル名が違います。「${expectedName}」を選択してください（選択されたのは「${handle.name}」）`,
+        'error'
+      );
+      return;
+    }
+
     // ファイルを開いた直後（ユーザー操作中）に書き込み権限を取得
     const permission = await handle.requestPermission({ mode: 'readwrite' });
     if (permission !== 'granted') {

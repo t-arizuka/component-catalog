@@ -3,8 +3,8 @@
 const crypto = require('node:crypto');
 
 const GITHUB_API_BASE = 'https://api.github.com';
-const TARGET_PATH = 'data/components.json';
 const DEFAULT_BRANCH = 'main';
+const ALLOWED_PATHS = ['data/components.json', 'data/lp-components.json'];
 
 /**
  * 管理画面から受け取ったデータを GitHub の components.json に保存する
@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
   if (req.method === 'GET') {
     res.status(200).json({
       ok: true,
-      path: TARGET_PATH,
+      allowedPaths: ALLOWED_PATHS,
       branch: process.env.GITHUB_BRANCH || DEFAULT_BRANCH,
     });
     return;
@@ -35,6 +35,10 @@ module.exports = async (req, res) => {
     const body = await readJsonBody(req);
     const password = typeof body.password === 'string' ? body.password : '';
     const data = body.data;
+
+    // 保存先パスをホワイトリストで検証（未指定時は基本カタログ）
+    const requestedPath = typeof body.path === 'string' ? body.path : '';
+    const targetPath = ALLOWED_PATHS.includes(requestedPath) ? requestedPath : ALLOWED_PATHS[0];
 
     if (!process.env.ADMIN_PASSWORD) {
       res.status(500).json({ error: 'ADMIN_PASSWORD が未設定です' });
@@ -59,7 +63,7 @@ module.exports = async (req, res) => {
     }
 
     const currentFile = await githubRequest(
-      `/repos/${owner}/${repo}/contents/${TARGET_PATH}?ref=${encodeURIComponent(branch)}`,
+      `/repos/${owner}/${repo}/contents/${targetPath}?ref=${encodeURIComponent(branch)}`,
       {
         method: 'GET',
         token,
@@ -71,12 +75,12 @@ module.exports = async (req, res) => {
     const content = Buffer.from(jsonText, 'utf8').toString('base64');
 
     const updateResult = await githubRequest(
-      `/repos/${owner}/${repo}/contents/${TARGET_PATH}`,
+      `/repos/${owner}/${repo}/contents/${targetPath}`,
       {
         method: 'PUT',
         token,
         body: {
-          message: `chore: update ${TARGET_PATH}`,
+          message: `chore: update ${targetPath}`,
           content,
           sha: currentFile.sha,
           branch,
