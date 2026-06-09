@@ -2,6 +2,19 @@
   "categories": [
     "SECTION"
   ],
-  "components": [],
+  "components": [
+    {
+      "id": "misc-001",
+      "name": "テスト",
+      "category": "SECTION",
+      "tags": [],
+      "description": "",
+      "html": "テスト",
+      "css": "test",
+      "author": "",
+      "createdAt": "2026-06-09",
+      "updatedAt": "2026-06-09"
+    }
+  ],
   "deletedComponents": []
 }
